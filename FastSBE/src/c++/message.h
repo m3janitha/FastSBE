@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdint>
-#include <assert.h>
 #include <string>
 #include <string_view>
 #include <ostream>
@@ -38,23 +37,6 @@
 //
 //
 //
-
-struct data_header
-{
-	std::uint32_t size_{};
-};
-
-struct data_1
-{
-	data_header h_{};
-	char* data_{};
-};
-
-struct data_2
-{
-	data_header h_{};
-	char* data_{};
-};
 
 enum class enum_1 : char
 {
