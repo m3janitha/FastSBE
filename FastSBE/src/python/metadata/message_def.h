@@ -2,22 +2,22 @@
 public:
 	static constexpr const char* name() noexcept
 	{ 
-		return "s_message_name"; 
+		return "S_MESSAGE_NAME"; 
 	}
 
 	static constexpr std::size_t template_id() noexcept
 	{ 
-		return s_message_id; 
+		return S_MESSAGE_ID; 
 	}
 
 	static constexpr std::size_t schema() noexcept
 	{  
-		return s_schema; 
+		return S_SCHEMA_ID; 
 	}
 
 	static constexpr std::size_t version() noexcept
 	{ 
-		return s_version; 
+		return S_VERSION_ID; 
 	}
 
 	static constexpr const char* semantic_type() noexcept

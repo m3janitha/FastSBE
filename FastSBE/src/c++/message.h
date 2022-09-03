@@ -146,11 +146,21 @@ struct message
 	char f3_[5]{};
 #pragma pack(pop)
 
-	constexpr char* get_m3() noexcept { return f3_; }
-	constexpr const char* get_m3() const noexcept { return f3_; }
+	constexpr char* get_f3() noexcept { return f3_; }
+	constexpr const char* get_f3() const noexcept { return f3_; }
 
-	constexpr std::string_view get_ms3_str() noexcept { return std::string_view(f3_, 5); }
-	constexpr const std::string_view get_ms3_str() const noexcept { return std::string_view(f3_, 5); }
+	constexpr std::string_view get_f3_str() noexcept { return std::string_view(f3_, 5); }
+	constexpr const std::string_view get_f3_str() const noexcept { return std::string_view(f3_, 5); }
+
+	constexpr message& set_f3(const char* value) noexcept
+	{
+		auto length = strlen(value);
+		auto* buf = buffer() + v_data1_offset();
+		auto* data = buf + sizeof(v_data1);
+		std::memcpy(data, value, length);
+		f2_ = value;
+		return *this;
+	}
 
 	static constexpr std::size_t f3_id() noexcept { return 3; }
 
