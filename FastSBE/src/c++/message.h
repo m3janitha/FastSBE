@@ -78,15 +78,42 @@ struct composite_1
 
 struct message
 {
-	static constexpr std::size_t f1_offset() noexcept { return 0; }
+	static constexpr const char* name() noexcept
+	{ 
+		return "message"; 
+	}
 
+	static constexpr std::size_t template_id() noexcept
+	{ 
+		return 1; 
+	}
+
+	static constexpr std::size_t schema() noexcept
+	{  
+		return 1; 
+	}
+
+	static constexpr std::size_t version() noexcept
+	{ 
+		return 1; 
+	}
+
+	static constexpr const char* semantic_type() 
+	{ 
+		return ""; 	
+	}
+	
 	using f1_type = std::uint32_t;
 #pragma pack(push, 1)
 	f1_type f1_{};
 #pragma pack(pop)
 
-	char* buffer() noexcept { return reinterpret_cast<char*>(&f1_); }
-	const char* buffer() const noexcept { return reinterpret_cast<const char*>(&f1_); }
+	static constexpr std::size_t f1_offset() noexcept { return 0; }
+	static constexpr std::size_t f1_id() noexcept { return 1; }
+	static constexpr const char* f1_name() noexcept { return "message"; }
+	static constexpr f1_type min_value() noexcept { return 90; }
+	static constexpr f1_type max_value() noexcept { return 110; }
+	static constexpr f1_type null_value() noexcept { return 110; }
 
 	constexpr f1_type get_f1() const noexcept { return f1_; }
 	constexpr message& set_f1(f1_type value) noexcept
@@ -94,9 +121,9 @@ struct message
 		f1_ = value;
 		return *this;
 	}
-	static constexpr std::size_t f1_id() noexcept { return 1; }
-	static constexpr f1_type min_value() noexcept { return 90; }
-	static constexpr f1_type max_value() noexcept { return 110; }
+
+	char* buffer() noexcept { return reinterpret_cast<char*>(&f1_); }
+	const char* buffer() const noexcept { return reinterpret_cast<const char*>(&f1_); }
 
 	static constexpr std::size_t f2_offset() noexcept { return f1_offset() + sizeof(f1_); }
 
