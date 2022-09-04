@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 from MessageGen import MessageGen
+from EnumGen import EnumClassFileGen
 
 field_types = {
 	"int8"	: "std::int8_t",
@@ -87,60 +88,80 @@ defined_types = {}
 for type in types:
 	print (type.tag, type.attrib)
 	type_name = type.attrib['name']
-	defined_types.update({type_name : type.attrib})
+	if(type.tag == 'type'):		
+		defined_types.update({type_name : type.attrib})
+		premitive_type = type.attrib['primitiveType']
+	elif (type.tag == 'enum'):
+		print(type.tag);
+		enum_values = []
+		for field in type:
+			print(field.text)
+			enum_values.append((field.attrib['name'], field.text))
 
-	premitive_type = type.attrib['primitiveType']
-	
-	#if(is_numeric(premitive_type) == True):
-	#	(min_value, max_value, null_value) = get_numeric_attrib_of_primitive(type)
-	#	print('types:', min_value, max_value, null_value)
+		encoding_type = type.attrib['encodingType']
+		enum_file = EnumClassFileGen("sbe::test", type_name, encoding_type, enum_values)
 
 
-for message in root.iterfind('sbe:message', namespaces):
-	message_name = message.attrib['name']
-	message_id = message.attrib['id']
-	message_description = message.attrib['description']
-	print('message_name:' , message_name, ' message_id:', message_id, ' message_description:', message_description)
+
+#for message in root.iterfind('sbe:message', namespaces):
+#	message_name = message.attrib['name']
+#	message_id = message.attrib['id']
+#	message_description = message.attrib['description']
+#	print('message_name:' , message_name, ' message_id:', message_id, ' message_description:', message_description)
 		
-	msg_gen = MessageGen(message_name = message_name\
-		, message_id = message_id\
-		, schema = schema_id\
-		, version = schema_version\
-		, description = message_description\
-		, namespace = "test::sbe")
+#	msg_gen = MessageGen(message_name = message_name\
+#		, message_id = message_id\
+#		, schema = schema_id\
+#		, version = schema_version\
+#		, description = message_description\
+#		, namespace = "test::sbe")
 
-	msg_gen.gen_includes(tab_index = 0, include_list = include_list)
-	msg_namespace = msg_gen.GenNameSpace(message_gen = msg_gen, tab_index = 0)
-	msg_class = msg_gen.GenClass(message_gen = msg_gen, tab_index = 0)
-	msg_gen.gen_message_descriptor(tab_index = 0)
+#	msg_gen.gen_includes(tab_index = 0, include_list = include_list)
+#	msg_namespace = msg_gen.GenNameSpace(message_gen = msg_gen, tab_index = 0)
+#	msg_class = msg_gen.GenClass(message_gen = msg_gen, tab_index = 0)
+#	msg_gen.gen_message_descriptor(tab_index = 0)
+
+#	prvious_field_name = "";
 	
-	for field in message.iterfind('field', namespaces):
-		field_name = field.attrib['name']
-		field_id = field.attrib['id']
-		field_type = field.attrib['type']
+#	for field in message.iterfind('field', namespaces):
+#		field_name = field.attrib['name']
+#		field_id = field.attrib['id']
+#		field_type = field.attrib['type']
 
-		if(is_numeric(field_type) == True):
-			msg_gen.gen_numeric_field_def(tab_index = 0\
-				, message_name = message_name\
-				, field_type = field_types[field_type]\
-				, field_id = field_id\
-				, field_name = field_name\
-				, min = defult_minimum[premitive_type]\
-				, max = defult_maximum[premitive_type]\
-				, null = defult_null[premitive_type])
-		elif (field_type in defined_types):
-			type = defined_types[field_type]
-			primitive_type = type['primitiveType'] 
-			if(is_numeric(primitive_type) == True):
-				(min_value, max_value, null_value) = get_numeric_attrib_of_primitive(type)
-				msg_gen.gen_numeric_field_def(tab_index = 0\
-					, message_name = message_name\
-					, field_type = field_types[primitive_type]\
-					, field_id = field_id\
-					, field_name = field_name\
-					, min = min_value\
-					, max = max_value\
-					, null = null_value)
+#		if(is_numeric(field_type) == True):
+#			msg_gen.gen_numeric_field_def(tab_index = 0\
+#				, message_name = message_name\
+#				, field_type = field_types[field_type]\
+#				, field_id = field_id\
+#				, field_name = field_name\
+#				, prvious_field_name = prvious_field_name\
+#				, min = defult_minimum[premitive_type]\
+#				, max = defult_maximum[premitive_type]\
+#				, null = defult_null[premitive_type])
+#		elif (field_type in defined_types):
+#			type = defined_types[field_type]
+#			primitive_type = type['primitiveType'] 
+#			if(is_numeric(primitive_type) == True):
+#				(min_value, max_value, null_value) = get_numeric_attrib_of_primitive(type)
+#				msg_gen.gen_numeric_field_def(tab_index = 0\
+#					, message_name = message_name\
+#					, field_type = field_types[primitive_type]\
+#					, field_id = field_id\
+#					, field_name = field_name\
+#					, prvious_field_name = prvious_field_name\
+#					, min = min_value\
+#					, max = max_value\
+#					, null = null_value)
+#			elif (primitive_type == 'char'):
+#				msg_gen.gen_string_field_def(tab_index = 0\
+#					, message_name = message_name\
+#					, field_type = field_types[primitive_type]\
+#					, field_id = field_id\
+#					, field_name = field_name\
+#					, prvious_field_name = prvious_field_name\
+#					, field_size = type['length'])
+		
+#		prvious_field_name = field_name
 
 
 

@@ -16,8 +16,8 @@ class MessageGen:
         self.string_field_ct = open('c++/string_field_def.h', 'r').read()
 
     def __del__(self):
-        message_file_name = self.message_name + '.h'
-        file = open(message_file_name,'w').write(self.content)
+        file_name = self.message_name + '.h'
+        file = open(file_name,'w').write(self.content)
 
     def gen_tabs(self, tab_index):
         str = " " * 4 * tab_index
@@ -68,17 +68,33 @@ class MessageGen:
             .replace('S_SCHEMA_ID', str(self.schema))\
             .replace('S_VERSION_ID', str(self.version))        
         self.content += self.tab_multi_lines(tab_index= tab_index, variable = message_text)
+
+    def get_field_offset(self, prvious_field_name):
+        if(prvious_field_name ==""):
+            return '0';
+        else:
+            return prvious_field_name + '_offset() + ' + prvious_field_name + '_size()'
     
-    def gen_numeric_field_def(self, tab_index, message_name, field_type, field_id, field_name, min, max, null):
+    def gen_numeric_field_def(self, tab_index, message_name, field_type, field_id, field_name, prvious_field_name, min, max, null):
         field_text = self.numeric_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
-            .replace('s_offset', str(0))\
+            .replace('S_FIELD_OFFSET', self.get_field_offset(prvious_field_name))\
             .replace('S_FIELD_ID', str(field_id))\
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_MIN', str(min))\
             .replace('S_FIELD_MAX', str(max))\
             .replace('S_FIELD_NULL', str(null))
+        self.content += self.tab_multi_lines(tab_index = tab_index, variable = field_text)
+
+    def gen_string_field_def(self, tab_index, message_name, field_type, field_id, field_name, prvious_field_name, field_size):
+        field_text = self.string_field_ct\
+            .replace('S_MESSAGE_NAME', message_name)\
+            .replace('S_FIELD_TYPE', field_type)\
+            .replace('S_FIELD_OFFSET', self.get_field_offset(prvious_field_name))\
+            .replace('S_FIELD_ID', str(field_id))\
+            .replace('S_FIELD_NAME', field_name)\
+            .replace('S_FIELD_SIZE', field_size)
         self.content += self.tab_multi_lines(tab_index = tab_index, variable = field_text)
 
     def generate_message(self):
