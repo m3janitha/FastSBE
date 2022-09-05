@@ -1,13 +1,18 @@
 
 private:
 	#pragma pack(push, 1)
-	char S_FIELD_NAME_[s_size]{};
+	char S_FIELD_NAME_[S_FIELD_SIZE]{};
 	#pragma pack(pop)
 
 public:
+	static constexpr std::size_t S_FIELD_NAME_size() noexcept
+	{
+		return S_FIELD_SIZE;
+	}
+
 	static constexpr std::size_t S_FIELD_NAME_offset() noexcept
 	{ 
-		return s_offset; 
+		return S_FIELD_OFFSET; 
 	}
 
 	static constexpr std::size_t S_FIELD_NAME_id() noexcept
@@ -15,14 +20,9 @@ public:
 		return S_FIELD_ID; 
 	}
 	
-	static constexpr const char* S_FIELD_NAME_name() noexcept
+	static constexpr const char* S_FIELD_NAME_name() const noexcept
 	{ 
 		return "S_FIELD_NAME"; 
-	}
-
-	static constexpr std::size_t S_FIELD_NAME_size() noexcept
-	{
-		return s_size;
 	}
 
 	constexpr char* get_S_FIELD_NAME() noexcept
