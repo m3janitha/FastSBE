@@ -1,7 +1,7 @@
 
 private:
 	#pragma pack(push, 1)
-	S_FIELD_TYPE::Value S_FIELD_NAME_{};
+	S_FIELD_TYPE S_FIELD_NAME_{};
 	#pragma pack(pop)
 
 public:
@@ -24,13 +24,18 @@ public:
 	{ 
 		return "S_FIELD_NAME"; 
 	}
-
-	constexpr S_FIELD_TYPE::Value get_S_FIELD_NAME() const noexcept
+	
+	constexpr const S_FIELD_TYPE& get_S_FIELD_NAME() const noexcept
 	{ 
 		return S_FIELD_NAME_;
 	}
 	
-	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE::Value value) noexcept
+	constexpr S_FIELD_TYPE& get_S_FIELD_NAME() noexcept
+	{
+		return S_FIELD_NAME_;
+
+	}
+	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE value) noexcept
 	{
 		S_FIELD_NAME_ = value;
 		return *this;

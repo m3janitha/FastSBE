@@ -18,6 +18,8 @@ class Indentaion:
 			indented_str += self.get_indentation_str() + line + "\n"
 		return indented_str
 
+
+
 class FileGen:
 	header_ct		= "#pragma once\n"
 	include_ct		= "#include<{include_file}>\n"
@@ -74,6 +76,8 @@ class FileGen:
 		def __del__(self):
 			self.gen_namespace_end()
 			print('delte NameSpaceGen', self.namespace)
+
+
 
 	class ClassGen:
 		class_ct		= "\nclass {s_class_name}\n{{\n"

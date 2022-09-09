@@ -85,15 +85,55 @@ class Gen:
 			user_defined_types.update({type_name : type.attrib})
 		return user_defined_types
 
-	def get_primitive_type(self, type, user_defined_types):
-		if type in self.primitive_types:
-			return type
+	def update_enum_attrib(self, field, enum_attrib, user_defined_types):
+		field_name = field.attrib['name']		
+		encoding_type = field.attrib['encodingType']
+		items = field.items()
+		for (key, value) in items:
+			enum_attrib[key] = value
+		
+		if encoding_type in self.primitive_types:
+			return
 		else:
-			type_attrib = user_defined_types[type]
-			#user defined type must have a primitiveType
-			primitive_type = type_attrib['primitiveType']
-			return primitive_type
+			if (encoding_type not in user_defined_types):
+				print(encoding_type, ' is not defined in types')
+				exit(self, 1)
+			type_attrib = user_defined_types[encoding_type]
+			enum_attrib.update(type_attrib)
 
+	def update_field_attrib(self, field, field_attrib, user_defined_types):
+		field_name = field.attrib['name']		
+		field_type = field.attrib['type']
+		items = field.items()
+		for (key, value) in items:
+			field_attrib[key] = value
+		
+		if field_type in self.primitive_types:
+			return
+		else:
+			if (field_type not in user_defined_types):
+				print(field_type, ' is not defined in types')
+				exit(self, 1)
+			type_attrib = user_defined_types[field_type]
+			field_attrib.update(type_attrib)
+
+	def get_primitive_encoding_type(self, enum_attrib):
+		if 'primitiveType' in enum_attrib:
+			return enum_attrib['primitiveType']
+		elif 'encodingType' in enum_attrib:
+			return enum_attrib['encodingType']
+		else:
+			print('type or primitiveType is not defined in', enum_attrib['name']) 
+			exit(self,1)
+
+	def get_primitive_type(self, field_attrib):
+		if 'primitiveType' in field_attrib:
+			return field_attrib['primitiveType']
+		elif 'type' in field_attrib:
+			return field_attrib['type']
+		else:
+			print('type or primitiveType is not defined in', field_attrib['name']) 
+			exit(self,1)
 
 	# read all enum in types
 	def read_all_enums(self, types, user_defined_types):
@@ -106,19 +146,76 @@ class Gen:
 				print(field.text)
 				enum_values.append((field.attrib['name'], field.text))
 
-			type_name = type.attrib['name']
+			enum_name = type.attrib['name']
 			encoding_type = type.attrib['encodingType']
 			#if type is user defined
-			primitive_encoding_type = self.get_primitive_type(encoding_type, user_defined_types)
-			enum_file = EnumClassFileGen("sbe::test", type_name, primitive_encoding_type, enum_values, enum_include_list)
-			user_defined_enums.append(type_name)
+			enum_attrib = {}
+			self.update_enum_attrib(type, enum_attrib, user_defined_types)
+			print(enum_attrib)
+			primitive_encoding_type = self.get_primitive_encoding_type(enum_attrib)
+			enum_file = EnumClassFileGen("sbe::test", enum_name, self.c_field_types[primitive_encoding_type], enum_values, enum_include_list)
+			user_defined_enums.append(enum_name)
 		return user_defined_enums
 
-	def read_all_composites(self, types):
+	def read_composite_type(self, msg_gen, composite_name, type, prvious_type_name, user_defined_types\
+		, user_defined_enums):
+					
+		primitive_type = type.attrib['primitiveType']
+		type_name = type.attrib['name']
+
+		if(self.is_numeric(primitive_type, type.attrib) == True):
+			if(('presence' in type.attrib) and (type.attrib['presence'] == 'constant')):
+				msg_gen.gen_composite_const_numeric_field_def(message_name = composite_name, field_type = self.c_field_types[primitive_type]\
+					, field_name = type_name, prvious_field_name = prvious_type_name\
+					, value = type.text)
+			else:
+				(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_type)
+				msg_gen.gen_composite_numeric_field_def(message_name = composite_name, field_type = self.c_field_types[primitive_type]\
+					, field_name = type_name, prvious_field_name = prvious_type_name\
+					, min = min_value, max = max_value, null = null_value)
+		else:
+			msg_gen.gen_composite_string_field_def(message_name = composite_name, field_type = self.c_field_types[primitive_type]\
+				, field_name = type_name, prvious_field_name = prvious_type_name, field_size = type.attrib['length'])
+
+		return type_name
+
+	# description is an optional attribute
+	def get_description(message):
+		if 'description' in message.attrib:
+			return message.attrib['description']
+		else:
+			return ""
+
+	def gen_composite(self, composite, user_defined_types, user_defined_enums):
+		composite_name = composite.attrib['name']
+		description = Gen.get_description(composite)
+		print('composite_name:' , composite_name, ' description:', description)
+		
+		include_list = ["cstdint", "string", "string_view", "ostream"]
+
+		msg_gen = MessageGen(message_name = composite_name\
+			, message_id = 0\
+			, schema = self.schema_id\
+			, version = self.schema_version\
+			, description = description\
+			, namespace = "test::sbe"\
+			, include_list = include_list)
+
+		prvious_type_name = "";
+		for type in composite.iter('type'):
+			prvious_type_name = self.read_composite_type(msg_gen, composite_name, type, prvious_type_name, user_defined_types\
+				, user_defined_enums)
+
+		msg_gen.gen_end_of_fields()
+
+	def read_all_composites(self, types, user_defined_types, user_defined_enums):
 		user_defined_composites = []
 		for composite in types.iter('composite'):
-			composite_name = composite.attrib['composite']
+			composite_name = composite.attrib['name']
 			user_defined_composites.append(composite_name)
+
+		self.gen_composite(composite, user_defined_types, user_defined_enums)
+
 		return user_defined_composites
 
 	#primitive type char with length defiend is string
@@ -141,39 +238,31 @@ class Gen:
 			print ('composite field:', field_name)
 
 		#numeirc or string
-		primitive_type = self.get_primitive_type(field_type, user_defined_types)
+		# combine field.attrib and type attrib
+		field_attrib = {}
+		self.update_field_attrib(field, field_attrib, user_defined_types)
+		print(field_attrib)
+		#self.enrich_field_attrib_by_name(field, field_attrib_by_name, user_defined_types)
+		primitive_type = self.get_primitive_type(field_attrib)
 
-		if(self.is_numeric(field_type, field.attrib) == True):
-			if(('presence' in field.attrib) and (field.attrib['presence'] == 'constant')):
-				msg_gen.gen_const_numeric_field_def(message_name = message_name, field_type = self.c_field_types[field_type]\
+		if(primitive_type in user_defined_enums):
+
+
+		if(self.is_numeric(primitive_type, field_attrib) == True):
+			if(('presence' in field_attrib) and (field_attrib['presence'] == 'constant')):
+				msg_gen.gen_message_const_numeric_field_def(message_name = message_name, field_type = self.c_field_types[primitive_type]\
 					, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name\
 					, value = field.text)
 			else:
 				(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_type)
-				msg_gen.gen_numeric_field_def(message_name = message_name, field_type = self.c_field_types[primitive_type]\
+				msg_gen.gen_message_numeric_field_def(message_name = message_name, field_type = self.c_field_types[primitive_type]\
 					, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name\
 					, min = min_value, max = max_value, null = null_value)
-		elif(primitive_type =='char'):
-			msg_gen.gen_string_field_def(message_name = message_name, field_type = self.c_field_types[primitive_type]\
-				, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name, field_size = type['length'])
 		else:
-			print ('undefined type field:', field_name, ' primitive_type:', primitive_type)
+			msg_gen.gen_message_string_field_def(message_name = message_name, field_type = self.c_field_types[primitive_type]\
+				, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name, field_size = field_attrib['length'])
 
 		return field_name
-
-		#elif (field_type in user_defined_types):
-		#	type = user_defined_types[field_type]
-		#	primitive_type = type['primitiveType'] 
-		#	if(is_numeric(primitive_type) == True):
-		#		(min_value, max_value, null_value) = get_numeric_attrib_of_primitive(primitive_type)
-		#		msg_gen.gen_numeric_field_def(message_name = message_name, field_type = c_field_types[primitive_type]\
-		#			, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name\
-		#			, min = min_value, max = max_value, null = null_value)
-		#	elif (primitive_type == 'char'):
-		#		msg_gen.gen_string_field_def(message_name = message_name, field_type = c_field_types[primitive_type]\
-		#			, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name, field_size = type['length'])
-
-		#return field_name
 
 	def read_message(self, message, user_defined_types, user_defined_enums, user_defined_composites):
 		message_name = message.attrib['name']
@@ -215,7 +304,7 @@ class Gen:
 		types = root.find('types')
 		user_defined_types = self.read_all_types(types)
 		user_defined_enums = self.read_all_enums(types, user_defined_types)
-		user_defined_composites = self.read_all_composites(types) 
+		user_defined_composites = self.read_all_composites(types, user_defined_types, user_defined_enums) 
 		self.read_all_msgs(root, user_defined_types, user_defined_enums, user_defined_composites)
 		
 		#msg_gen = MessageGen(message_name = "NewOrder", id = 1, schema = 3, version = 4, description = "new order message", namespace = "test::sbe")
