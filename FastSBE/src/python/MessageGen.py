@@ -2,28 +2,28 @@ from FileGen import Indentaion
 from FileGen import FileGen
 
 class MessageGen:
-    message_def_ct                  = open('c++/message/message_def.h', 'r').read()
+    message_def_ct                  = open('metadata/c++/message/message_def.h', 'r').read()
     #numeirc
-    message_numeric_field_ct        = open('c++/message/numeric_field_def.h', 'r').read()
-    message_const_numeric_field_ct  = open('c++/message/const_numeric_field_def.h', 'r').read()
+    message_numeric_field_ct        = open('metadata/c++/message/numeric_field_def.h', 'r').read()
+    message_const_numeric_field_ct  = open('metadata/c++/message/const_numeric_field_def.h', 'r').read()
     #enum
-    message_enum_field_ct           = open('c++/message/enum_field_def.h', 'r').read()
-    message_const_enum_field_ct     = open('c++/message/const_enum_field_def.h', 'r').read()
+    message_enum_field_ct           = open('metadata/c++/message/enum_field_def.h', 'r').read()
+    message_const_enum_field_ct     = open('metadata/c++/message/const_enum_field_def.h', 'r').read()
     #string
-    message_string_field_ct         = open('c++/message/string_field_def.h', 'r').read()
-    message_const_string_field_ct   = open('c++/message/const_string_field_def.h', 'r').read()
+    message_string_field_ct         = open('metadata/c++/message/string_field_def.h', 'r').read()
+    message_const_string_field_ct   = open('metadata/c++/message/const_string_field_def.h', 'r').read()
     #composite
-    message_composite_field_ct      = open('c++/message/composite_field_def.h', 'r').read()
+    message_composite_field_ct      = open('metadata/c++/message/composite_field_def.h', 'r').read()
     
     #numeirc
-    composite_numeric_field_ct      = open('c++/composite/numeric_field_def.h', 'r').read()
-    composite_const_numeric_field_ct= open('c++/composite/const_numeric_field_def.h', 'r').read()
+    composite_numeric_field_ct      = open('metadata/c++/composite/numeric_field_def.h', 'r').read()
+    composite_const_numeric_field_ct= open('metadata/c++/composite/const_numeric_field_def.h', 'r').read()
     #enum
-    composite_enum_field_ct         = open('c++/composite/enum_field_def.h', 'r').read()
-    composite_const_enum_field_ct   = open('c++/composite/const_enum_field_def.h', 'r').read()
+    composite_enum_field_ct         = open('metadata/c++/composite/enum_field_def.h', 'r').read()
+    composite_const_enum_field_ct   = open('metadata/c++/composite/const_enum_field_def.h', 'r').read()
     #string
-    composite_string_field_ct       = open('c++/composite/string_field_def.h', 'r').read()
-    composite_const_string_field_ct = open('c++/composite/const_string_field_def.h', 'r').read()
+    composite_string_field_ct       = open('metadata/c++/composite/string_field_def.h', 'r').read()
+    composite_const_string_field_ct = open('metadata/c++/composite/const_string_field_def.h', 'r').read()
 
     def gen_message_descriptor(self):
         message_def = self.message_def_ct\

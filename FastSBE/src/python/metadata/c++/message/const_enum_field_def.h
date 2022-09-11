@@ -27,5 +27,5 @@ public:
 
 	constexpr S_FIELD_TYPE get_S_FIELD_NAME() const noexcept
 	{ 
-		return S_FIELD_NAME_;
+		return S_FIELD_TYPE::Value::S_CONST_FIELD_VALUE;
 	}

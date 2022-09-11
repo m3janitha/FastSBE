@@ -37,12 +37,12 @@ public:
 
 	constexpr std::string_view get_S_FIELD_NAME_str() noexcept
 	{ 
-		return std::string_view(S_FIELD_NAME_, 5);
+		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
 	constexpr const std::string_view get_S_FIELD_NAME_str() const noexcept
 	{ 
-		return std::string_view(S_FIELD_NAME_, 5);
+		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
 	constexpr message& set_S_FIELD_NAME(const char* value) noexcept
