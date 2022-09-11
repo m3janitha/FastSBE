@@ -75,7 +75,7 @@ class MessageGen:
             .replace('S_FIELD_MAX', str(max))\
             .replace('S_FIELD_NULL', str(null))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_message_numeric_field_def', field_name)
 
     def gen_composite_numeric_field_def(self, message_name\
         , field_type, field_name, prvious_field_name\
@@ -89,10 +89,11 @@ class MessageGen:
             .replace('S_FIELD_MAX', str(max))\
             .replace('S_FIELD_NULL', str(null))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_composite_numeric_field_def', field_name)
 
 
-    def gen_message_const_numeric_field_def(self, message_name, field_type, field_id, field_name, prvious_field_name, value):
+    def gen_message_const_numeric_field_def(self, message_name\
+        , field_type, field_id, field_name, prvious_field_name, value):
         field_def = self.message_const_numeric_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -101,9 +102,10 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_message_const_numeric_field_def', field_name)
 
-    def gen_composite_const_numeric_field_def(self, message_name, field_type, field_name, prvious_field_name, value):
+    def gen_composite_const_numeric_field_def(self, message_name\
+        , field_type, field_name, prvious_field_name, value):
         field_def = self.composite_const_numeric_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
@@ -111,12 +113,12 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_composite_const_numeric_field_def', field_name)
 
 
     def gen_message_enum_field_def(self, message_name\
         , field_type, field_id, field_name, prvious_field_name\
-        , min, max, null):
+        , null):
         field_def = self.message_enum_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -125,11 +127,11 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_NULL', str(null))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_message_enum_field_def', field_name)
 
     def gen_composite_enum_field_def(self, message_name\
         , field_type, field_name, prvious_field_name\
-        , min, max, null):
+        , null):
         field_def = self.composite_enum_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
@@ -137,12 +139,11 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_NULL', str(null))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_composite_enum_field_def', field_name)
 
 
     def gen_message_const_enum_field_def(self, message_name\
-        , field_type, field_id, field_name, prvious_field_name\
-        , min, max, null):
+        , field_type, field_id, field_name, prvious_field_name, value):
         field_def = self.message_const_enum_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -151,11 +152,10 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_message_const_enum_field_def', field_name)
 
     def gen_composite_const_enum_field_def(self, message_name\
-        , field_type, field_name, prvious_field_name\
-        , min, max, null):
+        , field_type, field_name, prvious_field_name, value):
         field_def = self.composite_const_enum_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
@@ -163,10 +163,11 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_composite_const_enum_field_def', field_name)
 
 
-    def gen_message_string_field_def(self, message_name, field_type, field_id, field_name, prvious_field_name, field_size):
+    def gen_message_string_field_def(self, message_name, field_type, field_id, field_name\
+        , prvious_field_name, field_size):
         field_def = self.message_string_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -175,9 +176,10 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_SIZE', field_size)
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_string_field_def', field_name)
+        print('gen_message_string_field_def', field_name)
 
-    def gen_composite_string_field_def(self, message_name, field_type, field_name, prvious_field_name, field_size):
+    def gen_composite_string_field_def(self, message_name, field_type, field_name\
+        , prvious_field_name, field_size):
         field_def = self.composite_string_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
@@ -185,10 +187,11 @@ class MessageGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_SIZE', field_size)
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_string_field_def', field_name)
+        print('gen_composite_string_field_def', field_name)
 
 
-    def gen_message_const_string_field_def(self, message_name, field_type, field_id, field_name, prvious_field_name, field_size):
+    def gen_message_const_string_field_def(self, message_name, field_type, field_id, field_name\
+        , prvious_field_name, field_size):
         field_def = self.message_const_string_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -198,9 +201,10 @@ class MessageGen:
             .replace('S_FIELD_SIZE', field_size)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_string_field_def', field_name)
+        print('gen_message_const_string_field_def', field_name)
 
-    def gen_composite_const_string_field_def(self, message_name, field_type, field_name, prvious_field_name, field_size):
+    def gen_composite_const_string_field_def(self, message_name, field_type, field_name\
+        , prvious_field_name, field_size, value):
         field_def = self.composite_const_string_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_TYPE', field_type)\
@@ -209,12 +213,11 @@ class MessageGen:
             .replace('S_FIELD_SIZE', field_size)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_string_field_def', field_name)
+        print('gen_composite_const_string_field_def', field_name)
 
 
     def gen_message_composite_field_def(self, message_name\
-        , field_type, field_id, field_name, prvious_field_name\
-        , min, max, null):
+        , field_type, field_id, field_name, prvious_field_name):
         field_def = self.message_composite_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\
@@ -222,7 +225,7 @@ class MessageGen:
             .replace('S_FIELD_OFFSET', self.get_field_offset(prvious_field_name))\
             .replace('S_FIELD_NAME', field_name)
         self.file_gen.content += self.indentation.get_indented_str(field_def)
-        print('gen_numeric_field_def', field_name)
+        print('gen_message_composite_field_def', field_name)
 
     def gen_end_of_fields(self):
         self.indentation.decrement()

@@ -48,7 +48,7 @@ class FileGen:
 		self.gen_file_begin()
 
 	def __del__(self):
-		file_name_h = self.file_name + '.h'
+		file_name_h = './gen/' + self.file_name + '.h'
 		file = open(file_name_h,'w').write(self.content)
 		print('delete FileGen', self.file_name)
 

@@ -38,25 +38,6 @@
 //
 //
 
-enum class enum_1 : char
-{
-	VALUE1 = '1',
-	VALUE2 = '2'
-};
-
-const char* to_string(enum_1 value)
-{
-	switch (value)
-	{
-	case enum_1::VALUE1:
-		return "1";
-	case enum_1::VALUE2:
-		return "2";
-	default:
-		return "Invalid";
-	}
-}
-
 struct composite_1
 {
 	std::uint32_t f1_{};
@@ -138,8 +119,8 @@ struct message
 		f2_ = value;
 		return *this;
 	}
-	static constexpr std::size_t f2_id() noexcept { return 2; }
 
+	static constexpr std::size_t f2_id() noexcept { return 2; }
 	static constexpr std::size_t f3_offset() noexcept { return f2_offset() + sizeof(f2_); }
 
 #pragma pack(push, 1)
@@ -152,19 +133,39 @@ struct message
 	constexpr std::string_view get_f3_str() noexcept { return std::string_view(f3_, 5); }
 	constexpr const std::string_view get_f3_str() const noexcept { return std::string_view(f3_, 5); }
 
+	static constexpr std::size_t f3_size() noexcept { return 5;}
+
 	constexpr message& set_f3(const char* value) noexcept
 	{
 		auto length = strlen(value);
-		auto* buf = buffer() + v_data1_offset();
-		auto* data = buf + sizeof(v_data1);
-		std::memcpy(data, value, length);
-		f2_ = value;
+		std::memcpy(f3_, value, length);
+		return *this;
+	}
+
+	constexpr message& set_f3(std::string_view value) noexcept
+	{
+		auto size = std::min(f3_size(), value.size());
+		std::memcpy(f3_, value.data(), size);
 		return *this;
 	}
 
 	static constexpr std::size_t f3_id() noexcept { return 3; }
 
-	constexpr std::size_t group1_offset() const noexcept { return f3_offset() + sizeof(f3_); }
+	using f5_type = MyEnum::Value;
+#pragma pack(push, 1)
+	f5_type f2_{};
+#pragma pack(pop)
+
+	constexpr f5_type get_f2() const noexcept { return f2_; }
+	constexpr message& set_f2(f5_type value) noexcept
+	{
+		f2_ = value;
+		return *this;
+	}
+
+	static constexpr std::size_t f5_id() noexcept { return 2; }
+
+	constexpr std::size_t group1_offset() const noexcept { return f5_offset() + sizeof(f5_); }
 	struct group1
 	{
 		using data_size_type = std::uint32_t;

@@ -14,11 +14,6 @@ public:
 	{ 
 		return S_FIELD_OFFSET; 
 	}
-
-	static constexpr std::size_t S_FIELD_NAME_id() noexcept
-	{ 
-		return S_FIELD_ID; 
-	}
 	
 	static constexpr const char* S_FIELD_NAME_name() const noexcept
 	{ 
