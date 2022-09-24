@@ -20,7 +20,7 @@ public:
 		return S_FIELD_ID; 
 	}
 	
-	static constexpr const char* S_FIELD_NAME_name() const noexcept
+	static constexpr const char* S_FIELD_NAME_name() noexcept
 	{ 
 		return "S_FIELD_NAME"; 
 	}
@@ -52,7 +52,7 @@ public:
 		return *this;
 	}
 
-	constexpr message& set_S_FIELD_NAME(std::string_view value) noexcept
+	constexpr auto& set_S_FIELD_NAME(std::string_view value) noexcept
 	{
 		constexpr auto size = std::min(S_FIELD_NAME_size(), value.size());
 		std::memcpy(S_FIELD_NAME_, value.data(), size);

@@ -20,7 +20,7 @@ public:
 		return S_FIELD_ID; 
 	}
 	
-	static constexpr const char* S_FIELD_NAME_name() const noexcept
+	static constexpr const char* S_FIELD_NAME_name() noexcept
 	{ 
 		return "S_FIELD_NAME"; 
 	}
@@ -35,7 +35,7 @@ public:
 		return S_FIELD_NAME_;
 
 	}
-	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE value) noexcept
+	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE& value) noexcept
 	{
 		S_FIELD_NAME_ = value;
 		return *this;

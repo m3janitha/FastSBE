@@ -57,6 +57,15 @@ struct composite_1
 	}
 };
 
+struct MyEnum
+{
+	enum class Value
+	{
+		VAL1,
+		VAL2,
+	};
+};
+
 struct message
 {
 	static constexpr const char* name() noexcept
@@ -135,14 +144,14 @@ struct message
 
 	static constexpr std::size_t f3_size() noexcept { return 5;}
 
-	constexpr message& set_f3(const char* value) noexcept
+	message& set_f3(const char* value) noexcept
 	{
 		auto length = strlen(value);
 		std::memcpy(f3_, value, length);
 		return *this;
 	}
 
-	constexpr message& set_f3(std::string_view value) noexcept
+	message& set_f3(std::string_view value) noexcept
 	{
 		auto size = std::min(f3_size(), value.size());
 		std::memcpy(f3_, value.data(), size);
@@ -151,21 +160,25 @@ struct message
 
 	static constexpr std::size_t f3_id() noexcept { return 3; }
 
+	static constexpr std::size_t f5_offset() noexcept { return f3_offset() + sizeof(f5_); }
 	using f5_type = MyEnum::Value;
 #pragma pack(push, 1)
-	f5_type f2_{};
+	f5_type f5_{};
 #pragma pack(pop)
 
-	constexpr f5_type get_f2() const noexcept { return f2_; }
-	constexpr message& set_f2(f5_type value) noexcept
+	constexpr f5_type get_f5() const noexcept { return f5_; }
+	constexpr message& set_f5(f5_type value) noexcept
 	{
-		f2_ = value;
+		f5_ = value;
 		return *this;
 	}
 
 	static constexpr std::size_t f5_id() noexcept { return 2; }
 
-	constexpr std::size_t group1_offset() const noexcept { return f5_offset() + sizeof(f5_); }
+	char buffx_[512]{};
+
+	constexpr std::size_t group1_offset() const noexcept { return 0; }
+
 	struct group1
 	{
 		using data_size_type = std::uint32_t;
@@ -263,24 +276,36 @@ struct message
 
 	group1& get_group1() noexcept 
 	{
-		auto* buf = buffer() + group1_offset();
+		auto* buf = buffx_ + group1_offset();
 		return *reinterpret_cast<group1*>(buf);
 	}
 
 	const group1& get_group1() const noexcept 
 	{ 
-		const auto* buf = buffer() + group1_offset();
+		const auto* buf = buffx_ + group1_offset();
 		return *reinterpret_cast<const group1*>(buf); 
 	}
 
 	group1& append_group1(std::uint16_t count) noexcept
 	{
-		auto* buf = buffer() + group1_offset();
+		auto* buf = buffx_ + group1_offset();
 		auto* group = new(buf) group1(count);
 		return *group;
 	}
 
-	constexpr std::size_t group2_offset() const noexcept { return group1_offset() + sizeof(group1::group_header) + (group1_.header_.get_size() * group1_.header_.get_count()); }
+	std::size_t group1_data_length() const noexcept
+	{
+		auto group = get_group1();
+		return group.header_.get_size() * group.header_.get_count(); 
+	}
+
+	std::size_t group2_offset() const noexcept 
+	{ 
+		//return group1_offset() + sizeof(group1::group_header) + (group1_.header_.get_size() * group1_.header_.get_count());
+		auto previous_grp = get_group1();
+		return group1_offset() + sizeof(group1::group_header) + group1_data_length(); 
+	}
+
 	struct group2
 	{
 		using data_size_type = std::uint32_t;
@@ -386,12 +411,26 @@ struct message
 
 	group2& append_group2(std::uint16_t count) noexcept
 	{
+		auto aaa = group1_offset();
+		auto bbb = group2_offset();
 		auto* buf = buffer() + group2_offset();
 		auto* group = new(buf) group2(count);
 		return *group;
 	}
 
-	constexpr std::size_t v_data1_offset() const noexcept { return group2_offset() + sizeof(group2::group_header) + (group2_.header_.get_size() * group2_.header_.get_count()); }
+	std::size_t group2_data_length() const noexcept
+	{
+		auto group = get_group2();
+		return group.header_.get_size() * group.header_.get_count(); 
+	}
+
+	std::size_t v_data1_offset() const noexcept 
+	{ 
+		//return group1_offset() + sizeof(group1::group_header) + (group1_.header_.get_size() * group1_.header_.get_count());
+		auto previous_grp = get_group2();
+		return group2_offset() + sizeof(group2::group_header) + group2_data_length(); 
+	}
+	
 	struct v_data1
 	{
 		struct v_data_header

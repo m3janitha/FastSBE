@@ -15,6 +15,7 @@ void test_create()
 	m1.set_f1(99);
 	m1.set_f2(88);
 
+	std::cout << "XXXXXXXXX" << std::endl;
 	std::cout << m1 << std::endl;
 
 	auto& g1 = m1.append_group1(2);

@@ -10,7 +10,7 @@ public:
 		return S_FIELD_OFFSET;
 	}
 
-	static constexpr const char* S_FIELD_NAME_name() const noexcept
+	static constexpr const char* S_FIELD_NAME_name() noexcept
 	{
 		return "S_FIELD_NAME";
 	}

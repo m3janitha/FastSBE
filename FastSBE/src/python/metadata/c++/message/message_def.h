@@ -1,6 +1,6 @@
 
 public:
-	static constexpr const char* name() const noexcept
+	static constexpr const char* name() noexcept
 	{ 
 		return "S_MESSAGE_NAME"; 
 	}

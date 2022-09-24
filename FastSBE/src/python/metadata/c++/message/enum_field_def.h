@@ -15,7 +15,7 @@ public:
 		return S_FIELD_OFFSET; 
 	}
 	
-	static constexpr const char* S_FIELD_NAME_name() const noexcept
+	static constexpr const char* S_FIELD_NAME_name() noexcept
 	{ 
 		return "S_FIELD_NAME"; 
 	}
@@ -30,7 +30,7 @@ public:
 		return S_FIELD_NAME_;
 	}
 	
-	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE::Value value) noexcept
+	constexpr auto& set_S_FIELD_NAME(S_FIELD_TYPE::Value value) noexcept
 	{
 		S_FIELD_NAME_ = value;
 		return *this;
