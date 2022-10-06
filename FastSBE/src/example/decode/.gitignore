@@ -1,3 +1,2 @@
-./generated
-./generated/**
-./log.txt
+generated/
+log.txt
