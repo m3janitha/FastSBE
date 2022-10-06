@@ -5,6 +5,7 @@ include(FetchContent)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${CMAKE_CURRENT_LIST_DIR}/generated)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/genSBE/sbetest)
 
 #include_directories(${googletest_SOURCE_DIR}/googletest/include)
 include_directories(${googlebenchmark_SOURCE_DIR}/include)
