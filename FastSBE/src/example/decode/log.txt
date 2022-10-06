@@ -1,0 +1,219 @@
+2022-10-06:23:52:08,278 DEBUG    [FastSBE.py:32] schema_file: C:/Users/m3jan/source/repos/FastSBE/FastSBE/src/example/decode/example-schema.xml
+2022-10-06:23:52:08,278 DEBUG    [FastSBE.py:33] out_folder: C:/Users/m3jan/source/repos/FastSBE/FastSBE/src/example/decode/generated
+2022-10-06:23:52:08,278 DEBUG    [FastSBE.py:34] override_namespace: test::sbe
+2022-10-06:23:52:08,280 DEBUG    [Parser.py:466] schema_id: 4 schema_version: 2
+2022-10-06:23:52:08,280 DEBUG    [FileGen.py:48] create ClassGen: Side
+2022-10-06:23:52:08,280 DEBUG    [EnumGen.py:74] enum_name: Buy, enum_value: 1
+2022-10-06:23:52:08,280 DEBUG    [EnumGen.py:74] enum_name: Sell, enum_value: 2
+2022-10-06:23:52:08,280 DEBUG    [EnumGen.py:74] enum_name: ShortSell, enum_value: 3
+2022-10-06:23:52:08,280 DEBUG    [EnumGen.py:94] delete EnumDefinitionGen
+2022-10-06:23:52:08,281 DEBUG    [EnumGen.py:48] delete SwitchForEnumGen
+2022-10-06:23:52:08,281 DEBUG    [EnumGen.py:123] delete EnumToStrFunctionGen
+2022-10-06:23:52:08,281 DEBUG    [FileGen.py:54] delte ClassGen Side
+2022-10-06:23:52:08,281 DEBUG    [FileGen.py:156] create FileGen: Side
+2022-10-06:23:52:08,282 DEBUG    [FileGen.py:168] delete FileGen: Side
+2022-10-06:23:52:08,282 DEBUG    [EnumGen.py:149] delete EnumClassGen
+2022-10-06:23:52:08,283 DEBUG    [FileGen.py:48] create ClassGen: TimeInForce
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:74] enum_name: Day, enum_value: 1
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:74] enum_name: IOC, enum_value: 2
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:74] enum_name: FOK, enum_value: 3
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:94] delete EnumDefinitionGen
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:48] delete SwitchForEnumGen
+2022-10-06:23:52:08,283 DEBUG    [EnumGen.py:123] delete EnumToStrFunctionGen
+2022-10-06:23:52:08,283 DEBUG    [FileGen.py:54] delte ClassGen TimeInForce
+2022-10-06:23:52:08,283 DEBUG    [FileGen.py:156] create FileGen: TimeInForce
+2022-10-06:23:52:08,285 DEBUG    [FileGen.py:168] delete FileGen: TimeInForce
+2022-10-06:23:52:08,285 DEBUG    [EnumGen.py:149] delete EnumClassGen
+2022-10-06:23:52:08,285 DEBUG    [Parser.py:273] generate_composite: messageHeader 
+2022-10-06:23:52:08,285 DEBUG    [MessageGen.py:387] create MessageGen:messageHeader 
+2022-10-06:23:52:08,285 DEBUG    [FileGen.py:48] create ClassGen: messageHeader
+2022-10-06:23:52:08,285 DEBUG    [MessageGen.py:373] create FieldGen: messageHeader
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: blockLength
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: templateId
+2022-10-06:23:52:08,286 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: schemaId
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: version
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:400] delete MessageGen: messageHeader
+2022-10-06:23:52:08,287 DEBUG    [MessageGen.py:378] delete FieldGen: messageHeader
+2022-10-06:23:52:08,287 DEBUG    [FileGen.py:54] delte ClassGen messageHeader
+2022-10-06:23:52:08,287 DEBUG    [FileGen.py:156] create FileGen: messageHeader
+2022-10-06:23:52:08,288 DEBUG    [FileGen.py:168] delete FileGen: messageHeader
+2022-10-06:23:52:08,288 DEBUG    [Parser.py:273] generate_composite: groupSizeEncoding 
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:387] create MessageGen:groupSizeEncoding 
+2022-10-06:23:52:08,289 DEBUG    [FileGen.py:48] create ClassGen: groupSizeEncoding
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:373] create FieldGen: groupSizeEncoding
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: blockLength
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: numInGroup
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,289 DEBUG    [MessageGen.py:400] delete MessageGen: groupSizeEncoding
+2022-10-06:23:52:08,290 DEBUG    [MessageGen.py:378] delete FieldGen: groupSizeEncoding
+2022-10-06:23:52:08,290 DEBUG    [FileGen.py:54] delte ClassGen groupSizeEncoding
+2022-10-06:23:52:08,290 DEBUG    [FileGen.py:156] create FileGen: groupSizeEncoding
+2022-10-06:23:52:08,290 DEBUG    [FileGen.py:168] delete FileGen: groupSizeEncoding
+2022-10-06:23:52:08,290 DEBUG    [Parser.py:273] generate_composite: varStringEncoding 
+2022-10-06:23:52:08,290 DEBUG    [MessageGen.py:387] create MessageGen:varStringEncoding 
+2022-10-06:23:52:08,291 DEBUG    [FileGen.py:48] create ClassGen: varStringEncoding
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:373] create FieldGen: varStringEncoding
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: length
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: varData
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:400] delete MessageGen: varStringEncoding
+2022-10-06:23:52:08,291 DEBUG    [MessageGen.py:378] delete FieldGen: varStringEncoding
+2022-10-06:23:52:08,292 DEBUG    [FileGen.py:54] delte ClassGen varStringEncoding
+2022-10-06:23:52:08,292 DEBUG    [FileGen.py:156] create FileGen: varStringEncoding
+2022-10-06:23:52:08,292 DEBUG    [FileGen.py:168] delete FileGen: varStringEncoding
+2022-10-06:23:52:08,293 DEBUG    [Parser.py:273] generate_composite: varDataEncoding 
+2022-10-06:23:52:08,293 DEBUG    [MessageGen.py:387] create MessageGen:varDataEncoding 
+2022-10-06:23:52:08,293 DEBUG    [FileGen.py:48] create ClassGen: varDataEncoding
+2022-10-06:23:52:08,293 DEBUG    [MessageGen.py:373] create FieldGen: varDataEncoding
+2022-10-06:23:52:08,293 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,293 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,293 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: length
+2022-10-06:23:52:08,294 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,294 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: varData
+2022-10-06:23:52:08,294 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,294 DEBUG    [MessageGen.py:400] delete MessageGen: varDataEncoding
+2022-10-06:23:52:08,294 DEBUG    [MessageGen.py:378] delete FieldGen: varDataEncoding
+2022-10-06:23:52:08,294 DEBUG    [FileGen.py:54] delte ClassGen varDataEncoding
+2022-10-06:23:52:08,294 DEBUG    [FileGen.py:156] create FileGen: varDataEncoding
+2022-10-06:23:52:08,295 DEBUG    [FileGen.py:168] delete FileGen: varDataEncoding
+2022-10-06:23:52:08,295 DEBUG    [Parser.py:273] generate_composite: PartyDetails 
+2022-10-06:23:52:08,295 DEBUG    [MessageGen.py:387] create MessageGen:PartyDetails 
+2022-10-06:23:52:08,295 DEBUG    [FileGen.py:48] create ClassGen: PartyDetails
+2022-10-06:23:52:08,295 DEBUG    [MessageGen.py:373] create FieldGen: PartyDetails
+2022-10-06:23:52:08,295 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,295 DEBUG    [Parser.py:204] enum field: time_in_force
+2022-10-06:23:52:08,295 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,295 DEBUG    [MessageGen.py:219] gen_composite_enum_field_def: time_in_force
+2022-10-06:23:52:08,296 DEBUG    [Parser.py:198] const enum field: ord_status
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:250] gen_composite_const_enum_field_def: ord_status
+2022-10-06:23:52:08,296 DEBUG    [Parser.py:224] const string field: executor
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:279] gen_composite_string_field_def: executor
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:157] gen_composite_numeric_field_def: capacity
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:186] gen_composite_const_numeric_field_def: handle_inst
+2022-10-06:23:52:08,296 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,297 DEBUG    [MessageGen.py:400] delete MessageGen: PartyDetails
+2022-10-06:23:52:08,297 DEBUG    [MessageGen.py:378] delete FieldGen: PartyDetails
+2022-10-06:23:52:08,297 DEBUG    [FileGen.py:54] delte ClassGen PartyDetails
+2022-10-06:23:52:08,297 DEBUG    [FileGen.py:156] create FileGen: PartyDetails
+2022-10-06:23:52:08,298 DEBUG    [FileGen.py:168] delete FileGen: PartyDetails
+2022-10-06:23:52:08,298 DEBUG    [Parser.py:443] message_name: NewOrder
+2022-10-06:23:52:08,298 DEBUG    [MessageGen.py:387] create MessageGen:NewOrder 
+2022-10-06:23:52:08,298 DEBUG    [FileGen.py:48] create ClassGen: NewOrder
+2022-10-06:23:52:08,298 DEBUG    [MessageGen.py:373] create FieldGen: NewOrder
+2022-10-06:23:52:08,299 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,299 DEBUG    [Parser.py:346] const numeric field: clodr_id
+2022-10-06:23:52:08,299 DEBUG    [Parser.py:354] numeric field: clodr_id
+2022-10-06:23:52:08,299 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,299 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: clodr_id
+2022-10-06:23:52:08,299 DEBUG    [Parser.py:105] field_attrib {'name': 'Price', 'id': '2', 'type': 'Price', 'primitiveType': 'uint16'}
+2022-10-06:23:52:08,299 DEBUG    [Parser.py:346] const numeric field: price
+2022-10-06:23:52:08,299 DEBUG    [Parser.py:354] numeric field: price
+2022-10-06:23:52:08,299 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,299 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: price
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:105] field_attrib {'name': 'Trader', 'id': '3', 'type': 'Trader', 'primitiveType': 'uint64', 'presence': 'constant'}
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:346] const numeric field: trader
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:174] gen_message_const_numeric_field_def: trader
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:346] const numeric field: quantity
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:354] numeric field: quantity
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: quantity
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:105] field_attrib {'name': 'Text', 'id': '5', 'type': 'Text', 'primitiveType': 'char', 'length': '6', 'characterEncoding': 'ASCII'}
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:337] const string field: text
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:267] gen_message_string_field_def: text
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:306] enum field: time_in_force
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,300 DEBUG    [MessageGen.py:205] gen_message_enum_field_def: time_in_force
+2022-10-06:23:52:08,300 DEBUG    [Parser.py:315] composite field: party_details
+2022-10-06:23:52:08,301 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,301 DEBUG    [MessageGen.py:327] gen_message_composite_field_def: party_details
+2022-10-06:23:52:08,301 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,301 DEBUG    [MessageGen.py:400] delete MessageGen: NewOrder
+2022-10-06:23:52:08,301 DEBUG    [MessageGen.py:378] delete FieldGen: NewOrder
+2022-10-06:23:52:08,301 DEBUG    [FileGen.py:54] delte ClassGen NewOrder
+2022-10-06:23:52:08,301 DEBUG    [FileGen.py:156] create FileGen: NewOrder
+2022-10-06:23:52:08,302 DEBUG    [FileGen.py:168] delete FileGen: NewOrder
+2022-10-06:23:52:08,302 DEBUG    [Parser.py:443] message_name: CancelReplace
+2022-10-06:23:52:08,302 DEBUG    [MessageGen.py:387] create MessageGen:CancelReplace 
+2022-10-06:23:52:08,302 DEBUG    [FileGen.py:48] create ClassGen: CancelReplace
+2022-10-06:23:52:08,302 DEBUG    [MessageGen.py:373] create FieldGen: CancelReplace
+2022-10-06:23:52:08,302 DEBUG    [MessageGen.py:76] gen_ostream_def_begin
+2022-10-06:23:52:08,302 DEBUG    [Parser.py:346] const numeric field: clodr_id
+2022-10-06:23:52:08,302 DEBUG    [Parser.py:354] numeric field: clodr_id
+2022-10-06:23:52:08,302 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,302 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: clodr_id
+2022-10-06:23:52:08,303 DEBUG    [Parser.py:346] const numeric field: orig_clodr_id
+2022-10-06:23:52:08,303 DEBUG    [Parser.py:354] numeric field: orig_clodr_id
+2022-10-06:23:52:08,303 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,303 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: orig_clodr_id
+2022-10-06:23:52:08,303 DEBUG    [MessageGen.py:363] gen_buffer_def
+2022-10-06:23:52:08,303 DEBUG    [GroupGen.py:41] create GroupGen: PartyInfo
+2022-10-06:23:52:08,303 DEBUG    [FileGen.py:48] create ClassGen: PartyInfo
+2022-10-06:23:52:08,303 DEBUG    [GroupGen.py:16] create GroupDataGen
+2022-10-06:23:52:08,303 DEBUG    [FileGen.py:48] create ClassGen: data
+2022-10-06:23:52:08,303 DEBUG    [MessageGen.py:373] create FieldGen: data
+2022-10-06:23:52:08,303 DEBUG    [MessageGen.py:103] gen_ostream_def_begin
+2022-10-06:23:52:08,304 DEBUG    [Parser.py:346] const numeric field: self_match_id
+2022-10-06:23:52:08,304 DEBUG    [Parser.py:354] numeric field: self_match_id
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:122] gen_ostream_def
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: self_match_id
+2022-10-06:23:52:08,304 DEBUG    [Parser.py:346] const numeric field: group_id
+2022-10-06:23:52:08,304 DEBUG    [Parser.py:354] numeric field: group_id
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:122] gen_ostream_def
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: group_id
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:107] gen_ostream_def
+2022-10-06:23:52:08,304 DEBUG    [GroupGen.py:26] delete GroupDataGen
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:378] delete FieldGen: data
+2022-10-06:23:52:08,304 DEBUG    [FileGen.py:54] delte ClassGen data
+2022-10-06:23:52:08,304 DEBUG    [MessageGen.py:341] gen_nested_group_def: PartyInfo
+2022-10-06:23:52:08,304 DEBUG    [GroupGen.py:49] delete GroupGen: PartyInfo
+2022-10-06:23:52:08,304 DEBUG    [FileGen.py:54] delte ClassGen PartyInfo
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:356] gen_group_def: PartyInfo
+2022-10-06:23:52:08,305 DEBUG    [GroupGen.py:41] create GroupGen: AppInfo
+2022-10-06:23:52:08,305 DEBUG    [FileGen.py:48] create ClassGen: AppInfo
+2022-10-06:23:52:08,305 DEBUG    [GroupGen.py:16] create GroupDataGen
+2022-10-06:23:52:08,305 DEBUG    [FileGen.py:48] create ClassGen: data
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:373] create FieldGen: data
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:103] gen_ostream_def_begin
+2022-10-06:23:52:08,305 DEBUG    [Parser.py:346] const numeric field: firm_id
+2022-10-06:23:52:08,305 DEBUG    [Parser.py:354] numeric field: firm_id
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:122] gen_ostream_def
+2022-10-06:23:52:08,305 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: firm_id
+2022-10-06:23:52:08,305 DEBUG    [Parser.py:346] const numeric field: version
+2022-10-06:23:52:08,305 DEBUG    [Parser.py:354] numeric field: version
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:122] gen_ostream_def
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:142] gen_message_numeric_field_def: version
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:107] gen_ostream_def
+2022-10-06:23:52:08,306 DEBUG    [GroupGen.py:26] delete GroupDataGen
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:378] delete FieldGen: data
+2022-10-06:23:52:08,306 DEBUG    [FileGen.py:54] delte ClassGen data
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:341] gen_nested_group_def: AppInfo
+2022-10-06:23:52:08,306 DEBUG    [GroupGen.py:49] delete GroupGen: AppInfo
+2022-10-06:23:52:08,306 DEBUG    [FileGen.py:54] delte ClassGen AppInfo
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:94] gen_ostream_def
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:356] gen_group_def: AppInfo
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:80] gen_ostream_def
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:400] delete MessageGen: CancelReplace
+2022-10-06:23:52:08,306 DEBUG    [MessageGen.py:378] delete FieldGen: CancelReplace
+2022-10-06:23:52:08,306 DEBUG    [FileGen.py:54] delte ClassGen CancelReplace
+2022-10-06:23:52:08,306 DEBUG    [FileGen.py:156] create FileGen: CancelReplace
+2022-10-06:23:52:08,307 DEBUG    [FileGen.py:168] delete FileGen: CancelReplace
+2022-10-06:23:52:08,307 DEBUG    [Parser.py:486] end

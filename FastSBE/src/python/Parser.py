@@ -153,7 +153,6 @@ class Parser:
 	def generate_enum(self, type):
 		enum_values = []
 		for field in type:
-			print(field.text)
 			enum_values.append((field.attrib['name'], field.text))
 
 		enum_name = type.attrib['name']
@@ -460,7 +459,7 @@ class Parser:
 
 
 	def run(self):
-		tree = ET.parse('example-schema.xml')
+		tree = ET.parse(self.schema_file)
 		root = tree.getroot()
 		self.schema_id = root.attrib['id']
 		self.schema_version = root.attrib['version']
@@ -473,10 +472,10 @@ class Parser:
 		self.parse_all_messages(root = root)
 
 
-	def __init__(self, output_dir, override_namespace):
-		self.out_folder = output_dir
-		self.namespace = override_namespace		
-		self.override_namespace = override_namespace
+	def __init__(self, schema_file, out_folder, override_namespace):
+		self.schema_file = schema_file
+		self.out_folder = out_folder
+		self.namespace = override_namespace
 
 		self.user_defined_types = {}
 		self.user_defined_enums = []

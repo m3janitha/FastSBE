@@ -3,7 +3,7 @@
 #include <benchmark/benchmark.h>
 
 #include <helper.h>
-#include <generated/CancelReplace.h>
+#include <FastSBE/generated/CancelReplace.h>
 
 namespace fastsbe
 {

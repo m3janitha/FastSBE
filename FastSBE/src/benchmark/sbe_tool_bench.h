@@ -2,7 +2,7 @@
 
 #include <benchmark/benchmark.h>
 #include <helper.h>
-#include <genSBE/sbetest/CancelReplace.h>
+#include <SBETool/sbetest/CancelReplace.h>
 
 namespace sbetool
 {
@@ -36,7 +36,6 @@ namespace sbetool
     {
         sbetest::CancelReplace cxl;
         cxl.wrapForDecode(buffer,0,0,0,length);
-
 
         auto clodr_id = cxl.clodr_id();
         benchmark::DoNotOptimize(clodr_id);

@@ -163,7 +163,7 @@ class FileGen:
 
 	def __del__(self):
 		self.gen_file_end()
-		file_name_h = './' + self.out_folder + '/' + self.file_name + '.h'
+		file_name_h = self.out_folder + '/' + self.file_name + '.h'
 		file = open(file_name_h,'w').write(self.content)
 		logging.debug('delete FileGen: %s', self.file_name)
 

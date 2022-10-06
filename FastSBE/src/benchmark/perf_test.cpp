@@ -4,7 +4,6 @@
 
 #include <benchmark/benchmark.h>
 
-#include <generated/CancelReplace.h>
 #include <fast_sbe_bench.h>
 #include <sbe_tool_bench.h>
 

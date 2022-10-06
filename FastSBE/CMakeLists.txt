@@ -17,3 +17,5 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(googlebenchmark)
+
+include(FindPythonInterp)
