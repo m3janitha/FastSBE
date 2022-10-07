@@ -1,4 +1,4 @@
-.vs/*
-.vscode/*
-out/*
-build/*
+.vs/
+.vscode/
+out/
+build/
