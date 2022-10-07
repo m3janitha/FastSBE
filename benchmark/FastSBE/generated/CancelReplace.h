@@ -358,8 +358,10 @@ class CancelReplace
     	PartyInfo& append_PartyInfo(std::uint16_t count) noexcept
     	{
     		auto* buf = buffer() + PartyInfo_offset();
-    		auto* group = new(buf) PartyInfo(count);
-    		return *group;
+			//auto* group = new(buf) PartyInfo(count);
+			auto& group = *reinterpret_cast<PartyInfo*>(buf);
+			group.header_.set_numInGroup(count);
+    		return group;
     	}
     
     class AppInfo
@@ -559,8 +561,10 @@ class CancelReplace
     	AppInfo& append_AppInfo(std::uint16_t count) noexcept
     	{
     		auto* buf = buffer() + AppInfo_offset();
-    		auto* group = new(buf) AppInfo(count);
-    		return *group;
+    		//auto* group = new(buf) AppInfo(count);
+			auto& group = *reinterpret_cast<AppInfo*>(buf);
+			group.header_.set_numInGroup(count);
+    		return group;
     	}
 };
 }

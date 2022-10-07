@@ -54,6 +54,22 @@ BENCHMARK_F(SbeToolFixture, BM_Decode_CancelReplace)(benchmark::State& st)
    }
 }
 
+BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace)(benchmark::State& st) 
+{
+   for (auto _ : st) 
+   {
+        fastsbe::create_msg(msg_);
+   }
+}
+
+BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace)(benchmark::State& st) 
+{
+   for (auto _ : st) 
+   {
+        sbetool::create_msg(msg_, sizeof(msg_));
+   }
+}
+
 BENCHMARK_MAIN();
 
 

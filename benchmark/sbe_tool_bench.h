@@ -30,12 +30,14 @@ namespace sbetool
                 .firm_id(get_random_int(782))
                 .version(get_random_int(897));
         }
+
+        //std::cout << cxl.sbeBlockLength() << std::endl;
     }
 
     void benchmakr_cxl(char* buffer, std::size_t length)
     {
         sbetest::CancelReplace cxl;
-        cxl.wrapForDecode(buffer,0,0,0,length);
+        cxl.wrapForDecode(buffer,0,8,0,length);
 
         auto clodr_id = cxl.clodr_id();
         benchmark::DoNotOptimize(clodr_id);
