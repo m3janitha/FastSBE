@@ -5,11 +5,11 @@ from FileGen import FileGen
 from FileGen import ClassGen
 
 class SwitchForEnumGen:
-	switch_begin_ct		='switch (value)\n{{\n'
-	switch_case_ct		='case Value::{S_ENUM_VALUE}:\n    return "{S_RET_VALUE}";\n'
-	switch_null_ct		='case Value::NULL:\n    return "{S_RET_VALUE}";\n'
-	switch_default_ct	='default:\n    return "{S_DEFUAULT}";\n'
-	switch_end_ct		='}}\n'
+	switch_begin_ct		= "switch (value)\n{{\n"
+	switch_case_ct		="case Value::{S_ENUM_VALUE}:\n    return {S_RET_VALUE};\n"
+	switch_null_ct		="case Value::NULL:\n    return {S_RET_VALUE};\n"
+	switch_default_ct	="default:\n    return {S_DEFUAULT};\n"
+	switch_end_ct		="}}\n"
 
 
 	def gen_content(self):
@@ -49,12 +49,10 @@ class SwitchForEnumGen:
 
 
 class EnumClassGen:
-	ostream_enum_def_ct	= open('metadata/c++/message/ostream_enum_def.h', 'r').read()
-
 	class EnumDefinitionGen:
-		enum_def_ct			= 'public:\nenum class Value : {encoding_type}\n{{\n'
-		enum_def_end_ct		= '};\n'
-		enum_value_ct		= '{S_ENUM_NAME} = {S_ENUM_VALUE},\n'
+		enum_def_ct		= "public:\nenum class Value : {encoding_type}\n{{\n"
+		enum_def_end_ct = "};\n"
+		enum_value_ct	= "{S_ENUM_NAME} = {S_ENUM_VALUE},\n"
 
 
 		def gen_enum_begin(self):
@@ -97,7 +95,7 @@ class EnumClassGen:
 
 
 	class EnumToStrFunctionGen:
-		fuction_begin_ct = "\npublic:\nstatic constexpr const char* to_string(Value value) noexcept\n{{"
+		fuction_begin_ct = "\npublic:\nconst char* to_string(Value value) const noexcept\n{{"
 		fuction_end_ct = "}\n"
 
 
@@ -133,14 +131,7 @@ class EnumClassGen:
 			switch_content = self.EnumToStrFunctionGen(handler = self.handler, indentation = self.indentation, switch_variable = 'value', default_value = 'Invalid', values = self.values)
 
 
-	def gen_ostream_enum_def(self, enum_name, namespace):
-		field_def = self.ostream_enum_def_ct\
-			.replace('S_ENUM_NAME', enum_name)\
-			.replace('S_NAMESPACE', namespace)
-		self.handler.ostream += field_def
-		logging.debug('gen_ostream_field_def_begin')
-
-	def __init__(self, handler, enum_name, encoding_type, values, namespace):
+	def __init__(self, handler, enum_name, encoding_type, values):
 		self.handler = handler
 		self.enum_name = enum_name
 		self.encoding_type = encoding_type
@@ -151,8 +142,7 @@ class EnumClassGen:
 		class_gen = ClassGen(handler = self.handler, indentation = self.indentation\
 			, class_name = self.enum_name)
 		self.gen_enum_class_content()
-		self.gen_to_str_function()		
-		self.gen_ostream_enum_def(enum_name, namespace)
+		self.gen_to_str_function()
 
 
 	def __del__(self):

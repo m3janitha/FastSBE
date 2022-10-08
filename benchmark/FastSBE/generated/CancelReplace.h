@@ -67,17 +67,17 @@ class CancelReplace
     	
     	static constexpr std::uint32_t clodr_id_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint32_t clodr_id_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967294; 
     	}
     	
     	static constexpr std::uint32_t clodr_id_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967295; 
     	}
     
     	constexpr std::uint32_t get_clodr_id() const noexcept
@@ -120,17 +120,17 @@ class CancelReplace
     	
     	static constexpr std::uint32_t orig_clodr_id_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint32_t orig_clodr_id_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967294; 
     	}
     	
     	static constexpr std::uint32_t orig_clodr_id_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967295; 
     	}
     
     	constexpr std::uint32_t get_orig_clodr_id() const noexcept
@@ -161,6 +161,7 @@ class CancelReplace
     	}
     
     public:
+    
     class PartyInfo
     {
     	friend CancelReplace;
@@ -196,17 +197,17 @@ class CancelReplace
             	
             	static constexpr std::uint16_t self_match_id_min_value() noexcept
             	{ 
-            		return -1; 
+            		return 0; 
             	}
             	
             	static constexpr std::uint16_t self_match_id_max_value() noexcept
             	{ 
-            		return 100; 
+            		return 65534; 
             	}
             	
             	static constexpr std::uint16_t self_match_id_null_value() noexcept
             	{ 
-            		return 100; 
+            		return 65535; 
             	}
             
             	constexpr std::uint16_t get_self_match_id() const noexcept
@@ -249,17 +250,17 @@ class CancelReplace
             	
             	static constexpr std::uint16_t group_id_min_value() noexcept
             	{ 
-            		return -1; 
+            		return 0; 
             	}
             	
             	static constexpr std::uint16_t group_id_max_value() noexcept
             	{ 
-            		return 100; 
+            		return 65534; 
             	}
             	
             	static constexpr std::uint16_t group_id_null_value() noexcept
             	{ 
-            		return 100; 
+            		return 65535; 
             	}
             
             	constexpr std::uint16_t get_group_id() const noexcept
@@ -358,11 +359,11 @@ class CancelReplace
     	PartyInfo& append_PartyInfo(std::uint16_t count) noexcept
     	{
     		auto* buf = buffer() + PartyInfo_offset();
-			//auto* group = new(buf) PartyInfo(count);
-			auto& group = *reinterpret_cast<PartyInfo*>(buf);
-			group.header_.set_numInGroup(count);
-    		return group;
+    		auto& group = *reinterpret_cast<PartyInfo*>(buf);
+    		group.header_.set_numInGroup(count);
+    		return group;	
     	}
+    public:
     
     class AppInfo
     {
@@ -399,17 +400,17 @@ class CancelReplace
             	
             	static constexpr std::uint16_t firm_id_min_value() noexcept
             	{ 
-            		return -1; 
+            		return 0; 
             	}
             	
             	static constexpr std::uint16_t firm_id_max_value() noexcept
             	{ 
-            		return 100; 
+            		return 65534; 
             	}
             	
             	static constexpr std::uint16_t firm_id_null_value() noexcept
             	{ 
-            		return 100; 
+            		return 65535; 
             	}
             
             	constexpr std::uint16_t get_firm_id() const noexcept
@@ -452,17 +453,17 @@ class CancelReplace
             	
             	static constexpr std::uint32_t version_min_value() noexcept
             	{ 
-            		return -1; 
+            		return 0; 
             	}
             	
             	static constexpr std::uint32_t version_max_value() noexcept
             	{ 
-            		return 100; 
+            		return 4294967294; 
             	}
             	
             	static constexpr std::uint32_t version_null_value() noexcept
             	{ 
-            		return 100; 
+            		return 4294967295; 
             	}
             
             	constexpr std::uint32_t get_version() const noexcept
@@ -561,10 +562,9 @@ class CancelReplace
     	AppInfo& append_AppInfo(std::uint16_t count) noexcept
     	{
     		auto* buf = buffer() + AppInfo_offset();
-    		//auto* group = new(buf) AppInfo(count);
-			auto& group = *reinterpret_cast<AppInfo*>(buf);
-			group.header_.set_numInGroup(count);
-    		return group;
+    		auto& group = *reinterpret_cast<AppInfo*>(buf);
+    		group.header_.set_numInGroup(count);
+    		return group;	
     	}
 };
 }

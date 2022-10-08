@@ -7,7 +7,7 @@ private:
 public:
 	static constexpr std::size_t S_FIELD_NAME_size() noexcept
 	{
-		return sizeof(S_FIELD_TYPE);
+		return 0;
 	}
 
 	static constexpr std::size_t S_FIELD_NAME_offset() noexcept

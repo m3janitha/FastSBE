@@ -154,15 +154,18 @@ class Parser:
 		enum_values = []
 		for field in type:
 			enum_values.append((field.attrib['name'], field.text))
+		
 
 		enum_name = type.attrib['name']
 		encoding_type = type.attrib['encodingType']
 		#if type is user defined
 		enum_attrib = self.update_enum_attrib(type = type)
 		primitive_encoding_type = self.get_primitive_encoding_type(enum_attrib)
+		(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_encoding_type)
+		enum_values.append(('Null', null_value))
 		handler = ContentHandler()
 		enum_file = EnumClassGen(handler, enum_name, Metadata.c_field_types[primitive_encoding_type]\
-			, enum_values)
+			, enum_values, self.namespace)
 		self.user_defined_enums.append(enum_name)
 
 		system_includes = ["cstdint", "string", "string_view", "ostream"]
@@ -210,20 +213,21 @@ class Parser:
 		
 		field_attrib =  self.update_type_attrib(field = type)
 		primitive_type = self.get_primitive_type(type.attrib)
+		field_type = Metadata.c_field_types[primitive_type]
 
 		#string
 		if(self.is_string_field(primitive_type, field_attrib)):
 			if(self.is_const_type(type.attrib)):
 				logging.debug('const string field: %s', type_name)
 				field_gen.gen_composite_const_string_field_def(message_name = composite_name\
-					, field_type = Metadata.c_field_types[primitive_type]\
+					, field_type = field_type\
 					, field_name = type_name, prvious_field_name = prvious_type_name, field_size = type.attrib['length']\
 					, value = type.text)
 				return type_name, includes
 			else:
 				logging.debug('const string field: %s', type_name)
 				field_gen.gen_composite_string_field_def(message_name = composite_name\
-					, field_type = Metadata.c_field_types[primitive_type]\
+					, field_type = field_type\
 					, field_name = type_name, prvious_field_name = prvious_type_name, field_size = type.attrib['length'])
 				return type_name, includes
 		
@@ -231,14 +235,14 @@ class Parser:
 		if(self.is_numeric(primitive_type, type.attrib) == True):
 			if(('presence' in type.attrib) and (type.attrib['presence'] == 'constant')):
 				field_gen.gen_composite_const_numeric_field_def(message_name = composite_name\
-					, field_type = Metadata.c_field_types[primitive_type]\
+					, field_type = field_type\
 					, field_name = type_name, prvious_field_name = prvious_type_name\
 					, value = type.text)
 				return type_name, includes
 			else:
 				(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_type)
 				field_gen.gen_composite_numeric_field_def(message_name = composite_name\
-					, field_type = Metadata.c_field_types[primitive_type]\
+					, field_type = field_type\
 					, field_name = type_name, prvious_field_name = prvious_type_name\
 					, min = min_value, max = max_value, null = null_value)
 				return type_name, includes
@@ -266,6 +270,7 @@ class Parser:
 			prvious_type_name, includes = self.generate_composite_type(msg_gen.field_gen, composite_name, type\
 				, prvious_type_name)
 		msg_gen.field_gen.gen_ostream_end()
+		msg_gen.field_gen.gen_constructor()
 
 
 	def generate_composite(self, composite):

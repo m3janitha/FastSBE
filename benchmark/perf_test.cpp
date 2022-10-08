@@ -62,7 +62,7 @@ BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace)(benchmark::State& st)
    }
 }
 
-BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace)(benchmark::State& st) 
+BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace)(benchmark::State& st)
 {
    for (auto _ : st) 
    {

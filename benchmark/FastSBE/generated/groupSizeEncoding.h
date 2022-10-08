@@ -60,17 +60,17 @@ class groupSizeEncoding
     	
     	static constexpr std::uint16_t blockLength_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t blockLength_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t blockLength_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_blockLength() const noexcept
@@ -108,17 +108,17 @@ class groupSizeEncoding
     	
     	static constexpr std::uint16_t numInGroup_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t numInGroup_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t numInGroup_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_numInGroup() const noexcept

@@ -67,17 +67,17 @@ class NewOrder
     	
     	static constexpr std::uint32_t clodr_id_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint32_t clodr_id_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967294; 
     	}
     	
     	static constexpr std::uint32_t clodr_id_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967295; 
     	}
     
     	constexpr std::uint32_t get_clodr_id() const noexcept
@@ -120,17 +120,17 @@ class NewOrder
     	
     	static constexpr std::uint16_t price_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t price_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t price_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_price() const noexcept
@@ -168,7 +168,7 @@ class NewOrder
     
     	constexpr std::uint64_t get_trader() const noexcept
     	{ 
-    		return 1234;
+    		return None;
     	}
     
     
@@ -200,17 +200,17 @@ class NewOrder
     	
     	static constexpr std::uint64_t quantity_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint64_t quantity_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 18446744073709551614; 
     	}
     	
     	static constexpr std::uint64_t quantity_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 18446744073709551615; 
     	}
     
     	constexpr std::uint64_t get_quantity() const noexcept
@@ -271,16 +271,16 @@ class NewOrder
     		return std::string_view(text_, 6);
     	}
     
-    	auto& set_text(const char* value) noexcept
+    	constexpr message& set_text(const char* value) noexcept
     	{
     		auto length = strlen(value);
     		std::memcpy(text_, value, length);
     		return *this;
     	}
     
-    	auto& set_text(std::string_view value) noexcept
+    	constexpr auto& set_text(std::string_view value) noexcept
     	{
-    		auto size = std::min(text_size(), value.size());
+    		constexpr auto size = std::min(text_size(), value.size());
     		std::memcpy(text_, value.data(), size);
     		return *this;
     	}

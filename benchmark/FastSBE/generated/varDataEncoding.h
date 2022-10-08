@@ -60,17 +60,17 @@ class varDataEncoding
     	
     	static constexpr std::uint32_t length_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint32_t length_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967294; 
     	}
     	
     	static constexpr std::uint32_t length_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 4294967295; 
     	}
     
     	constexpr std::uint32_t get_length() const noexcept
@@ -108,17 +108,17 @@ class varDataEncoding
     	
     	static constexpr std::uint8_t varData_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint8_t varData_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 254; 
     	}
     	
     	static constexpr std::uint8_t varData_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 255; 
     	}
     
     	constexpr std::uint8_t get_varData() const noexcept

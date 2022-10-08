@@ -95,7 +95,7 @@ class PartyDetails
     
     	constexpr TimeInForce::Value get_ord_status() const noexcept
     	{
-    		return TimeInForce::Value::Day;
+    		return TimeInForce::Value::1;
     	}
     
     private:
@@ -178,17 +178,17 @@ class PartyDetails
     	
     	static constexpr std::uint16_t capacity_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t capacity_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t capacity_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_capacity() const noexcept

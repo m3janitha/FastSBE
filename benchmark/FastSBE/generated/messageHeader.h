@@ -60,17 +60,17 @@ class messageHeader
     	
     	static constexpr std::uint16_t blockLength_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t blockLength_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t blockLength_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_blockLength() const noexcept
@@ -108,17 +108,17 @@ class messageHeader
     	
     	static constexpr std::uint16_t templateId_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t templateId_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t templateId_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_templateId() const noexcept
@@ -156,17 +156,17 @@ class messageHeader
     	
     	static constexpr std::uint16_t schemaId_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t schemaId_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t schemaId_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_schemaId() const noexcept
@@ -204,17 +204,17 @@ class messageHeader
     	
     	static constexpr std::uint16_t version_min_value() noexcept
     	{ 
-    		return -1; 
+    		return 0; 
     	}
     	
     	static constexpr std::uint16_t version_max_value() noexcept
     	{ 
-    		return 100; 
+    		return 65534; 
     	}
     	
     	static constexpr std::uint16_t version_null_value() noexcept
     	{ 
-    		return 100; 
+    		return 65535; 
     	}
     
     	constexpr std::uint16_t get_version() const noexcept

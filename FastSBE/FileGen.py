@@ -173,4 +173,5 @@ class ContentHandler:
 		self.user_includes =[]
 		self.ostream = ""
 		self.ostream_var = ""
+		self.field_type_and_name = []
 

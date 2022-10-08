@@ -6,8 +6,8 @@ private:
 
 public:
 	S_GROUP_NAME() = default;
-	S_GROUP_NAME(S_DIMENTION_COUNT_TYPE count) {}
-	//	:header_(count) {}
+	S_GROUP_NAME(S_DIMENTION_COUNT_TYPE count)
+		:header_(sizeof(S_GROUP_NAME::data), count) {}
 
 	data& get(S_GROUP_NAME& group, std::size_t group_id) noexcept
 	{

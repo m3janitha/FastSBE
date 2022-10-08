@@ -46,6 +46,7 @@ public:
 	S_GROUP_NAME& append_S_GROUP_NAME(S_DIMENTION_COUNT_TYPE count) noexcept
 	{
 		auto* buf = buffer() + S_GROUP_NAME_offset();
-		auto* group = new(buf) S_GROUP_NAME(count);
-		return *group;
+		auto& group = *reinterpret_cast<S_GROUP_NAME*>(buf);
+		group.header_.set_numInGroup(count);
+		return group;	
 	}

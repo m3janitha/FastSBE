@@ -6,6 +6,7 @@ from MessageGen import FieldGen
 
 class GroupGen:
 	group_qulifiyer_def_ct = open('metadata/c++/message/group_qulifiyer_def.h', 'r').read()
+	group_class_qulifiyer_def_ct = 'public:'
 
 	class GroupDataGen:
 		def __init__(self, handler, indentation, namespace):
@@ -39,6 +40,7 @@ class GroupGen:
 		self.dimension_type = dimension_type
 
 		logging.debug('create GroupGen: %s', self.group_name)
+		self.handler.content += self.indentation.get_indented_str(self.group_class_qulifiyer_def_ct)
 		self.class_gen = ClassGen(handler = self.handler, indentation = self.indentation\
 			, class_name = self.group_name)
 

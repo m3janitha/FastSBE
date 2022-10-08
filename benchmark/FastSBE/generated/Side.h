@@ -15,7 +15,7 @@ class Side
         Buy = 1,
         Sell = 2,
         ShortSell = 3,
-        Null = 255,
+        Null = 0,
     };
     
     public:
@@ -30,7 +30,7 @@ class Side
         case Value::ShortSell:
             return "3";
         case Value::Null:
-            return "255";
+            return "0";
         default:
             return "Invalid";
         }

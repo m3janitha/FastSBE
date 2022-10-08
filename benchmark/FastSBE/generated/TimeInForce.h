@@ -15,7 +15,7 @@ class TimeInForce
         Day = 1,
         IOC = 2,
         FOK = 3,
-        Null = 100,
+        Null = 255,
     };
     
     public:
@@ -30,7 +30,7 @@ class TimeInForce
         case Value::FOK:
             return "3";
         case Value::Null:
-            return "100";
+            return "255";
         default:
             return "Invalid";
         }

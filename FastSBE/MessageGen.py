@@ -29,6 +29,9 @@ class FieldGen:
     composite_string_field_ct       = open('metadata/c++/composite/string_field_def.h', 'r').read()
     composite_const_string_field_ct = open('metadata/c++/composite/const_string_field_def.h', 'r').read()
 
+    constructor_ct                  = open('metadata/c++/composite/constructor_def.h', 'r').read()
+
+
     #group
     nested_group_def_ct             = open('metadata/c++/message/nested_group_def.h', 'r').read()
     group_def_ct                    = open('metadata/c++/message/group_def.h', 'r').read()
@@ -37,8 +40,8 @@ class FieldGen:
     buffer_def_ct                   = open('metadata/c++/message/buffer_def.h', 'r').read()
 
     #ostream
-    ostream_def_begin_ct            = open('metadata/c++/message/ostream_def_begin.h', 'r').read()
-    ostream_def_end_ct              = open('metadata/c++/message/ostream_def_end.h', 'r').read()
+    ostream_field_def_begin_ct      = open('metadata/c++/message/ostream_field_def_begin.h', 'r').read()
+    ostream_field_def_end_ct        = open('metadata/c++/message/ostream_field_def_end.h', 'r').read()
     ostream_field_def_ct            = open('metadata/c++/message/ostream_field_def.h', 'r').read()
     ostream_group_def_begin_ct      = open('metadata/c++/message/ostream_group_def_begin.h', 'r').read()
     ostream_group_def_end_ct        = open('metadata/c++/message/ostream_group_def_end.h', 'r').read()
@@ -68,22 +71,22 @@ class FieldGen:
             return prvious_field_name + '_offset() + ' + 'sizeof(' + prvious_field_name + '::header_) + ' + prvious_field_name + '_data_length()'
 
 
-    def gen_ostream_def_begin(self):
-        field_def = self.ostream_def_begin_ct\
+    def gen_ostream_field_def_begin(self):
+        field_def = self.ostream_field_def_begin_ct\
             .replace('S_NAMESPACE', self.namespace)\
             .replace('S_MESSAGE_NAME', self.message_name)
         self.handler.ostream += field_def
-        logging.debug('gen_ostream_def_begin')
+        logging.debug('gen_ostream_field_def_begin')
 
-    def gen_ostream_def_end(self):
-        self.handler.ostream += self.ostream_def_end_ct
+    def gen_ostream_field_def_end(self):
+        self.handler.ostream += self.ostream_field_def_end_ct
         logging.debug('gen_ostream_def')
 
     def gen_ostream_begin(self):
-        self.gen_ostream_def_begin()
+        self.gen_ostream_field_def_begin()
 
     def gen_ostream_end(self):
-        self.gen_ostream_def_end()
+        self.gen_ostream_field_def_end()
 
     def gen_ostream_field_def(self, field_name):
         field_def = self.ostream_field_def_ct\
@@ -94,13 +97,20 @@ class FieldGen:
         logging.debug('gen_ostream_def')
 
 
+    def gen_ostream_field(self, field_name, is_group, group_name):
+        if(is_group == False):
+            self.gen_ostream_field_def(field_name)
+        else:
+            self.gen_ostream_group_field_def(field_name, group_name)
+
+
     def gen_ostream_group_def_begin(self, group_name, message_name):
         field_def = self.ostream_group_def_begin_ct\
             .replace('S_NAMESPACE', self.namespace)\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_GROUP_NAME', group_name)
         self.handler.ostream_var += field_def
-        logging.debug('gen_ostream_def_begin')
+        logging.debug('gen_ostream_field_def_begin')
 
     def gen_ostream_group_def_end(self):
         self.handler.ostream_var += self.ostream_group_def_end_ct
@@ -134,11 +144,7 @@ class FieldGen:
             .replace('S_FIELD_MAX', str(max))\
             .replace('S_FIELD_NULL', str(null))
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
-
+        self.gen_ostream_field(field_name, is_group, group_name)
         logging.debug('gen_message_numeric_field_def: %s', field_name)
 
     def gen_composite_numeric_field_def(self, message_name\
@@ -154,6 +160,7 @@ class FieldGen:
             .replace('S_FIELD_NULL', str(null))
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(field_name)
+        self.handler.field_type_and_name.append([field_type, field_name])
         logging.debug('gen_composite_numeric_field_def: %s', field_name)
 
 
@@ -167,10 +174,7 @@ class FieldGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
         logging.debug('gen_message_const_numeric_field_def: %s', field_name)
 
     def gen_composite_const_numeric_field_def(self, message_name\
@@ -197,11 +201,8 @@ class FieldGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_NULL', str(null))
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
-        self.handler.user_includes.append(field_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
+        self.handler.user_includes.append(field_type)
         logging.debug('gen_message_enum_field_def: %s', field_name)
 
     def gen_composite_enum_field_def(self, message_name\
@@ -215,7 +216,8 @@ class FieldGen:
             .replace('S_FIELD_NULL', str(null))
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(field_name)
-        self.handler.user_includes.append(field_name)
+        self.handler.user_includes.append(field_type)
+        self.handler.field_type_and_name.append([field_type + '::Value', field_name])
         logging.debug('gen_composite_enum_field_def: %s', field_name)
 
 
@@ -229,11 +231,8 @@ class FieldGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
-        self.handler.user_includes.append(field_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
+        self.handler.user_includes.append(field_type)
         logging.debug('gen_message_const_enum_field_def: %s', field_name)
 
     def gen_composite_const_enum_field_def(self, message_name\
@@ -246,7 +245,7 @@ class FieldGen:
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(field_name)
-        self.handler.user_includes.append(field_name)
+        self.handler.user_includes.append(field_type)
         logging.debug('gen_composite_const_enum_field_def: %s', field_name)
 
 
@@ -260,10 +259,7 @@ class FieldGen:
             .replace('S_FIELD_NAME', field_name)\
             .replace('S_FIELD_SIZE', field_size)
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
         logging.debug('gen_message_string_field_def: %s', field_name)
 
     def gen_composite_string_field_def(self, message_name, field_type, field_name\
@@ -276,6 +272,7 @@ class FieldGen:
             .replace('S_FIELD_SIZE', field_size)
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(field_name)
+        self.handler.field_type_and_name.append([field_type, field_name])
         logging.debug('gen_composite_string_field_def: %s', field_name)
 
 
@@ -290,10 +287,7 @@ class FieldGen:
             .replace('S_FIELD_SIZE', field_size)\
             .replace('S_CONST_FIELD_VALUE', str(value))
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
         logging.debug('gen_message_const_string_field_def: %s', field_name)
 
     def gen_composite_const_string_field_def(self, message_name, field_type, field_name\
@@ -319,11 +313,9 @@ class FieldGen:
             .replace('S_FIELD_OFFSET', self.get_field_offset(prvious_field_name))\
             .replace('S_FIELD_NAME', field_name)
         self.handler.content += self.indentation.get_indented_str(field_def)
-        if(is_group == False):
-            self.gen_ostream_field_def(field_name)
-        else:
-            self.gen_ostream_group_field_def(field_name, group_name)
-        self.handler.user_includes.append(field_name)
+        self.gen_ostream_field(field_name, is_group, group_name)
+        self.handler.user_includes.append(field_type)
+        self.handler.field_type_and_name.append([field_type, field_name])
         logging.debug('gen_message_composite_field_def: %s', field_name)
 
 
@@ -354,6 +346,34 @@ class FieldGen:
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(group_name)
         logging.debug('gen_group_def: %s', group_name)
+
+    def gen_constructor(self):
+        string_fields = []
+        ct_args_list = []
+        for type in self.handler.field_type_and_name:
+            if(type[0] == 'char'):
+                string_fields.append(type[1])
+                ct_args_list.append('std::string_view ' + type[1])
+            else:
+                ct_args_list.append(' '.join(type))
+        initilizer_args_list = []
+        for type in self.handler.field_type_and_name:
+            if(type[0] != 'char'):
+                initilizer_args_list.append(type[1] + '_(' + type[1] + ')')
+
+        ct_args = ', '.join(ct_args_list)
+        initilizer_args = ', '.join(initilizer_args_list)
+        str_assign = ''
+        for field_name in string_fields:
+            str_assign += field_name + '.copy(' + field_name + '_,' + field_name + '_size());'
+
+        field_def = self.constructor_ct\
+            .replace('S_MESSAGE_NAME', self.message_name)\
+            .replace('S_ARGS_LIST', ct_args)\
+            .replace('S_INITIALIZER_LIST', initilizer_args)\
+            .replace('S_STRING_FIELDS_ASSIGN', str_assign)
+
+        self.handler.content += self.indentation.get_indented_str(field_def)
 
 
     def gen_buffer_def(self, field_size):
@@ -393,7 +413,6 @@ class MessageGen:
         
         self.field_gen.gen_message_descriptor(message_name = message_name, message_id = message_id\
             , schema = schema, version = version, description = description)
-        #self.field_gen.gen_ostream_def();
 
 
     def __del__(self):

@@ -20,9 +20,9 @@ public:
 		return "S_FIELD_NAME"; 
 	}
 
-	static constexpr S_FIELD_TYPE S_FIELD_NAME_null_value() noexcept
+	static constexpr S_FIELD_TYPE::Value S_FIELD_NAME_null_value() noexcept
 	{
-		return S_FIELD_NULL;
+		return S_FIELD_TYPE::Value::Null;
 	}
 
 	constexpr S_FIELD_TYPE::Value get_S_FIELD_NAME() const noexcept
