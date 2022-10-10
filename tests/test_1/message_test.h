@@ -4,7 +4,7 @@
 
 void test_create()
 {
-	char buffer[1024];
+	char buffer[2048];
 
 	message m1{};
 	auto s = sizeof(message);

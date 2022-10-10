@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.24)
 
-project(FastSBE VERSION 0.1.0)
+project(FastSBE VERSION 1.0)
 
 set(CMAKE_CPP_COMPILER g++)
 set(CMAKE_CXX_STANDARD 17)

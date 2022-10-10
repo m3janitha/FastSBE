@@ -48,5 +48,6 @@ public:
 		auto* buf = buffer() + S_GROUP_NAME_offset();
 		auto& group = *reinterpret_cast<S_GROUP_NAME*>(buf);
 		group.header_.set_numInGroup(count);
+		group.header_.set_blockLength(sizeof(S_GROUP_NAME::data));
 		return group;	
 	}

@@ -5,5 +5,5 @@ inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, T
 {
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
-		auto& g = group.get(group, i);
+		auto& g = group.get(i);
 
