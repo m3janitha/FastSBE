@@ -6,7 +6,7 @@
 
 namespace sbetool
 {
-    void create_msg(char* buffer, std::size_t length, repeting_groups_count count, bool display)
+    void create_msg_from_random(char* buffer, std::size_t length, repeting_groups_count count, bool display)
     {
         sbetest::CancelReplace cxl;
         cxl.wrapForEncode(buffer, 0, length)
@@ -36,7 +36,7 @@ namespace sbetool
             //std::cout << cxl.sbeBlockLength() << std::endl;
     }
 
-    void create_msg_2(char* buffer, std::size_t length, CancelReplaceData data, bool display)
+    void create_msg_from_c_struct(char* buffer, std::size_t length, CancelReplaceData& data, bool display)
     {
         sbetest::CancelReplace cxl;
         cxl.wrapForEncode(buffer, 0, length)

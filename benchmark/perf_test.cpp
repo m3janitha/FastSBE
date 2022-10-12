@@ -14,8 +14,8 @@ class FastSBEFixture : public benchmark::Fixture
 public:
     void SetUp(const ::benchmark::State& state) 
     {
-        fastsbe::create_msg(msg_, count, false);
-        data = create_random_data(count);
+        fastsbe::create_msg_from_random(msg_, count, false);
+        data = create_cancel_replace_data(count);
     }
 
     void TearDown(const ::benchmark::State& state) {}
@@ -29,8 +29,8 @@ class SbeToolFixture : public benchmark::Fixture
 public:
     void SetUp(const ::benchmark::State& state) 
     {
-        sbetool::create_msg(msg_, sizeof(msg_), count, false);
-        data = create_random_data(count);
+        sbetool::create_msg_from_random(msg_, sizeof(msg_), count, false);
+        data = create_cancel_replace_data(count);
     }
 
     void TearDown(const ::benchmark::State& state) {}
@@ -55,35 +55,43 @@ BENCHMARK_F(SbeToolFixture, BM_Decode_CancelReplace)(benchmark::State& st)
    }
 }
 
-BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace)(benchmark::State& st) 
+BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace_random)(benchmark::State& st) 
 {
    for (auto _ : st) 
    {
-        fastsbe::create_msg(msg_, count, false);
+        fastsbe::create_msg_from_random(msg_, count, false);
    }
 }
 
-BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace)(benchmark::State& st)
+BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace_random)(benchmark::State& st)
 {
    for (auto _ : st) 
    {
-        sbetool::create_msg(msg_, sizeof(msg_), count, false);
+        sbetool::create_msg_from_random(msg_, sizeof(msg_), count, false);
    }
 }
 
-BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace_2)(benchmark::State& st) 
+BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace_from_struct)(benchmark::State& st) 
 {
    for (auto _ : st) 
    {
-        fastsbe::create_msg_2(msg_, data, false);
+        fastsbe::create_msg_from_c_struct(msg_, data, false);
    }
 }
 
-BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace_2)(benchmark::State& st)
+BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace_from_struct)(benchmark::State& st)
 {
    for (auto _ : st) 
    {
-        sbetool::create_msg_2(msg_, sizeof(msg_), data, false);
+        sbetool::create_msg_from_c_struct(msg_, sizeof(msg_), data, false);
+   }
+}
+
+BENCHMARK_F(SbeToolFixture, BM_Encode_get_from_cancel_replace_data)(benchmark::State& st)
+{
+   for (auto _ : st) 
+   {
+        benchmark_get_from_cancel_replace_data(data);
    }
 }
 

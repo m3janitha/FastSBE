@@ -4,6 +4,8 @@
 #include <iostream>
 #include <ctime>
 
+#include <benchmark/benchmark.h>
+
 inline int get_random_int(int base)
 {
     std::srand(std::time(nullptr));
@@ -44,7 +46,7 @@ struct CancelReplaceData
     std::vector<AppInfoData> app_info{};        
 };
 
-CancelReplaceData create_random_data(repeting_groups_count count)
+inline CancelReplaceData create_cancel_replace_data(repeting_groups_count count)
 {
     CancelReplaceData data{};
 
@@ -64,4 +66,24 @@ CancelReplaceData create_random_data(repeting_groups_count count)
     }
 
     return data;
+}
+
+inline void benchmark_get_from_cancel_replace_data(CancelReplaceData& data)
+{
+    benchmark::DoNotOptimize(data.clodr_id);
+    benchmark::DoNotOptimize(data.orig_clodr_id);
+
+    auto party_info_count = data.party_info.size();
+    for(auto i=0u; i<party_info_count; i++)
+    {
+        benchmark::DoNotOptimize(data.party_info[i].self_match_id);
+        benchmark::DoNotOptimize(data.party_info[i].group_id);
+    }
+
+    auto app_info_count = data.app_info.size();
+    for(auto i=0u; i<app_info_count; i++)
+    {
+        benchmark::DoNotOptimize(data.app_info[i].firm_id);
+        benchmark::DoNotOptimize(data.app_info[i].version);
+    }
 }

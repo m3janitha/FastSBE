@@ -8,7 +8,7 @@
 
 namespace fastsbe
 {
-    void create_msg(char* buffer, repeting_groups_count count, bool display)
+    void create_msg_from_random(char* buffer, repeting_groups_count count, bool display)
     {	
         auto& cxl = *reinterpret_cast<test::sbe::CancelReplace*>(buffer);
 
@@ -35,7 +35,7 @@ namespace fastsbe
             std::cout << "FastSBE" << std::endl <<  cxl << std::endl;
     }
 
-    void create_msg_2(char* buffer, CancelReplaceData data, bool display)
+    void create_msg_from_c_struct(char* buffer, CancelReplaceData& data, bool display)
     {	
         auto& cxl = *reinterpret_cast<test::sbe::CancelReplace*>(buffer);
 
