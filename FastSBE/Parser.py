@@ -5,6 +5,7 @@ from MessageGen import MessageGen
 from Metadata import Metadata
 from EnumGen import EnumClassGen
 from GroupGen import GroupGen
+from VariableLengthDataGen import VariableLengthDataGen
 from FileGen import ContentHandler
 from FileGen import Indentaion
 from FileGen import *
@@ -153,8 +154,7 @@ class Parser:
 	def generate_enum(self, type):
 		enum_values = []
 		for field in type:
-			enum_values.append((field.attrib['name'], field.text))
-		
+			enum_values.append((field.attrib['name'], field.text))		
 
 		enum_name = type.attrib['name']
 		encoding_type = type.attrib['encodingType']
@@ -168,7 +168,7 @@ class Parser:
 			, enum_values, self.namespace)
 		self.user_defined_enums.append(enum_name)
 
-		system_includes = ["cstdint", "string", "string_view", "ostream"]
+		system_includes = ["cstdint", "string", "string_view", "ostream", "cstring"]
 		handler.user_includes = []
 		indentation = Indentaion(0)
 		FileGen(indentation = indentation, out_folder = self.out_folder\
@@ -189,19 +189,35 @@ class Parser:
 			return type.attrib['primitiveType']
 
 
+	def get_enum_const_value(field):
+		if 'valueRef' in field.attrib:
+			return field.attrib['valueRef'].split('.')[1]
+		else:
+			return field.text
+
+	def get_enum_type(field):
+		if 'valueRef' in field.attrib:
+			return field.attrib['valueRef'].split('.')[0]
+		else:
+			return field.attrib['type']
+
+
 	def generate_composite_type(self, field_gen, composite_name, type, prvious_type_name):
 		type_name = type.attrib['name']
 		composite_type = self.get_composite_type(type)
 		includes = []
 		
 		#enum
+		if('valueRef' in type.attrib.keys()):
+			composite_type = Parser.get_enum_type(type)
+
 		if(composite_type in self.user_defined_enums):
 			includes.append(composite_type)
 			if(self.is_const_type(type.attrib)):
 				logging.debug('const enum field: %s', type_name)
 				field_gen.gen_composite_const_enum_field_def(message_name = composite_name, field_type = composite_type\
 					, field_name = type_name, prvious_field_name = prvious_type_name\
-					, value = type.text)
+					, value = Parser.get_enum_const_value(type))
 				return type_name, includes
 			else:
 				logging.debug('enum field: %s', type_name)
@@ -272,7 +288,6 @@ class Parser:
 		msg_gen.field_gen.gen_ostream_end()
 		msg_gen.field_gen.gen_constructor()
 
-
 	def generate_composite(self, composite):
 		composite_name = composite.attrib['name']
 		logging.debug('generate_composite: %s ' , composite_name)		
@@ -305,7 +320,7 @@ class Parser:
 				logging.debug('const enum field: %s', field_name)
 				field_gen.gen_message_const_enum_field_def(message_name = message_name, field_type = field_type\
 					, field_id = field_id, field_name = field_name, prvious_field_name = prvious_field_name\
-					, value = field.text, is_group = is_group, group_name = group_name)
+					, value = Parser.get_enum_const_value(field), is_group = is_group, group_name = group_name)
 				return field_name
 			else:
 				logging.debug('enum field: %s', field_name)
@@ -369,6 +384,7 @@ class Parser:
 
 		return field_name
 
+
 	def generate_group_fields(self, msg_gen, handler, group_gen, group, message_name):
 
 		data_gen = group_gen.GroupDataGen(handler = handler, indentation = msg_gen.indentation
@@ -384,62 +400,201 @@ class Parser:
 		data_gen.field_gen.gen_ostream_group_end()
 
 
-	def generate_nested_group(self, msg_gen, handler, group, message_name):
+	def update_group_size_encoding_types(group_size_encoding_type_entry, composite, index):
+		type = composite[index]
+		default_type_name = Metadata.default_group_size_encoding_names[index].lower()
+		if (type.attrib['name'].lower() != default_type_name):
+			logging.error('invalid group size encoding. expected %s confiured %s'\
+				, default_type_name.lower(), type.attrib['name'].lower())
+			exit(1)
+		else:
+			group_size_encoding_type = { 
+				"name": type.attrib['name'], 
+				"type" : Metadata.c_field_types[type.attrib['primitiveType']]  
+			}
+			group_size_encoding_type_entry.append(group_size_encoding_type)
+
+
+	def parse_group_size_encoding_header(self, dimension_type):
+		if(dimension_type in self.group_size_encoding_types.keys()):
+			return self.group_size_encoding_types[dimension_type]
+		else:
+			xpath = ".//*[@name='" + dimension_type + "']"
+			composite = self.root.find(xpath)
+			group_size_encoding_type = []
+			field_count = len(composite)
+			if(field_count < 2):
+				logging.error('invalid group size encoding. expected at least 2 field')
+				exit(1)
+			elif(field_count == 2):
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 0)
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 1)
+			elif(field_count == 4):
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 0)
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 1)
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 2)
+				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 3)
+		
+			self.group_size_encoding_types.update({dimension_type : group_size_encoding_type})
+			logging.debug('update group size encoding. %s', group_size_encoding_type)
+			return group_size_encoding_type
+
+
+	def update_variable_data_encoding_types(variable_data_encoding_type_entry, composite, index):
+		type = composite[index]
+		default_type_name = Metadata.default_variable_data_encoding_names[index].lower()
+		if (type.attrib['name'].lower() != default_type_name):
+			logging.error('invalid variable data encoding. expected %s confiured %s'\
+				, default_type_name.lower(), type.attrib['name'].lower())
+			exit(1)
+		else:
+			variable_data_encoding_type = { 
+				"name": type.attrib['name'], 
+				"type" : Metadata.c_field_types[type.attrib['primitiveType']]  
+			}
+			variable_data_encoding_type_entry.append(variable_data_encoding_type)
+
+
+	def parse_variable_data_encoding_header(self, type):
+		if(type in self.variable_data_encoding_types.keys()):
+			return self.variable_data_encoding_types[type]
+		else:
+			xpath = ".//*[@name='" + type + "']"
+			composite = self.root.find(xpath)
+			variable_data_encoding_type = []
+			field_count = len(composite)
+			if(field_count < 2):
+				logging.error('invalid variable data encoding. expected at least 2 field')
+				exit(1)
+			elif(field_count == 2):
+				Parser.update_variable_data_encoding_types(variable_data_encoding_type, composite, 0)
+				Parser.update_variable_data_encoding_types(variable_data_encoding_type, composite, 1)		
+
+			self.variable_data_encoding_types.update({type : variable_data_encoding_type})
+			logging.debug('variable data encoding. %s', variable_data_encoding_type)
+			return variable_data_encoding_type
+
+
+	def generate_nested_group(self, msg_gen, handler, group, message_name, dimension):
 		group_name = group.attrib['name']
 		group_id = group.attrib['id']
 		dimension_type = group.attrib['dimensionType']
 		
 		group_gen = GroupGen(handler = handler, indentation = msg_gen.indentation\
-			, group_name = group_name, id = group_id, message_name = message_name, namespace = self.namespace\
+			, name = group_name, id = group_id, message_name = message_name, namespace = self.namespace\
 			, dimension_type = dimension_type)
 
 		self.generate_group_fields(msg_gen, handler, group_gen, group, message_name)
 
-		msg_gen.field_gen.gen_nested_group_def(group_name = group_name, dimension_type = dimension_type\
-			, dimension_size_name = 'blockLength', dimension_count_name = 'numInGroup'\
-			, dimension_count_type = 'std::uint16_t')
+		dimension_type_count = len(dimension)
+		if(dimension_type_count == 2):
+			msg_gen.field_gen.gen_nested_group_def(group_name = group_name, dimension_type = dimension_type\
+				, block_length_name = dimension[0]['name']\
+				, num_in_group_name = dimension[1]['name'], num_in_group_type = dimension[1]['type'])
+
+		elif(dimension_type_count == 4):
+			msg_gen.field_gen.gen_nested_group_def_4(group_name = group_name, dimension_type = dimension_type\
+				, block_length_name = dimension[0]['name']\
+				, num_in_group_name = dimension[1]['name'], num_in_group_type = dimension[1]['type']\
+				, num_groups_type = dimension[2]['type']\
+				, num_var_data_field_type = dimension[3]['type'])
 
 
 	def parse_group(self, msg_gen, handler, message_name, group, prvious_field_name):
-
 		group_name = group.attrib['name']
 		group_id = group.attrib['id']
 		dimension_type = group.attrib['dimensionType']
 
-		self.generate_nested_group(msg_gen, handler, group, message_name)
+		dimension = self.parse_group_size_encoding_header(dimension_type)
 
-		msg_gen.field_gen.gen_group_def(group_name = group_name\
-			, prvious_group_name = prvious_field_name, group_id = group_id\
-			, dimension_type = dimension_type, dimension_size_name = 'blockLength'\
-			, dimension_count_name = 'numInGroup', dimension_count_type = 'std::uint16_t')
+		self.generate_nested_group(msg_gen, handler, group, message_name, dimension)
+
+		dimension_type_count = len(dimension)
+		if(dimension_type_count == 2):
+			msg_gen.field_gen.gen_group_def(group_name = group_name\
+				, prvious_group_name = prvious_field_name, group_id = group_id\
+				, dimension_type = dimension_type, block_length_name = 'blockLength'\
+				, num_in_group_name = 'numInGroup', num_in_group_type = 'std::uint16_t')
+		elif(dimension_type_count == 4):
+			msg_gen.field_gen.gen_group_def_4(group_name = group_name
+				, prvious_group_name = prvious_field_name, group_id = group_id\
+				, dimension_type = dimension_type, block_length_name = dimension[0]['name']\
+				, num_in_group_name = dimension[1]['name'], num_in_group_type = dimension[1]['type']\
+				, num_groups_name = dimension[2]['name'], num_groups_type = dimension[2]['type']\
+				, num_var_data_fields_name = dimension[3]['name'], num_var_data_fields_type = dimension[3]['type'])
 
 		return group_name;
 
 
+	def generate_nested_variable_length_data(self, msg_gen, handler, var_len_data, message_name, dimension):
+		name = var_len_data.attrib['name']
+		id = var_len_data.attrib['id']
+		dimension_type = var_len_data.attrib['type']
+		
+		group_gen = VariableLengthDataGen(handler = handler, indentation = msg_gen.indentation\
+			, name = name, id = id, message_name = message_name, namespace = self.namespace\
+			, dimension_type = dimension_type)
+
+		msg_gen.field_gen.gen_nested_variable_length_data_def(var_len_data_name = name, dimension_type = dimension_type\
+			, dimension = dimension)		
+
+
+	def parse_data(self, msg_gen, handler, message_name, var_len_data, prvious_var_len_data_name):
+		name = var_len_data.attrib['name']
+		id = var_len_data.attrib['id']
+		dimension_type = var_len_data.attrib['type']
+
+		dimension = self.parse_variable_data_encoding_header(dimension_type)
+		self.generate_nested_variable_length_data(msg_gen, handler, var_len_data, message_name, dimension)
+
+		msg_gen.field_gen.gen_variable_length_data_def(var_len_data_name = name\
+			, prvious_var_len_data_name = prvious_var_len_data_name, var_len_data_id = id\
+			, dimension_type = dimension_type, dimension = dimension)
+
+		return name;
+		
+
 	def generate_message(self, message, handler):
 		message_name = message.attrib['name']
-		message_id = message.attrib['id']
-		description = message.attrib['description']
+		message_id = message.attrib['id']		
+		description = Parser.get_description(message)
 
 		msg_gen = MessageGen(handler = handler, message_name = message_name, message_id = message_id\
 			, schema = self.schema_id, version = self.schema_version, description = description, namespace = self.namespace)
 
-		msg_gen.field_gen.gen_ostream_begin()
-		is_fixed_length_section = True
+		msg_gen.field_gen.gen_ostream_begin()			
+		is_group_section = False
+		is_var_data_section = False
 		prvious_field_name = "";
 		for eliment in message:
 			if (eliment.tag == 'field'):
 				prvious_field_name = self.generate_message_field(msg_gen.field_gen, message_name, eliment\
 					, prvious_field_name, is_group = False, group_name = '')
 			elif(eliment.tag == 'group'):
-				if(is_fixed_length_section == True):
-					#this is the first variable length field
+				if(is_group_section == False):
+					#this is the first group field
+					is_group_section = True
 					prvious_field_name = "";
-					msg_gen.field_gen.gen_buffer_def(1024)
-					is_fixed_length_section = False
+					msg_gen.field_gen.gen_buffer_def(1024)					
 					
 				prvious_field_name = self.parse_group(msg_gen, handler, message_name, eliment\
 					, prvious_field_name)
+
+			elif(eliment.tag == 'data'):
+				if(is_var_data_section == False):
+					is_var_data_section = True
+					#this is the first variable length data field
+					if(is_group_section == True):
+						#there was a group before data
+						pass
+					else:					
+						prvious_field_name = "";					
+						msg_gen.field_gen.gen_buffer_def(1024)
+						is_fixed_length_section = False
+
+				prvious_field_name = self.parse_data(msg_gen, handler, message_name, eliment\
+					, prvious_field_name)
+
 		msg_gen.field_gen.gen_ostream_end()
 
 
@@ -458,23 +613,29 @@ class Parser:
 
 
 	def parse_all_messages(self, root):
-		namespaces = {'sbe': 'http://fixprotocol.io/2016/sbe'}
-		for message in root.iterfind('sbe:message', namespaces):
-			self.parse_message(message)
-
+		messages = root.find('messages')
+		if not messages:
+			namespaces = {'sbe' : root.tag.split('}')[0].strip('{')}
+			for message in root.iterfind('sbe:message', namespaces):
+				self.parse_message(message)
+		else:
+			namespaces = {'sbe' : root.tag.split('}')[0].strip('{')}
+			for message in messages.iterfind('sbe:message', namespaces):
+				self.parse_message(message)
 
 	def run(self):
 		tree = ET.parse(self.schema_file)
-		root = tree.getroot()
-		self.schema_id = root.attrib['id']
-		self.schema_version = root.attrib['version']
+		self.root = tree.getroot()
+		self.schema_id = self.root.attrib['id']
+		self.schema_version = self.root.attrib['version']
 		logging.debug('schema_id: %s schema_version: %s', self.schema_id, self.schema_version)
 
-		types = root.find('types')
+		types = self.root.find('types')
 		self.parse_all_types(types = types)
 		self.parse_all_enums(types = types)
-		self.parse_all_composites(types = types) 
-		self.parse_all_messages(root = root)
+		self.parse_all_composites(types = types)
+		self.parse_all_messages(root = self.root)
+
 
 
 	def __init__(self, schema_file, out_folder, override_namespace):
@@ -485,6 +646,8 @@ class Parser:
 		self.user_defined_types = {}
 		self.user_defined_enums = []
 		self.user_defined_composites = []
+		self.group_size_encoding_types = {}
+		self.variable_data_encoding_types = {}
 
 		self.run()
 

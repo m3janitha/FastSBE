@@ -35,7 +35,7 @@ public:
 		return S_FIELD_NAME_;
 
 	}
-	constexpr S_MESSAGE_NAME& set_S_FIELD_NAME(S_FIELD_TYPE& value) noexcept
+	constexpr auto& set_S_FIELD_NAME(S_FIELD_TYPE& value) noexcept
 	{
 		S_FIELD_NAME_ = value;
 		return *this;

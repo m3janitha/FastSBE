@@ -34,7 +34,13 @@ class FieldGen:
 
     #group
     nested_group_def_ct             = open('metadata/c++/message/nested_group_def.h', 'r').read()
+    nested_group_def_ct_4           = open('metadata/c++/message/nested_group_def_4.h', 'r').read()
     group_def_ct                    = open('metadata/c++/message/group_def.h', 'r').read()
+    group_def_ct_4                  = open('metadata/c++/message/group_def_4.h', 'r').read()
+
+    #variable length data
+    nested_var_len_data_def_ct      = open('metadata/c++/message/nested_variable_length_data_def.h', 'r').read()
+    var_len_data_def_ct             = open('metadata/c++/message/variable_length_data_def.h', 'r').read()
 
     #buffer
     buffer_def_ct                   = open('metadata/c++/message/buffer_def.h', 'r').read()
@@ -320,32 +326,102 @@ class FieldGen:
 
 
     def gen_nested_group_def(self, group_name\
-        , dimension_type, dimension_size_name, dimension_count_name\
-        , dimension_count_type):
+        , dimension_type, block_length_name, num_in_group_name\
+        , num_in_group_type):
         field_def = self.nested_group_def_ct\
             .replace('S_GROUP_NAME', group_name)\
-            .replace('S_DIMENTION_TYPE', dimension_type)\
-            .replace('S_DIMENTION_SIZE_NAME', dimension_size_name)\
-            .replace('S_DIMENTION_COUNT_NAME', dimension_count_name)\
-            .replace('S_DIMENTION_COUNT_TYPE', dimension_count_type)
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_BLOCK_LENGTH_NAME', block_length_name)\
+            .replace('S_NUM_IN_GROUP_NAME', num_in_group_name)\
+            .replace('S_NUM_IN_GROUP_TYPE', num_in_group_type)
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.handler.user_includes.append(dimension_type)
         logging.debug('gen_nested_group_def: %s', group_name)
 
+    def gen_nested_group_def_4(self, group_name\
+        , dimension_type, block_length_name, num_in_group_name\
+        , num_in_group_type, num_groups_type, num_var_data_field_type):
+        field_def = self.nested_group_def_ct_4\
+            .replace('S_GROUP_NAME', group_name)\
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_BLOCK_LENGTH_NAME', block_length_name)\
+            .replace('S_NUM_IN_GROUP_NAME', num_in_group_name)\
+            .replace('S_NUM_IN_GROUP_TYPE', num_in_group_type)\
+            .replace('S_NUM_GROUPS_TYPE', num_groups_type)\
+            .replace('S_NUM_VAR_DATA_FIELDS_TYPE', num_var_data_field_type)             
+        self.handler.content += self.indentation.get_indented_str(field_def)
+        self.handler.user_includes.append(dimension_type)
+        logging.debug('gen_nested_group_def_4: %s', group_name)        
+
+
     def gen_group_def(self, group_name, prvious_group_name, group_id\
-        , dimension_type, dimension_size_name, dimension_count_name\
-        , dimension_count_type):
+        , dimension_type, block_length_name
+        , num_in_group_name, num_in_group_type):
         field_def = self.group_def_ct\
             .replace('S_GROUP_NAME', group_name)\
             .replace('S_GROUP_ID', group_id)\
             .replace('S_GROUP_OFFSET', self.get_group_offset(str(prvious_group_name)))\
-            .replace('S_DIMENTION_TYPE', dimension_type)\
-            .replace('S_DIMENTION_SIZE_NAME', dimension_size_name)\
-            .replace('S_DIMENTION_COUNT_NAME', dimension_count_name)\
-            .replace('S_DIMENTION_COUNT_TYPE', dimension_count_type)
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_BLOCK_LENGTH_NAME', block_length_name)\
+            .replace('S_NUM_IN_GROUP_NAME', num_in_group_name)\
+            .replace('S_NUM_IN_GROUP_TYPE', num_in_group_type)                           
         self.handler.content += self.indentation.get_indented_str(field_def)
         self.gen_ostream_field_def(group_name)
         logging.debug('gen_group_def: %s', group_name)
+
+    def gen_group_def_4(self, group_name, prvious_group_name, group_id\
+        , dimension_type, block_length_name
+        , num_in_group_name, num_in_group_type\
+        , num_groups_name, num_groups_type\
+        , num_var_data_fields_name, num_var_data_fields_type):
+        field_def = self.group_def_ct_4\
+            .replace('S_GROUP_NAME', group_name)\
+            .replace('S_GROUP_ID', group_id)\
+            .replace('S_GROUP_OFFSET', self.get_group_offset(str(prvious_group_name)))\
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_BLOCK_LENGTH_NAME', block_length_name)\
+            .replace('S_NUM_IN_GROUP_NAME', num_in_group_name)\
+            .replace('S_NUM_IN_GROUP_TYPE', num_in_group_type)\
+            .replace('S_NUM_GROUPS_NAME', num_groups_name)\
+            .replace('S_NUM_GROUPS_TYPE', num_groups_type)\
+            .replace('S_NUM_VAR_DATA_FIELDS_NAME', num_var_data_fields_name)\
+            .replace('S_NUM_VAR_DATA_FIELDS_TYPE', num_var_data_fields_type)                            
+        self.handler.content += self.indentation.get_indented_str(field_def)
+        self.gen_ostream_field_def(group_name)
+        logging.debug('gen_group_def_4: %s', group_name)
+
+
+    def gen_nested_variable_length_data_def(self, var_len_data_name\
+        , dimension_type, dimension):
+        var_len_data_length_name = dimension[0]['name']
+        var_len_data_length_type = dimension[0]['type']
+        var_len_data_var_data_type = dimension[1]['type']
+
+        field_def = self.nested_var_len_data_def_ct\
+            .replace('S_VAR_LEN_DATA_NAME', var_len_data_name)\
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_VAR_LEN_DATA_LENGTH_NAME', var_len_data_length_name)\
+            .replace('S_VAR_LEN_DATA_LENGTH_TYPE', var_len_data_length_type)\
+            .replace('S_VAR_LEN_DATA_VAR_DATA_TYPE', var_len_data_var_data_type)
+        self.handler.content += self.indentation.get_indented_str(field_def)
+        self.handler.user_includes.append(dimension_type)
+        logging.debug('nested_variable_length_data_def: %s', var_len_data_name)
+
+    def gen_variable_length_data_def(self, var_len_data_name, prvious_var_len_data_name, var_len_data_id\
+        , dimension_type, dimension):
+        var_len_data_length_name = dimension[1]['name']
+        var_len_data_length_type = dimension[1]['type']        
+        field_def = self.var_len_data_def_ct\
+            .replace('S_VAR_LEN_DATA_NAME', var_len_data_name)\
+            .replace('S_VAR_LEN_DATA_ID', var_len_data_id)\
+            .replace('S_VAR_LEN_DATA_OFFSET', self.get_group_offset(str(prvious_var_len_data_name)))\
+            .replace('S_DIAMENTION_TYPE', dimension_type)\
+            .replace('S_VAR_LEN_DATA_LENGTH_NAME', var_len_data_length_name)\
+            .replace('S_VAR_LEN_DATA_LENGTH_TYPE', var_len_data_length_type)             
+        self.handler.content += self.indentation.get_indented_str(field_def)
+        self.gen_ostream_field_def(var_len_data_name)
+        logging.debug('gen_variable_length_data_def: %s', var_len_data_name)            
+
 
     def gen_constructor(self):
         string_fields = []

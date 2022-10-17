@@ -45,16 +45,16 @@ public:
 		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
-	constexpr message& set_S_FIELD_NAME(const char* value) noexcept
+	constexpr auto& set_S_FIELD_NAME(const char* value) noexcept
 	{
 		auto length = strlen(value);
 		std::memcpy(S_FIELD_NAME_, value, length);
 		return *this;
 	}
 
-	constexpr auto& set_S_FIELD_NAME(std::string_view value) noexcept
+	auto& set_S_FIELD_NAME(std::string_view value) noexcept
 	{
-		constexpr auto size = std::min(S_FIELD_NAME_size(), value.size());
+		auto size = std::min(S_FIELD_NAME_size(), value.size());
 		std::memcpy(S_FIELD_NAME_, value.data(), size);
 		return *this;
 	}

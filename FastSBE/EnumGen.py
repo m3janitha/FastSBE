@@ -68,10 +68,13 @@ class EnumClassGen:
 			self.indentation.decrement()
 
 
-		def gen_enum_values(self, values):
+		def gen_enum_values(self, values, encoding_type):
 			enum_ct = ""
 			for value in values:
 				(enum_name, enum_value) = value
+				if (encoding_type == 'char'):
+					if(enum_name.lower() != 'null'):
+						enum_value = "'" + str(enum_value) + "'"
 				enum_ct += self.enum_value_ct.format(S_ENUM_NAME = enum_name, S_ENUM_VALUE = enum_value)
 				logging.debug('enum_name: %s, enum_value: %s' , enum_name, enum_value)
 			
@@ -88,7 +91,7 @@ class EnumClassGen:
 			self.values = values
 
 			self.gen_enum_begin()
-			self.gen_enum_values(values = self.values)
+			self.gen_enum_values(values = self.values, encoding_type = self.encoding_type)
 
 
 		def __del__(self):

@@ -286,31 +286,17 @@ class CancelReplace
     	PartyInfo(std::uint16_t count)
     		:header_(sizeof(PartyInfo::data), count) {}
     
-    	// data& get(PartyInfo& group, std::size_t group_id) noexcept
-    	// {
-    	// 	auto* buffer = reinterpret_cast<char*>(&group) + sizeof(groupSizeEncoding)
-    	// 		+ (header_.get_blockLength() * group_id);
-    	// 	return *reinterpret_cast<data*>(buffer);
-    	// }
     	data& get(std::size_t group_id) noexcept
     	{
     		auto* buffer = reinterpret_cast<char*>(&this->header_) + sizeof(groupSizeEncoding)
     			+ (this->header_.get_blockLength() * group_id);
-    		//auto offset2 = sizeof(groupSizeEncoding) +(this->header_.get_blockLength() * group_id);
     		return *reinterpret_cast<data*>(buffer);
     	}
     
-    	// const data& get(const PartyInfo& group, std::size_t group_id) const noexcept
-    	// {
-    	// 	auto* buffer = reinterpret_cast<const char*>(&group) + sizeof(groupSizeEncoding)
-    	// 		+ (header_.get_blockLength() * group_id);
-    	// 	return *reinterpret_cast<const data*>(buffer);
-    	// }
     	const data& get(std::size_t group_id) const noexcept
     	{
     		auto* buffer = reinterpret_cast<const char*>(&this->header_) + sizeof(groupSizeEncoding)
     			+ (this->header_.get_blockLength() * group_id);
-    		//auto offset2 = sizeof(groupSizeEncoding) +(this->header_.get_blockLength() * group_id);
     		return *reinterpret_cast<const data*>(buffer);
     	}
     
@@ -374,8 +360,8 @@ class CancelReplace
     	{
     		auto* buf = buffer() + PartyInfo_offset();
     		auto& group = *reinterpret_cast<PartyInfo*>(buf);
-    		group.header_.set_numInGroup(count);
     		group.header_.set_blockLength(sizeof(PartyInfo::data));
+    		group.header_.set_numInGroup(count);
     		return group;	
     	}
     public:
@@ -504,31 +490,17 @@ class CancelReplace
     	AppInfo(std::uint16_t count)
     		:header_(sizeof(AppInfo::data), count) {}
     
-    	// data& get(AppInfo& group, std::size_t group_id) noexcept
-    	// {
-    	// 	auto* buffer = reinterpret_cast<char*>(&group) + sizeof(groupSizeEncoding)
-    	// 		+ (header_.get_blockLength() * group_id);
-    	// 	return *reinterpret_cast<data*>(buffer);
-    	// }
     	data& get(std::size_t group_id) noexcept
     	{
     		auto* buffer = reinterpret_cast<char*>(&this->header_) + sizeof(groupSizeEncoding)
     			+ (this->header_.get_blockLength() * group_id);
-    		//auto offset2 = sizeof(groupSizeEncoding) +(this->header_.get_blockLength() * group_id);
     		return *reinterpret_cast<data*>(buffer);
     	}
     
-    	// const data& get(const AppInfo& group, std::size_t group_id) const noexcept
-    	// {
-    	// 	auto* buffer = reinterpret_cast<const char*>(&group) + sizeof(groupSizeEncoding)
-    	// 		+ (header_.get_blockLength() * group_id);
-    	// 	return *reinterpret_cast<const data*>(buffer);
-    	// }
     	const data& get(std::size_t group_id) const noexcept
     	{
     		auto* buffer = reinterpret_cast<const char*>(&this->header_) + sizeof(groupSizeEncoding)
     			+ (this->header_.get_blockLength() * group_id);
-    		//auto offset2 = sizeof(groupSizeEncoding) +(this->header_.get_blockLength() * group_id);
     		return *reinterpret_cast<const data*>(buffer);
     	}
     
@@ -592,8 +564,8 @@ class CancelReplace
     	{
     		auto* buf = buffer() + AppInfo_offset();
     		auto& group = *reinterpret_cast<AppInfo*>(buf);
-    		group.header_.set_numInGroup(count);
     		group.header_.set_blockLength(sizeof(AppInfo::data));
+    		group.header_.set_numInGroup(count);
     		return group;	
     	}
 };

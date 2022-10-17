@@ -59,3 +59,15 @@ class Metadata:
 		"uint64": 18446744073709551615,
 		"char"	: 0,
 	}
+
+	default_group_size_encoding_names = [
+		"blockLength",
+		"numInGroup",
+		"numGroups",
+		"numVarDataFields"
+	]
+
+	default_variable_data_encoding_names = [
+		"length",
+		"varData",
+	]

@@ -271,16 +271,16 @@ class NewOrder
     		return std::string_view(text_, 6);
     	}
     
-    	constexpr message& set_text(const char* value) noexcept
+    	constexpr auto& set_text(const char* value) noexcept
     	{
     		auto length = strlen(value);
     		std::memcpy(text_, value, length);
     		return *this;
     	}
     
-    	constexpr auto& set_text(std::string_view value) noexcept
+    	auto& set_text(std::string_view value) noexcept
     	{
-    		constexpr auto size = std::min(text_size(), value.size());
+    		auto size = std::min(text_size(), value.size());
     		std::memcpy(text_, value.data(), size);
     		return *this;
     	}
@@ -360,7 +360,7 @@ class NewOrder
     		return party_details_;
     
     	}
-    	constexpr NewOrder& set_party_details(PartyDetails& value) noexcept
+    	constexpr auto& set_party_details(PartyDetails& value) noexcept
     	{
     		party_details_ = value;
     		return *this;

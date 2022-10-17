@@ -55,6 +55,7 @@ inline CancelReplaceData create_cancel_replace_data(repeting_groups_count count)
 
     for(auto i=0u;i<count.party_info; i++)
     {
+        auto b = i;
         data.party_info.emplace_back(static_cast<std::uint16_t>(get_random_int(456))
             , static_cast<std::uint16_t>(get_random_int(4654)));
     }

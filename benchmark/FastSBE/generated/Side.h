@@ -3,6 +3,7 @@
 #include<string>
 #include<string_view>
 #include<ostream>
+#include<cstring>
 
 namespace test::sbe
 {
@@ -12,9 +13,9 @@ class Side
     public:
     enum class Value : char
     {
-        Buy = 1,
-        Sell = 2,
-        ShortSell = 3,
+        Buy = '1',
+        Sell = '2',
+        ShortSell = '3',
         Null = 0,
     };
     

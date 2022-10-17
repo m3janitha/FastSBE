@@ -1,9 +1,4 @@
 
-private:
-	#pragma pack(push, 1)
-	S_FIELD_TYPE S_FIELD_NAME_{};
-	#pragma pack(pop)
-
 public:
 	static constexpr std::size_t S_FIELD_NAME_size() noexcept
 	{
@@ -25,7 +20,7 @@ public:
 		return "S_FIELD_NAME"; 
 	}
 
-	constexpr S_FIELD_TYPE get_S_FIELD_NAME() const noexcept
+	constexpr S_FIELD_TYPE::Value get_S_FIELD_NAME() const noexcept
 	{ 
 		return S_FIELD_TYPE::Value::S_CONST_FIELD_VALUE;
 	}
