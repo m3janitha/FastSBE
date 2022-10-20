@@ -33,7 +33,7 @@ namespace sbe_test
     template <typename EnumType, typename U = std::underlying_type_t<EnumType>>
     EnumType random_enum(U start, U end)
     {        
-        if constexpr (std::is_same<U, char>::value)
+        if constexpr (std::is_same<std::remove_cv_t<U>, char>::value)
         {
             auto rnd = random_char(start, end);
             return static_cast<EnumType>(rnd);

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include <gtest/gtest.h>
-#include <random.h>
+#include <random_gen.h>
 
 #include <BusinessMessageReject.h>
 #include <ExecutionReportTrade.h>
