@@ -71,13 +71,20 @@ class NewOrder
     	}
     	
     	static constexpr std::uint32_t clodr_id_max_value() noexcept
-    	{ 
-    		return 4294967294; 
+    	{
+    		return 4294967294;
     	}
     	
     	static constexpr std::uint32_t clodr_id_null_value() noexcept
     	{ 
-    		return 4294967295; 
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 4294967295;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint32_t get_clodr_id() const noexcept
@@ -124,13 +131,20 @@ class NewOrder
     	}
     	
     	static constexpr std::uint16_t price_max_value() noexcept
-    	{ 
-    		return 65534; 
+    	{
+    		return 65534;
     	}
     	
     	static constexpr std::uint16_t price_null_value() noexcept
     	{ 
-    		return 65535; 
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 65535;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint16_t get_price() const noexcept
@@ -204,13 +218,20 @@ class NewOrder
     	}
     	
     	static constexpr std::uint64_t quantity_max_value() noexcept
-    	{ 
-    		return 18446744073709551614; 
+    	{
+    		return 18446744073709551614;
     	}
     	
     	static constexpr std::uint64_t quantity_null_value() noexcept
     	{ 
-    		return 18446744073709551615; 
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 18446744073709551615;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint64_t get_quantity() const noexcept
@@ -273,16 +294,29 @@ class NewOrder
     
     	constexpr auto& set_text(const char* value) noexcept
     	{
-    		auto length = strlen(value);
-    		std::memcpy(text_, value, length);
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+    	#endif
+    		std::memcpy(text_, value, text_size());
     		return *this;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif	
     	}
     
     	auto& set_text(std::string_view value) noexcept
     	{
-    		auto size = std::min(text_size(), value.size());
-    		std::memcpy(text_, value.data(), size);
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+    	#endif
+    		//auto size = std::min(text_size(), value.size());
+    		std::memcpy(text_, value.data(), text_size());
     		return *this;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif	
     	}
     
     

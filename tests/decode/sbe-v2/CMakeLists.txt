@@ -18,11 +18,14 @@ if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h)
 endif()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/generated)
 
 add_executable(decode_sbe_v2 decode_sbe_v2.cpp 
     ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
 )
+
+target_link_libraries(decode_sbe_v2 GTest::gtest GTest::gtest_main)
 
 add_custom_target(
     sbe_v2_target ALL

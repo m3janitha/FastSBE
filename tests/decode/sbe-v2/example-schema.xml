@@ -12,7 +12,7 @@
         <type name="currency" length="3" primitiveType="char" description="ISO 4217"/>
         <composite name="DATA">
             <type name="length" primitiveType="uint16"/>
-            <type name="varData" length="0" primitiveType="uint8"/>
+            <type name="varData" length="0" primitiveType="char"/>
         </composite>
         <composite name="MONTH_YEAR">
             <type name="year" primitiveType="uint16"/>
@@ -92,7 +92,7 @@
         </enum>
         <enum name="PartyIDSourceEnum" encodingType="enumEncoding">
             <validValue name="BIC">B</validValue>
-            <validValue name="Proprietary">D</validValue>
+            <validValue name="Proprietary">C</validValue>
         </enum>
         <enum name="PartyRoleEnum" encodingType="intEnumEncoding">
             <validValue name="ExecutingFirm">1</validValue>

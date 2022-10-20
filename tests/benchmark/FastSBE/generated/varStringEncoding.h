@@ -7,13 +7,13 @@
 namespace test::sbe
 {
 
-class varDataEncoding
+class varStringEncoding
 {
     
     public:
     	static constexpr const char* name() noexcept
     	{ 
-    		return "varDataEncoding"; 
+    		return "varStringEncoding"; 
     	}
     
     	static constexpr std::size_t template_id() noexcept
@@ -64,13 +64,20 @@ class varDataEncoding
     	}
     	
     	static constexpr std::uint32_t length_max_value() noexcept
-    	{ 
-    		return 4294967294; 
+    	{
+    		return 4294967294;
     	}
     	
     	static constexpr std::uint32_t length_null_value() noexcept
-    	{ 
-    		return 4294967295; 
+    	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 4294967295;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint32_t get_length() const noexcept
@@ -78,7 +85,7 @@ class varDataEncoding
     		return length_;
     	}
     	
-    	constexpr varDataEncoding& set_length(std::uint32_t value) noexcept
+    	constexpr varStringEncoding& set_length(std::uint32_t value) noexcept
     	{
     		length_ = value;
     		return *this;
@@ -112,13 +119,20 @@ class varDataEncoding
     	}
     	
     	static constexpr std::uint8_t varData_max_value() noexcept
-    	{ 
-    		return 254; 
+    	{
+    		return 254;
     	}
     	
     	static constexpr std::uint8_t varData_null_value() noexcept
-    	{ 
-    		return 255; 
+    	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 255;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint8_t get_varData() const noexcept
@@ -126,7 +140,7 @@ class varDataEncoding
     		return varData_;
     	}
     	
-    	constexpr varDataEncoding& set_varData(std::uint8_t value) noexcept
+    	constexpr varStringEncoding& set_varData(std::uint8_t value) noexcept
     	{
     		varData_ = value;
     		return *this;
@@ -134,9 +148,10 @@ class varDataEncoding
     
     
     public:
-    	varDataEncoding() = default;
+    	varStringEncoding() = default;
     
-    	constexpr varDataEncoding(std::uint32_t length, std::uint8_t varData) noexcept
+    	/*constexpr */
+    	varStringEncoding(std::uint32_t length, std::uint8_t varData) noexcept
     		:length_(length), varData_(varData)
     	{
     		
@@ -147,7 +162,7 @@ class varDataEncoding
 
 template <class CharT, class Traits = std::char_traits<CharT>>
 inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const test::sbe::varDataEncoding& msg)
+    , const test::sbe::varStringEncoding& msg)
 {
 	os << msg.length_name() << ": " << msg.get_length() << " ";
 	os << msg.varData_name() << ": " << msg.get_varData() << " ";

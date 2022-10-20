@@ -15,6 +15,11 @@ public:
 		return "S_FIELD_NAME"; 
 	}
 
+	constexpr S_FIELD_TYPE get_S_FIELD_NAME() noexcept
+	{ 
+		return S_CONST_FIELD_VALUE;
+	}
+
 	constexpr S_FIELD_TYPE get_S_FIELD_NAME() const noexcept
 	{ 
 		return S_CONST_FIELD_VALUE;

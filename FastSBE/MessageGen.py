@@ -52,8 +52,8 @@ class FieldGen:
     ostream_group_def_begin_ct      = open('metadata/c++/message/ostream_group_def_begin.h', 'r').read()
     ostream_group_def_end_ct        = open('metadata/c++/message/ostream_group_def_end.h', 'r').read()
     ostream_group_field_def_ct      = open('metadata/c++/message/ostream_group_field_def.h', 'r').read()
+    ostream_var_len_data_def_ct      = open('metadata/c++/message/ostream_var_len_data_def_ct.h', 'r').read()
     
-
 
     def gen_message_descriptor(self, message_name, message_id, schema, version, description):
         message_def = self.message_def_ct\
@@ -136,6 +136,15 @@ class FieldGen:
         field_def += '\n'
         self.handler.ostream_var += field_def
         logging.debug('gen_ostream_def')
+
+    def gen_ostream_var_len_data_def(self, field_name):
+        field_def = self.ostream_var_len_data_def_ct\
+            .replace('S_MESSAGE_NAME', self.message_name)\
+            .replace('S_FIELD_NAME', field_name)
+        field_def += '\n'
+        self.handler.ostream += field_def
+        logging.debug('gen_ostream_def')        
+
 
     def gen_message_numeric_field_def(self, message_name\
         , field_type, field_id, field_name, prvious_field_name\
@@ -409,17 +418,19 @@ class FieldGen:
 
     def gen_variable_length_data_def(self, var_len_data_name, prvious_var_len_data_name, var_len_data_id\
         , dimension_type, dimension):
-        var_len_data_length_name = dimension[1]['name']
-        var_len_data_length_type = dimension[1]['type']        
+        var_len_data_length_name = dimension[0]['name']
+        var_len_data_length_type = dimension[0]['type']
+        var_len_data_var_data_type = dimension[1]['type']    
         field_def = self.var_len_data_def_ct\
             .replace('S_VAR_LEN_DATA_NAME', var_len_data_name)\
             .replace('S_VAR_LEN_DATA_ID', var_len_data_id)\
             .replace('S_VAR_LEN_DATA_OFFSET', self.get_group_offset(str(prvious_var_len_data_name)))\
             .replace('S_DIAMENTION_TYPE', dimension_type)\
             .replace('S_VAR_LEN_DATA_LENGTH_NAME', var_len_data_length_name)\
-            .replace('S_VAR_LEN_DATA_LENGTH_TYPE', var_len_data_length_type)             
+            .replace('S_VAR_LEN_DATA_LENGTH_TYPE', var_len_data_length_type)\
+            .replace('S_VAR_LEN_DATA_VAR_DATA_TYPE', var_len_data_var_data_type)
         self.handler.content += self.indentation.get_indented_str(field_def)
-        self.gen_ostream_field_def(var_len_data_name)
+        self.gen_ostream_var_len_data_def(var_len_data_name)
         logging.debug('gen_variable_length_data_def: %s', var_len_data_name)            
 
 

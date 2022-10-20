@@ -5,9 +5,6 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/SBETool/sbetest)
 
-#include_directories(${googletest_SOURCE_DIR}/googletest/include)
-#include_directories(${googlebenchmark_SOURCE_DIR}/include)
-
 set (fast_sbe_dir "${PROJECT_SOURCE_DIR}/FastSBE")
 set (py_cmd "${fast_sbe_dir}/FastSBE.py")
 set (log_file "${CMAKE_CURRENT_LIST_DIR}/log.txt")

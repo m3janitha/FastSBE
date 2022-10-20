@@ -31,13 +31,20 @@ public:
 	}
 	
 	static constexpr S_FIELD_TYPE S_FIELD_NAME_max_value() noexcept
-	{ 
-		return S_FIELD_MAX; 
+	{
+		return S_FIELD_MAX;
 	}
 	
 	static constexpr S_FIELD_TYPE S_FIELD_NAME_null_value() noexcept
 	{ 
-		return S_FIELD_NULL; 
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wtype-limits"
+	#endif
+		return S_FIELD_NULL;
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic pop
+	#endif
 	}
 
 	constexpr S_FIELD_TYPE get_S_FIELD_NAME() const noexcept

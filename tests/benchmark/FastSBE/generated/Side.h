@@ -25,13 +25,13 @@ class Side
         switch (value)
         {
         case Value::Buy:
-            return "1";
+            return "Buy";
         case Value::Sell:
-            return "2";
+            return "Sell";
         case Value::ShortSell:
-            return "3";
+            return "ShortSell";
         case Value::Null:
-            return "0";
+            return "Null";
         default:
             return "Invalid";
         }

@@ -93,6 +93,11 @@ class PartyDetails
     		return "ord_status";
     	}
     
+    	constexpr TimeInForce::Value get_ord_status() noexcept
+    	{
+    		return TimeInForce::Value::1;
+    	}
+    
     	constexpr TimeInForce::Value get_ord_status() const noexcept
     	{
     		return TimeInForce::Value::1;
@@ -141,17 +146,31 @@ class PartyDetails
     
     	auto& set_executor(const char* value) noexcept
     	{
-    		auto length = strlen(value);
-    		std::memcpy(executor_, value, length);
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+    	#endif		
+    		//auto length = strlen(value);
+    		std::memcpy(executor_, value, executor_size());
     		return *this;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif			
     	}
     
     	auto& set_executor(std::string_view value) noexcept
     	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+    	#endif		
     		//constexpr auto size = std::min(executor_size(), value.size());
-    		auto size = std::min(executor_size(), value.size());
-    		std::memcpy(executor_, value.data(), size);
+    		//auto size = std::min(executor_size(), value.size());
+    		std::memcpy(executor_, value.data(), executor_size());
     		return *this;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif			
     	}
     
     
@@ -182,13 +201,20 @@ class PartyDetails
     	}
     	
     	static constexpr std::uint16_t capacity_max_value() noexcept
-    	{ 
-    		return 65534; 
+    	{
+    		return 65534;
     	}
     	
     	static constexpr std::uint16_t capacity_null_value() noexcept
-    	{ 
-    		return 65535; 
+    	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 65535;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint16_t get_capacity() const noexcept
@@ -219,6 +245,11 @@ class PartyDetails
     		return "handle_inst"; 
     	}
     
+    	constexpr std::uint32_t get_handle_inst() noexcept
+    	{ 
+    		return 56;
+    	}
+    
     	constexpr std::uint32_t get_handle_inst() const noexcept
     	{ 
     		return 56;
@@ -228,7 +259,8 @@ class PartyDetails
     public:
     	PartyDetails() = default;
     
-    	constexpr PartyDetails(TimeInForce::Value time_in_force, std::string_view executor, std::uint16_t capacity) noexcept
+    	/*constexpr */
+    	PartyDetails(TimeInForce::Value time_in_force, std::string_view executor, std::uint16_t capacity) noexcept
     		:time_in_force_(time_in_force), capacity_(capacity)
     	{
     		executor.copy(executor_,executor_size());

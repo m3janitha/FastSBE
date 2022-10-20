@@ -64,13 +64,20 @@ class groupSizeEncoding
     	}
     	
     	static constexpr std::uint16_t blockLength_max_value() noexcept
-    	{ 
-    		return 65534; 
+    	{
+    		return 65534;
     	}
     	
     	static constexpr std::uint16_t blockLength_null_value() noexcept
-    	{ 
-    		return 65535; 
+    	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 65535;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint16_t get_blockLength() const noexcept
@@ -112,13 +119,20 @@ class groupSizeEncoding
     	}
     	
     	static constexpr std::uint16_t numInGroup_max_value() noexcept
-    	{ 
-    		return 65534; 
+    	{
+    		return 65534;
     	}
     	
     	static constexpr std::uint16_t numInGroup_null_value() noexcept
-    	{ 
-    		return 65535; 
+    	{
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 65535;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint16_t get_numInGroup() const noexcept
@@ -136,7 +150,8 @@ class groupSizeEncoding
     public:
     	groupSizeEncoding() = default;
     
-    	constexpr groupSizeEncoding(std::uint16_t blockLength, std::uint16_t numInGroup) noexcept
+    	/*constexpr */
+    	groupSizeEncoding(std::uint16_t blockLength, std::uint16_t numInGroup) noexcept
     		:blockLength_(blockLength), numInGroup_(numInGroup)
     	{
     		

@@ -6,7 +6,7 @@ from FileGen import ClassGen
 
 class SwitchForEnumGen:
 	switch_begin_ct		='switch (value)\n{{\n'
-	switch_case_ct		='case Value::{S_ENUM_VALUE}:\n    return "{S_RET_VALUE}";\n'
+	switch_case_ct		='case Value::{S_ENUM_VALUE}:\n    return "{S_ENUM_VALUE}";\n'
 	switch_null_ct		='case Value::NULL:\n    return "{S_RET_VALUE}";\n'
 	switch_default_ct	='default:\n    return "{S_DEFUAULT}";\n'
 	switch_end_ct		='}}\n'

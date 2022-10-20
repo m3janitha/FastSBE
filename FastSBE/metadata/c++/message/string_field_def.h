@@ -47,15 +47,28 @@ public:
 
 	constexpr auto& set_S_FIELD_NAME(const char* value) noexcept
 	{
-		auto length = strlen(value);
-		std::memcpy(S_FIELD_NAME_, value, length);
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+	#endif
+		std::memcpy(S_FIELD_NAME_, value, S_FIELD_NAME_size());
 		return *this;
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic pop
+	#endif	
 	}
 
 	auto& set_S_FIELD_NAME(std::string_view value) noexcept
 	{
-		auto size = std::min(S_FIELD_NAME_size(), value.size());
-		std::memcpy(S_FIELD_NAME_, value.data(), size);
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wstringop-overflow"
+	#endif
+		//auto size = std::min(S_FIELD_NAME_size(), value.size());
+		std::memcpy(S_FIELD_NAME_, value.data(), S_FIELD_NAME_size());
 		return *this;
+	#if defined(__GNUG__)
+	#pragma GCC diagnostic pop
+	#endif	
 	}
 

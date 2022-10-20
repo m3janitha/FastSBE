@@ -25,13 +25,13 @@ class TimeInForce
         switch (value)
         {
         case Value::Day:
-            return "1";
+            return "Day";
         case Value::IOC:
-            return "2";
+            return "IOC";
         case Value::FOK:
-            return "3";
+            return "FOK";
         case Value::Null:
-            return "255";
+            return "Null";
         default:
             return "Invalid";
         }

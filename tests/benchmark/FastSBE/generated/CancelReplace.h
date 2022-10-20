@@ -71,13 +71,20 @@ class CancelReplace
     	}
     	
     	static constexpr std::uint32_t clodr_id_max_value() noexcept
-    	{ 
-    		return 4294967294; 
+    	{
+    		return 4294967294;
     	}
     	
     	static constexpr std::uint32_t clodr_id_null_value() noexcept
     	{ 
-    		return 4294967295; 
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 4294967295;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint32_t get_clodr_id() const noexcept
@@ -124,13 +131,20 @@ class CancelReplace
     	}
     	
     	static constexpr std::uint32_t orig_clodr_id_max_value() noexcept
-    	{ 
-    		return 4294967294; 
+    	{
+    		return 4294967294;
     	}
     	
     	static constexpr std::uint32_t orig_clodr_id_null_value() noexcept
     	{ 
-    		return 4294967295; 
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic push
+    	#pragma GCC diagnostic ignored "-Wtype-limits"
+    	#endif
+    		return 4294967295;
+    	#if defined(__GNUG__)
+    	#pragma GCC diagnostic pop
+    	#endif
     	}
     
     	constexpr std::uint32_t get_orig_clodr_id() const noexcept
@@ -201,13 +215,20 @@ class CancelReplace
             	}
             	
             	static constexpr std::uint16_t self_match_id_max_value() noexcept
-            	{ 
-            		return 65534; 
+            	{
+            		return 65534;
             	}
             	
             	static constexpr std::uint16_t self_match_id_null_value() noexcept
             	{ 
-            		return 65535; 
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic push
+            	#pragma GCC diagnostic ignored "-Wtype-limits"
+            	#endif
+            		return 65535;
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic pop
+            	#endif
             	}
             
             	constexpr std::uint16_t get_self_match_id() const noexcept
@@ -254,13 +275,20 @@ class CancelReplace
             	}
             	
             	static constexpr std::uint16_t group_id_max_value() noexcept
-            	{ 
-            		return 65534; 
+            	{
+            		return 65534;
             	}
             	
             	static constexpr std::uint16_t group_id_null_value() noexcept
             	{ 
-            		return 65535; 
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic push
+            	#pragma GCC diagnostic ignored "-Wtype-limits"
+            	#endif
+            		return 65535;
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic pop
+            	#endif
             	}
             
             	constexpr std::uint16_t get_group_id() const noexcept
@@ -405,13 +433,20 @@ class CancelReplace
             	}
             	
             	static constexpr std::uint16_t firm_id_max_value() noexcept
-            	{ 
-            		return 65534; 
+            	{
+            		return 65534;
             	}
             	
             	static constexpr std::uint16_t firm_id_null_value() noexcept
             	{ 
-            		return 65535; 
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic push
+            	#pragma GCC diagnostic ignored "-Wtype-limits"
+            	#endif
+            		return 65535;
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic pop
+            	#endif
             	}
             
             	constexpr std::uint16_t get_firm_id() const noexcept
@@ -458,13 +493,20 @@ class CancelReplace
             	}
             	
             	static constexpr std::uint32_t version_max_value() noexcept
-            	{ 
-            		return 4294967294; 
+            	{
+            		return 4294967294;
             	}
             	
             	static constexpr std::uint32_t version_null_value() noexcept
             	{ 
-            		return 4294967295; 
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic push
+            	#pragma GCC diagnostic ignored "-Wtype-limits"
+            	#endif
+            		return 4294967295;
+            	#if defined(__GNUG__)
+            	#pragma GCC diagnostic pop
+            	#endif
             	}
             
             	constexpr std::uint32_t get_version() const noexcept
