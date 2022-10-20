@@ -14,20 +14,20 @@ set (override_namespace "test::sbe")
 
 message("py_cmd is ${py_cmd} ${log_file} ${schema_file} ${out_folder} ${override_namespace}" )
 
-if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h)
+if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated/__header.h)
     message(FATAL_ERROR "File \"${CMAKE_CURRENT_LIST_DIR}/generated/__header.h\" found, \
     this should never be created, remove!")
 endif()
 
 add_custom_target(
     generate_fast_sbe_benchmark ALL
-    DEPENDS ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
+    DEPENDS ${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated/__header.h
 )
 
 add_custom_command(
     OUTPUT
-        ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
-        ${CMAKE_CURRENT_LIST_DIR}/generated/CancelReplace.h
+        ${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated/__header.h
+        ${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated/CancelReplace.h
     COMMAND ${PYTHON_EXECUTABLE} ${py_cmd} ${log_file} ${schema_file} ${out_folder} ${override_namespace}
     WORKING_DIRECTORY ${fast_sbe_dir}
 )
@@ -38,7 +38,7 @@ foreach(dir ${dirs})
 endforeach()
 
 add_executable(perf_test perf_test.cpp 
-    ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
+    ${CMAKE_CURRENT_LIST_DIR}/FastSBE/generated/__header.h
 )
 
 target_link_libraries(perf_test GTest::gtest GTest::gtest_main)

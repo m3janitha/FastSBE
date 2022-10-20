@@ -19,6 +19,8 @@ namespace sbe_test
         std::cout << "[----------]" << std::endl;
     }
 
+    /* string encoding: Array of char of specified length, delimited by NUL character if a string is shorter than the length specified for a field.*/
+    /* use max length as (length -1) in encoding to make it always null terminated */
     struct NewOrderSingle_T
     {
         std::string ClOrdId{random_string(7).c_str()};
@@ -32,13 +34,13 @@ namespace sbe_test
         timestampEncoding TransactTime{};
         struct qtyEncoding
         {
-            std::uint32_t mantissa{random_number<std::uint32_t>()};
+            std::int32_t mantissa{random_number<std::int32_t>()};
         };
         qtyEncoding OrderQty{};
         ordTypeEnum::Value OrdType{random_enum<ordTypeEnum::Value>('1', '4')};
         struct decimalEncoding
         {
-            std::uint64_t mantissa{random_number<std::uint64_t>()};
+            std::int64_t mantissa{random_number<std::int64_t>()};
         };
         decimalEncoding Price{};
         decimalEncoding StopPx{};
@@ -80,6 +82,8 @@ namespace sbe_test
         msg.get_TransactTime().set_time(values.TransactTime.time);
         msg.get_OrderQty().set_mantissa(values.OrderQty.mantissa);
         msg.set_OrdType(values.OrdType);
+        msg.get_Price().set_mantissa(values.Price.mantissa);
+        msg.get_StopPx().set_mantissa(values.StopPx.mantissa);
 
         auto &PartiesGrp = msg.append_PartiesGrp(values.PartiesGrps.size());
         for (auto i = 0u; i < values.PartiesGrps.size(); i++)
@@ -130,6 +134,14 @@ namespace sbe_test
         auto &OrderQty = msg.get_OrderQty();
         EXPECT_EQ(OrderQty.get_mantissa(), values.OrderQty.mantissa);
         EXPECT_EQ(OrderQty.get_exponent(), static_cast<std::int8_t>(0));
+
+        auto& Price = msg.get_Price();
+        EXPECT_EQ(Price.get_mantissa(), values.Price.mantissa);
+        EXPECT_EQ(Price.get_exponent(), static_cast<std::int8_t>(-3));
+
+        auto& StopPx = msg.get_StopPx();
+        EXPECT_EQ(StopPx.get_mantissa(), values.StopPx.mantissa);
+        EXPECT_EQ(StopPx.get_exponent(), static_cast<std::int8_t>(-3));
 
         auto &PartiesGrp = msg.get_PartiesGrp();
         for (auto i = 0u; i < values.PartiesGrps.size(); i++)
