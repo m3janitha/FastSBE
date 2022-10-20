@@ -42,6 +42,8 @@ FetchContent_MakeAvailable(googlebenchmark)
 
 include(FindPythonInterp)
 
+enable_testing()
+
 add_subdirectory(tests)
 #add_subdirectory(example)
 

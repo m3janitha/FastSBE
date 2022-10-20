@@ -27,8 +27,7 @@ add_executable(decode_sbe_v2 decode_sbe_v2.cpp
 
 target_link_libraries(decode_sbe_v2 GTest::gtest GTest::gtest_main)
 
-add_test(NAME decode_sbe_v2 
-         COMMAND decode_sbe_v2
+add_test(NAME decode_sbe_v2 COMMAND decode_sbe_v2
 )
 
 add_custom_target(
