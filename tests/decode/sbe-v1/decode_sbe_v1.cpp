@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include <CancelReplace.h>
+#include <NewOrderSingle.h>
 
 int main()
 {
-    test::sbe::CancelReplace cxl;
+    test::sbe::NewOrderSingle msg;
 }

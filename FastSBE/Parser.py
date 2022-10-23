@@ -79,7 +79,7 @@ class Parser:
 				enum_attrib.update(type_attrib)
 			else:
 				logging.error('%s is not defined in types', encoding_type)
-				exit(self, 1)
+				exit()
 
 		logging.debug('enum_attrib %s', enum_attrib)
 		return enum_attrib
@@ -101,7 +101,7 @@ class Parser:
 				field_attrib.update(type_attrib)
 			else:
 				logging.error('%s is not defined in types', field_type)
-				exit(self, 1)
+				exit()
 
 		logging.debug('field_attrib %s', field_attrib)
 		return field_attrib
@@ -125,7 +125,7 @@ class Parser:
 				field_attrib.update(type_attrib)
 			else:
 				logging.error('%s is not defined in types', field_type)
-				exit(self, 1)
+				exit()
 
 		logging.debub('field_attrib %s', field_attrib)
 		return field_attrib
@@ -138,7 +138,7 @@ class Parser:
 			return enum_attrib['encodingType']
 		else:
 			logging.error('type or primitiveType is not defined in %s', enum_attrib['name']) 
-			exit(self,1)
+			exit()
 
 
 	def get_primitive_type(self, field_attrib):
@@ -148,7 +148,7 @@ class Parser:
 			return field_attrib['type']
 		else:
 			logging.error('type or primitiveType is not defined in %s', field_attrib['name']) 
-			exit(self,1)
+			exit()
 
 
 	def generate_enum(self, type):
@@ -264,7 +264,7 @@ class Parser:
 				return type_name, includes
 		else:
 			logging.error('field type or primitive type is not defined in: %s', type_name)
-			exit(1)
+			exit()
 
 
 	# description is an optional attribute
@@ -380,7 +380,7 @@ class Parser:
 				return field_name
 
 		logging.error('field type or primitive type is not defined in: %s', field_name)
-		exit(1)
+		exit()
 
 		return field_name
 
@@ -406,7 +406,7 @@ class Parser:
 		if (type.attrib['name'].lower() != default_type_name):
 			logging.error('invalid group size encoding. expected %s confiured %s'\
 				, default_type_name.lower(), type.attrib['name'].lower())
-			exit(1)
+			exit()
 		else:
 			group_size_encoding_type = { 
 				"name": type.attrib['name'], 
@@ -425,7 +425,7 @@ class Parser:
 			field_count = len(composite)
 			if(field_count < 2):
 				logging.error('invalid group size encoding. expected at least 2 field')
-				exit(1)
+				exit()
 			elif(field_count == 2):
 				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 0)
 				Parser.update_group_size_encoding_types(group_size_encoding_type, composite, 1)
@@ -446,7 +446,7 @@ class Parser:
 		if (type.attrib['name'].lower() != default_type_name):
 			logging.error('invalid variable data encoding. expected %s confiured %s'\
 				, default_type_name.lower(), type.attrib['name'].lower())
-			exit(1)
+			exit()
 		else:
 			variable_data_encoding_type = { 
 				"name": type.attrib['name'], 
@@ -465,7 +465,7 @@ class Parser:
 			field_count = len(composite)
 			if(field_count < 2):
 				logging.error('invalid variable data encoding. expected at least 2 field')
-				exit(1)
+				exit()
 			elif(field_count == 2):
 				Parser.update_variable_data_encoding_types(variable_data_encoding_type, composite, 0)
 				Parser.update_variable_data_encoding_types(variable_data_encoding_type, composite, 1)		

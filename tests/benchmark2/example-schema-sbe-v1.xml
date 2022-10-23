@@ -7,15 +7,13 @@
 	<types>
 		<type name="date" primitiveType="uint16" semanticType="LocalMktDate" />
 		<type name="enumEncoding" primitiveType="char" />
-		<type name="idString" length="8" primitiveType="char"
-			semanticType="String" />
+		<type name="idString" length="8" primitiveType="char" semanticType="String" />
+		<type name="idString16" length="16" primitiveType="char" semanticType="String" />
 		<type name="intEnumEncoding" primitiveType="uint8" />
-		<type name="timestampEncoding" primitiveType="uint64"
-			semanticType="UTCTimestamp" />
+		<type name="timestampEncoding" primitiveType="uint64" semanticType="UTCTimestamp" />
 		<composite name="DATA">
 			<type name="length" primitiveType="uint16" semanticType="Length" />
-			<type name="varData" length="0" primitiveType="uint8"
-				semanticType="data" />
+			<type name="varData" length="0" primitiveType="char" semanticType="data" />
 		</composite>
 		<composite name="MONTH_YEAR" semanticType="MonthYear">
 			<type name="year" primitiveType="uint16" />
@@ -79,6 +77,15 @@
 			<validValue name="Buy">1</validValue>
 			<validValue name="Sell">2</validValue>
 		</enum>
+		<enum name="PartyIDSourceEnum" encodingType="enumEncoding">
+			<validValue name="BIC">B</validValue>
+			<validValue name="Proprietary">C</validValue>
+		</enum>
+		<enum name="PartyRoleEnum" encodingType="intEnumEncoding">
+			<validValue name="ExecutingFirm">1</validValue>
+			<validValue name="BrokerOfCredit">2</validValue>
+			<validValue name="ClientID">3</validValue>
+		</enum>
 	</types>
 	<sbe:message name="BusinessMessageReject" id="97"
 		blockLength="9" semanticType="j">
@@ -88,33 +95,20 @@
 			offset="8" semanticType="int" />
 		<data name="Text" id="58" type="DATA" semanticType="data" />
 	</sbe:message>
-	<sbe:message name="ExecutionReport" id="98" blockLength="42"
-		semanticType="8">
-		<field name="OrderID" id="37" type="idString" offset="0"
-			semanticType="String" />
-		<field name="ExecID" id="17" type="idString" offset="8"
-			semanticType="String" />
-		<field name="ExecType" id="150" type="execTypeEnum" offset="16"
-			semanticType="char" />
-		<field name="OrdStatus" id="39" type="ordStatusEnum" offset="17"
-			semanticType="char" />
-		<field name="Symbol" id="55" type="idString" offset="18"
-			semanticType="String" />
-		<field name="MaturityMonthYear" id="200" type="MONTH_YEAR"
-			offset="26" semanticType="MonthYear" />
-		<field name="Side" id="54" type="sideEnum" offset="31"
-			semanticType="char" />
-		<field name="LeavesQty" id="151" type="qtyEncoding" offset="32"
-			semanticType="Qty" />
-		<field name="CumQty" id="14" type="qtyEncoding" offset="36"
-			semanticType="Qty" />
-		<field name="TradeDate" id="75" type="date" offset="40"
-			semanticType="LocalMktDate" />
+	<sbe:message name="ExecutionReport" id="98" blockLength="42" semanticType="8">
+		<field name="OrderID" id="37" type="idString" offset="0" semanticType="String" />
+		<field name="ExecID" id="17" type="idString" offset="8" semanticType="String" />
+		<field name="ExecType" id="150" type="execTypeEnum" offset="16" semanticType="char" />
+		<field name="OrdStatus" id="39" type="ordStatusEnum" offset="17" semanticType="char" />
+		<field name="Symbol" id="55" type="idString" offset="18" semanticType="String" />
+		<field name="MaturityMonthYear" id="200" type="MONTH_YEAR" offset="26" semanticType="MonthYear" />
+		<field name="Side" id="54" type="sideEnum" offset="31" semanticType="char" />
+		<field name="LeavesQty" id="151" type="qtyEncoding" offset="32" semanticType="Qty" />
+		<field name="CumQty" id="14" type="qtyEncoding" offset="36" semanticType="Qty" />
+		<field name="TradeDate" id="75" type="date" offset="40" semanticType="LocalMktDate" />
 		<group name="FillsGrp" id="2112" blockLength="12" dimensionType="groupSizeEncoding">
-			<field name="FillPx" id="1364" type="optionalDecimalEncoding"
-				offset="0" semanticType="Price" />
-			<field name="FillQty" id="1365" type="qtyEncoding" offset="8"
-				semanticType="Qty" />
+			<field name="FillPx" id="1364" type="optionalDecimalEncoding" offset="0" semanticType="Price" />
+			<field name="FillQty" id="1365" type="qtyEncoding" offset="8" semanticType="Qty" />
 		</group>
 	</sbe:message>
 	<sbe:message name="NewOrderSingle" id="99" blockLength="54" semanticType="D">
@@ -127,5 +121,19 @@
 		<field name="OrdType" id="40" type="ordTypeEnum" offset="37" semanticType="char" />
 		<field name="Price" id="44" type="optionalDecimalEncoding" offset="38" semanticType="Price" />
 		<field name="StopPx" id="99" type="optionalDecimalEncoding" offset="46" semanticType="Price" />
+		<group name="PartiesGrp" id="583" blockLength="20" dimensionType="groupSizeEncoding">
+			<field name="PartyID" id="448" type="idString" offset="0" semanticType="String" />
+			<field name="PartyIDSource" id="447" type="PartyIDSourceEnum" offset="8" semanticType="char" />
+			<field name="PartyRole" id="452" type="PartyRoleEnum" offset="9" semanticType="uint8" />
+		</group>
+		<group name="AllocsGrp" id="78" blockLength="20" dimensionType="groupSizeEncoding">
+			<field name="AllocAccount" id="79" type="idString16" offset="0" semanticType="String" />
+			<field name="AllocShares" id="80" type="qtyEncoding" offset="16" semanticType="Qty" />
+		</group>
+		<group name="TradingSessionsGrp" id="386" blockLength="8" dimensionType="groupSizeEncoding">
+			<field name="TradingSessionID" id="336" type="idString" offset="0" semanticType="String" />
+		</group>
+		<data name="Text" id="58" type="DATA" semanticType="data" />
+		<data name="ClearingFirm" id="439" type="DATA" semanticType="data" />
 	</sbe:message>
 </sbe:messageSchema>

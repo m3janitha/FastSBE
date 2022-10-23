@@ -10,7 +10,7 @@
 using namespace test::sbe;
 
 template <typename Msg>
-void print_message(Msg &msg)
+inline void print_message(Msg &msg)
 {
     std::cout << "[ MESSEGE  ]" << std::endl;
     std::cout << msg << std::endl;
