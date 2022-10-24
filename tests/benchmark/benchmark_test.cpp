@@ -17,8 +17,6 @@ public:
         fastsbe::encode_NewOrderSingle_from_struct(buffer_, data, false);
     }
 
-    void TearDown(const ::benchmark::State& state) {}
-
     char buffer_[1024]{};
     NewOrderSingleData data{3,3,3};
 };
@@ -30,8 +28,6 @@ public:
     {
         sbetool::encode_NewOrderSingle_from_struct(buffer_, sizeof(buffer_), data, false);
     }
-
-    void TearDown(const ::benchmark::State& state) {}
 
     char buffer_[1024]{};
     NewOrderSingleData data{3,3,3};

@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <vector>
 
-
 #include <random_gen.h>
 
 struct NewOrderSingleData
