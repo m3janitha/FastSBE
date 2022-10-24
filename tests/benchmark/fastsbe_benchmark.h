@@ -3,7 +3,7 @@
 #include <benchmark/benchmark.h>
 
 #include <random_gen.h>
-#include <NewOrderSingle.h>
+#include <FastSBE/fastsbe/NewOrderSingle.h>
 #include <NewOrderSingleData.h>
 
 template <typename Msg>
@@ -20,11 +20,11 @@ namespace fastsbe
     {
         auto &msg = *reinterpret_cast<fastsbe::NewOrderSingle *>(buffer);
 
-        msg.set_ClOrdId(values.ClOrdId)
-            .set_Account(values.Account)
-            .set_Symbol(values.Symbol)
-            .set_Side(static_cast<sideEnum::Value>(values.Side));
-        msg.set_TransactTime(values.TransactTime);
+        msg.set_ClOrdId(values.ClOrdId.c_str())
+            .set_Account(values.Account.c_str())
+            .set_Symbol(values.Symbol.c_str())
+            .set_Side(static_cast<sideEnum::Value>(values.Side))
+            .set_TransactTime(values.TransactTime);
         msg.get_OrderQty().set_mantissa(values.OrderQty.mantissa);
         msg.set_OrdType(static_cast<ordTypeEnum::Value>(values.OrdType));
         msg.get_Price().set_mantissa(values.Price.mantissa);
@@ -35,7 +35,7 @@ namespace fastsbe
         {
             auto &party = values.PartiesGrps[i];
             PartiesGrp.get(i)
-                .set_PartyID(party.PartyID)
+                .set_PartyID(party.PartyID.c_str())
                 .set_PartyIDSource(static_cast<fastsbe::PartyIDSourceEnum::Value>(party.PartyIDSource))
                 .set_PartyRole(static_cast<fastsbe::PartyRoleEnum::Value>(party.PartyRole));
         }
@@ -45,9 +45,8 @@ namespace fastsbe
         {
             auto &alloc = values.AllocsGrps[i];
             AllocsGrp.get(i)
-                .set_AllocAccount(alloc.AllocAccount)
-                .get_AllocShares()
-                .set_mantissa(alloc.AllocShares.mantissa);
+                .set_AllocAccount(alloc.AllocAccount.c_str())
+                .get_AllocShares().set_mantissa(alloc.AllocShares.mantissa);
         }
 
         auto &TradingSessionsGrp = msg.append_TradingSessionsGrp(values.TradingSessionsGrps.size());
@@ -55,7 +54,7 @@ namespace fastsbe
         {
             auto &tradingSession = values.TradingSessionsGrps[i];
             TradingSessionsGrp.get(i)
-                .set_TradingSessionID(tradingSession.TradingSessionID);
+                .set_TradingSessionID(tradingSession.TradingSessionID.c_str());
         }
         msg.append_Text(values.Text.c_str(), values.Text.length());
         msg.append_ClearingFirm(values.ClearingFirm.c_str(), values.ClearingFirm.length());
@@ -78,7 +77,6 @@ namespace fastsbe
         benchmark::DoNotOptimize(Symbol);
         auto Side = msg.get_Side();
         benchmark::DoNotOptimize(Symbol);
-
         auto TransactTime = msg.get_TransactTime();
         benchmark::DoNotOptimize(TransactTime);
 
