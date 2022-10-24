@@ -1,1 +1,0 @@
-java -Dsbe.output.dir=. -Dsbe.target.language=CPP -Dsbe.target.namespace=sbetool -Dsbe.output.dir=./. -jar ./sbe-all-1.26.0.jar ./../example-schema-sbe-v1.xml
