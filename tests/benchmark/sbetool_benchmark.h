@@ -3,7 +3,7 @@
 #include <benchmark/benchmark.h>
 
 #include <random_gen.h>
-#include <SBETool/sbetool/NewOrderSingle.h>
+#include <SbeTool/sbetool/NewOrderSingle.h>
 
 template <typename Msg>
 inline void print_message2(Msg &msg)

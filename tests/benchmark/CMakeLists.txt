@@ -4,7 +4,7 @@ message("CMAKE_CURRENT_SRC_DIR is ${CMAKE_CURRENT_SRC_DIR}")
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/FastSBE/fastsbe)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/SBETool/sbetool)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/SbeTool/sbetool)
 
 set (fast_sbe_dir "${PROJECT_SOURCE_DIR}/FastSBE")
 set (py_cmd "${fast_sbe_dir}/FastSBE.py")
