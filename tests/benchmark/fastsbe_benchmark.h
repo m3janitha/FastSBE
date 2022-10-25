@@ -3,7 +3,7 @@
 #include <benchmark/benchmark.h>
 
 #include <random_gen.h>
-#include <FastSBE/fastsbe/NewOrderSingle.h>
+#include <NewOrderSingle.h>
 #include <NewOrderSingleData.h>
 
 template <typename Msg>

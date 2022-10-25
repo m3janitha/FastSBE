@@ -30,12 +30,12 @@ public:
 		return S_FIELD_NAME_;
 	}
 
-	constexpr std::string_view get_S_FIELD_NAME_str() noexcept
+	constexpr std::string_view get_S_FIELD_NAME_view() noexcept
 	{ 
 		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
-	constexpr const std::string_view get_S_FIELD_NAME_str() const noexcept
+	constexpr const std::string_view get_S_FIELD_NAME_view() const noexcept
 	{ 
 		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}

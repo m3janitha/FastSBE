@@ -123,12 +123,12 @@ class DATA
     		return varData_;
     	}
     
-    	constexpr std::string_view get_varData_str() noexcept
+    	constexpr std::string_view get_varData_view() noexcept
     	{ 
     		return std::string_view(varData_, 0);
     	}
     
-    	constexpr const std::string_view get_varData_str() const noexcept
+    	constexpr const std::string_view get_varData_view() const noexcept
     	{ 
     		return std::string_view(varData_, 0);
     	}

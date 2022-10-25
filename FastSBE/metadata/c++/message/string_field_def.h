@@ -11,41 +11,48 @@ public:
 	}
 
 	static constexpr std::size_t S_FIELD_NAME_offset() noexcept
-	{ 
-		return S_FIELD_OFFSET; 
+	{
+		return S_FIELD_OFFSET;
 	}
 
 	static constexpr std::size_t S_FIELD_NAME_id() noexcept
-	{ 
-		return S_FIELD_ID; 
-	}
-	
-	static constexpr const char* S_FIELD_NAME_name() noexcept
-	{ 
-		return "S_FIELD_NAME"; 
+	{
+		return S_FIELD_ID;
 	}
 
-	constexpr char* get_S_FIELD_NAME() noexcept
-	{ 
+	static constexpr const char *S_FIELD_NAME_name() noexcept
+	{
+		return "S_FIELD_NAME";
+	}
+
+	constexpr char *get_S_FIELD_NAME() noexcept
+	{
 		return S_FIELD_NAME_;
 	}
 
-	constexpr const char* get_S_FIELD_NAME() const noexcept
-	{ 
+	constexpr const char *get_S_FIELD_NAME() const noexcept
+	{
 		return S_FIELD_NAME_;
 	}
 
-	constexpr std::string_view get_S_FIELD_NAME_str() noexcept
-	{ 
+	constexpr std::string_view get_S_FIELD_NAME_view() noexcept
+	{
 		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
-	constexpr const std::string_view get_S_FIELD_NAME_str() const noexcept
-	{ 
+	constexpr const std::string_view get_S_FIELD_NAME_view() const noexcept
+	{
 		return std::string_view(S_FIELD_NAME_, S_FIELD_SIZE);
 	}
 
-	constexpr auto& set_S_FIELD_NAME(const char* value) noexcept
+	const std::string get_S_FIELD_NAME_string() const noexcept
+	{
+		auto length = 0ULL;
+		for (; length < S_FIELD_SIZE && *(S_FIELD_NAME_ + length) != '\0'; ++length);
+		return std::string(S_FIELD_NAME_, length);
+	}
+
+	constexpr auto &set_S_FIELD_NAME(const char *value) noexcept
 	{
 	#if defined(__GNUG__)
 	#pragma GCC diagnostic push
@@ -55,20 +62,19 @@ public:
 		return *this;
 	#if defined(__GNUG__)
 	#pragma GCC diagnostic pop
-	#endif	
+	#endif
 	}
 
-	auto& set_S_FIELD_NAME(std::string_view value) noexcept
+	auto &set_S_FIELD_NAME(std::string_view value) noexcept
 	{
 	#if defined(__GNUG__)
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wstringop-overflow"
 	#endif
-		//auto size = std::min(S_FIELD_NAME_size(), value.size());
+		// auto size = std::min(S_FIELD_NAME_size(), value.size());
 		std::memcpy(S_FIELD_NAME_, value.data(), S_FIELD_NAME_size());
 		return *this;
 	#if defined(__GNUG__)
 	#pragma GCC diagnostic pop
-	#endif	
+	#endif
 	}
-

@@ -22,9 +22,17 @@ inline char random_char(char start = ' ', char end = '~')
     return val;
 }
 
-inline std::string random_string(std::size_t max_length)
+inline std::string random_length_string(std::size_t max_length)
 {
     auto length = random_number<std::size_t>(1, max_length);
+    std::string str{};
+    for (auto i = 0u; i < length; i++)
+        str.push_back(random_char());
+    return str;
+}
+
+inline std::string random_string(std::size_t length)
+{
     std::string str{};
     for (auto i = 0u; i < length; i++)
         str.push_back(random_char());

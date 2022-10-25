@@ -292,7 +292,7 @@ class FieldGen:
 
 
     def gen_message_const_string_field_def(self, message_name, field_type, field_id, field_name\
-        , prvious_field_name, field_size, is_group, group_name):
+        , prvious_field_name, field_size, value, is_group, group_name):
         field_def = self.message_const_string_field_ct\
             .replace('S_MESSAGE_NAME', message_name)\
             .replace('S_FIELD_ID', str(field_id))\

@@ -62,41 +62,48 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t ClOrdId_offset() noexcept
-    	{ 
-    		return 0; 
+    	{
+    		return 0;
     	}
     
     	static constexpr std::size_t ClOrdId_id() noexcept
-    	{ 
-    		return 11; 
-    	}
-    	
-    	static constexpr const char* ClOrdId_name() noexcept
-    	{ 
-    		return "ClOrdId"; 
+    	{
+    		return 11;
     	}
     
-    	constexpr char* get_ClOrdId() noexcept
-    	{ 
+    	static constexpr const char *ClOrdId_name() noexcept
+    	{
+    		return "ClOrdId";
+    	}
+    
+    	constexpr char *get_ClOrdId() noexcept
+    	{
     		return ClOrdId_;
     	}
     
-    	constexpr const char* get_ClOrdId() const noexcept
-    	{ 
+    	constexpr const char *get_ClOrdId() const noexcept
+    	{
     		return ClOrdId_;
     	}
     
-    	constexpr std::string_view get_ClOrdId_str() noexcept
-    	{ 
+    	constexpr std::string_view get_ClOrdId_view() noexcept
+    	{
     		return std::string_view(ClOrdId_, 8);
     	}
     
-    	constexpr const std::string_view get_ClOrdId_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_ClOrdId_view() const noexcept
+    	{
     		return std::string_view(ClOrdId_, 8);
     	}
     
-    	constexpr auto& set_ClOrdId(const char* value) noexcept
+    	const std::string get_ClOrdId_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(ClOrdId_ + length) != '\0'; ++length);
+    		return std::string(ClOrdId_, length);
+    	}
+    
+    	constexpr auto &set_ClOrdId(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -106,23 +113,22 @@ class NewOrderSingle
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_ClOrdId(std::string_view value) noexcept
+    	auto &set_ClOrdId(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(ClOrdId_size(), value.size());
+    		// auto size = std::min(ClOrdId_size(), value.size());
     		std::memcpy(ClOrdId_, value.data(), ClOrdId_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -136,41 +142,48 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t Account_offset() noexcept
-    	{ 
-    		return ClOrdId_offset() + ClOrdId_size(); 
+    	{
+    		return ClOrdId_offset() + ClOrdId_size();
     	}
     
     	static constexpr std::size_t Account_id() noexcept
-    	{ 
-    		return 1; 
-    	}
-    	
-    	static constexpr const char* Account_name() noexcept
-    	{ 
-    		return "Account"; 
+    	{
+    		return 1;
     	}
     
-    	constexpr char* get_Account() noexcept
-    	{ 
+    	static constexpr const char *Account_name() noexcept
+    	{
+    		return "Account";
+    	}
+    
+    	constexpr char *get_Account() noexcept
+    	{
     		return Account_;
     	}
     
-    	constexpr const char* get_Account() const noexcept
-    	{ 
+    	constexpr const char *get_Account() const noexcept
+    	{
     		return Account_;
     	}
     
-    	constexpr std::string_view get_Account_str() noexcept
-    	{ 
+    	constexpr std::string_view get_Account_view() noexcept
+    	{
     		return std::string_view(Account_, 8);
     	}
     
-    	constexpr const std::string_view get_Account_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_Account_view() const noexcept
+    	{
     		return std::string_view(Account_, 8);
     	}
     
-    	constexpr auto& set_Account(const char* value) noexcept
+    	const std::string get_Account_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(Account_ + length) != '\0'; ++length);
+    		return std::string(Account_, length);
+    	}
+    
+    	constexpr auto &set_Account(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -180,23 +193,22 @@ class NewOrderSingle
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_Account(std::string_view value) noexcept
+    	auto &set_Account(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(Account_size(), value.size());
+    		// auto size = std::min(Account_size(), value.size());
     		std::memcpy(Account_, value.data(), Account_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -210,41 +222,48 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t Symbol_offset() noexcept
-    	{ 
-    		return Account_offset() + Account_size(); 
+    	{
+    		return Account_offset() + Account_size();
     	}
     
     	static constexpr std::size_t Symbol_id() noexcept
-    	{ 
-    		return 55; 
-    	}
-    	
-    	static constexpr const char* Symbol_name() noexcept
-    	{ 
-    		return "Symbol"; 
+    	{
+    		return 55;
     	}
     
-    	constexpr char* get_Symbol() noexcept
-    	{ 
+    	static constexpr const char *Symbol_name() noexcept
+    	{
+    		return "Symbol";
+    	}
+    
+    	constexpr char *get_Symbol() noexcept
+    	{
     		return Symbol_;
     	}
     
-    	constexpr const char* get_Symbol() const noexcept
-    	{ 
+    	constexpr const char *get_Symbol() const noexcept
+    	{
     		return Symbol_;
     	}
     
-    	constexpr std::string_view get_Symbol_str() noexcept
-    	{ 
+    	constexpr std::string_view get_Symbol_view() noexcept
+    	{
     		return std::string_view(Symbol_, 8);
     	}
     
-    	constexpr const std::string_view get_Symbol_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_Symbol_view() const noexcept
+    	{
     		return std::string_view(Symbol_, 8);
     	}
     
-    	constexpr auto& set_Symbol(const char* value) noexcept
+    	const std::string get_Symbol_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(Symbol_ + length) != '\0'; ++length);
+    		return std::string(Symbol_, length);
+    	}
+    
+    	constexpr auto &set_Symbol(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -254,23 +273,22 @@ class NewOrderSingle
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_Symbol(std::string_view value) noexcept
+    	auto &set_Symbol(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(Symbol_size(), value.size());
+    		// auto size = std::min(Symbol_size(), value.size());
     		std::memcpy(Symbol_, value.data(), Symbol_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -573,41 +591,48 @@ class NewOrderSingle
             	}
             
             	static constexpr std::size_t PartyID_offset() noexcept
-            	{ 
-            		return 0; 
+            	{
+            		return 0;
             	}
             
             	static constexpr std::size_t PartyID_id() noexcept
-            	{ 
-            		return 448; 
-            	}
-            	
-            	static constexpr const char* PartyID_name() noexcept
-            	{ 
-            		return "PartyID"; 
+            	{
+            		return 448;
             	}
             
-            	constexpr char* get_PartyID() noexcept
-            	{ 
+            	static constexpr const char *PartyID_name() noexcept
+            	{
+            		return "PartyID";
+            	}
+            
+            	constexpr char *get_PartyID() noexcept
+            	{
             		return PartyID_;
             	}
             
-            	constexpr const char* get_PartyID() const noexcept
-            	{ 
+            	constexpr const char *get_PartyID() const noexcept
+            	{
             		return PartyID_;
             	}
             
-            	constexpr std::string_view get_PartyID_str() noexcept
-            	{ 
+            	constexpr std::string_view get_PartyID_view() noexcept
+            	{
             		return std::string_view(PartyID_, 8);
             	}
             
-            	constexpr const std::string_view get_PartyID_str() const noexcept
-            	{ 
+            	constexpr const std::string_view get_PartyID_view() const noexcept
+            	{
             		return std::string_view(PartyID_, 8);
             	}
             
-            	constexpr auto& set_PartyID(const char* value) noexcept
+            	const std::string get_PartyID_string() const noexcept
+            	{
+            		auto length = 0ULL;
+            		for (; length < 8 && *(PartyID_ + length) != '\0'; ++length);
+            		return std::string(PartyID_, length);
+            	}
+            
+            	constexpr auto &set_PartyID(const char *value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
@@ -617,23 +642,22 @@ class NewOrderSingle
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
             
-            	auto& set_PartyID(std::string_view value) noexcept
+            	auto &set_PartyID(std::string_view value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
             	#pragma GCC diagnostic ignored "-Wstringop-overflow"
             	#endif
-            		//auto size = std::min(PartyID_size(), value.size());
+            		// auto size = std::min(PartyID_size(), value.size());
             		std::memcpy(PartyID_, value.data(), PartyID_size());
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
-            
             
             private:
             	#pragma pack(push, 1)
@@ -821,41 +845,48 @@ class NewOrderSingle
             	}
             
             	static constexpr std::size_t AllocAccount_offset() noexcept
-            	{ 
-            		return 0; 
+            	{
+            		return 0;
             	}
             
             	static constexpr std::size_t AllocAccount_id() noexcept
-            	{ 
-            		return 79; 
-            	}
-            	
-            	static constexpr const char* AllocAccount_name() noexcept
-            	{ 
-            		return "AllocAccount"; 
+            	{
+            		return 79;
             	}
             
-            	constexpr char* get_AllocAccount() noexcept
-            	{ 
+            	static constexpr const char *AllocAccount_name() noexcept
+            	{
+            		return "AllocAccount";
+            	}
+            
+            	constexpr char *get_AllocAccount() noexcept
+            	{
             		return AllocAccount_;
             	}
             
-            	constexpr const char* get_AllocAccount() const noexcept
-            	{ 
+            	constexpr const char *get_AllocAccount() const noexcept
+            	{
             		return AllocAccount_;
             	}
             
-            	constexpr std::string_view get_AllocAccount_str() noexcept
-            	{ 
+            	constexpr std::string_view get_AllocAccount_view() noexcept
+            	{
             		return std::string_view(AllocAccount_, 16);
             	}
             
-            	constexpr const std::string_view get_AllocAccount_str() const noexcept
-            	{ 
+            	constexpr const std::string_view get_AllocAccount_view() const noexcept
+            	{
             		return std::string_view(AllocAccount_, 16);
             	}
             
-            	constexpr auto& set_AllocAccount(const char* value) noexcept
+            	const std::string get_AllocAccount_string() const noexcept
+            	{
+            		auto length = 0ULL;
+            		for (; length < 16 && *(AllocAccount_ + length) != '\0'; ++length);
+            		return std::string(AllocAccount_, length);
+            	}
+            
+            	constexpr auto &set_AllocAccount(const char *value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
@@ -865,23 +896,22 @@ class NewOrderSingle
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
             
-            	auto& set_AllocAccount(std::string_view value) noexcept
+            	auto &set_AllocAccount(std::string_view value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
             	#pragma GCC diagnostic ignored "-Wstringop-overflow"
             	#endif
-            		//auto size = std::min(AllocAccount_size(), value.size());
+            		// auto size = std::min(AllocAccount_size(), value.size());
             		std::memcpy(AllocAccount_, value.data(), AllocAccount_size());
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
-            
             
             private:
             	#pragma pack(push, 1)
@@ -1036,41 +1066,48 @@ class NewOrderSingle
             	}
             
             	static constexpr std::size_t TradingSessionID_offset() noexcept
-            	{ 
-            		return 0; 
+            	{
+            		return 0;
             	}
             
             	static constexpr std::size_t TradingSessionID_id() noexcept
-            	{ 
-            		return 336; 
-            	}
-            	
-            	static constexpr const char* TradingSessionID_name() noexcept
-            	{ 
-            		return "TradingSessionID"; 
+            	{
+            		return 336;
             	}
             
-            	constexpr char* get_TradingSessionID() noexcept
-            	{ 
+            	static constexpr const char *TradingSessionID_name() noexcept
+            	{
+            		return "TradingSessionID";
+            	}
+            
+            	constexpr char *get_TradingSessionID() noexcept
+            	{
             		return TradingSessionID_;
             	}
             
-            	constexpr const char* get_TradingSessionID() const noexcept
-            	{ 
+            	constexpr const char *get_TradingSessionID() const noexcept
+            	{
             		return TradingSessionID_;
             	}
             
-            	constexpr std::string_view get_TradingSessionID_str() noexcept
-            	{ 
+            	constexpr std::string_view get_TradingSessionID_view() noexcept
+            	{
             		return std::string_view(TradingSessionID_, 8);
             	}
             
-            	constexpr const std::string_view get_TradingSessionID_str() const noexcept
-            	{ 
+            	constexpr const std::string_view get_TradingSessionID_view() const noexcept
+            	{
             		return std::string_view(TradingSessionID_, 8);
             	}
             
-            	constexpr auto& set_TradingSessionID(const char* value) noexcept
+            	const std::string get_TradingSessionID_string() const noexcept
+            	{
+            		auto length = 0ULL;
+            		for (; length < 8 && *(TradingSessionID_ + length) != '\0'; ++length);
+            		return std::string(TradingSessionID_, length);
+            	}
+            
+            	constexpr auto &set_TradingSessionID(const char *value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
@@ -1080,23 +1117,22 @@ class NewOrderSingle
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
             
-            	auto& set_TradingSessionID(std::string_view value) noexcept
+            	auto &set_TradingSessionID(std::string_view value) noexcept
             	{
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic push
             	#pragma GCC diagnostic ignored "-Wstringop-overflow"
             	#endif
-            		//auto size = std::min(TradingSessionID_size(), value.size());
+            		// auto size = std::min(TradingSessionID_size(), value.size());
             		std::memcpy(TradingSessionID_, value.data(), TradingSessionID_size());
             		return *this;
             	#if defined(__GNUG__)
             	#pragma GCC diagnostic pop
-            	#endif	
+            	#endif
             	}
-            
     };
     
     private:
@@ -1460,8 +1496,8 @@ inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, T
 	os << msg.PartiesGrp_name() << ": " << msg.get_PartiesGrp() << " ";
 	os << msg.AllocsGrp_name() << ": " << msg.get_AllocsGrp() << " ";
 	os << msg.TradingSessionsGrp_name() << ": " << msg.get_TradingSessionsGrp() << " ";
-	os << msg.Text_name() << ": " << msg.get_Text().get() << " ";
-	os << msg.ClearingFirm_name() << ": " << msg.get_ClearingFirm().get() << " ";
+	os << msg.Text_name() << ": " << msg.get_Text().get_str() << " ";
+	os << msg.ClearingFirm_name() << ": " << msg.get_ClearingFirm().get_str() << " ";
 	return os;
 };
 

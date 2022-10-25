@@ -51,41 +51,48 @@ class BusinessMessageReject
     	}
     
     	static constexpr std::size_t BusinesRejectRefId_offset() noexcept
-    	{ 
-    		return 0; 
+    	{
+    		return 0;
     	}
     
     	static constexpr std::size_t BusinesRejectRefId_id() noexcept
-    	{ 
-    		return 379; 
-    	}
-    	
-    	static constexpr const char* BusinesRejectRefId_name() noexcept
-    	{ 
-    		return "BusinesRejectRefId"; 
+    	{
+    		return 379;
     	}
     
-    	constexpr char* get_BusinesRejectRefId() noexcept
-    	{ 
+    	static constexpr const char *BusinesRejectRefId_name() noexcept
+    	{
+    		return "BusinesRejectRefId";
+    	}
+    
+    	constexpr char *get_BusinesRejectRefId() noexcept
+    	{
     		return BusinesRejectRefId_;
     	}
     
-    	constexpr const char* get_BusinesRejectRefId() const noexcept
-    	{ 
+    	constexpr const char *get_BusinesRejectRefId() const noexcept
+    	{
     		return BusinesRejectRefId_;
     	}
     
-    	constexpr std::string_view get_BusinesRejectRefId_str() noexcept
-    	{ 
+    	constexpr std::string_view get_BusinesRejectRefId_view() noexcept
+    	{
     		return std::string_view(BusinesRejectRefId_, 8);
     	}
     
-    	constexpr const std::string_view get_BusinesRejectRefId_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_BusinesRejectRefId_view() const noexcept
+    	{
     		return std::string_view(BusinesRejectRefId_, 8);
     	}
     
-    	constexpr auto& set_BusinesRejectRefId(const char* value) noexcept
+    	const std::string get_BusinesRejectRefId_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(BusinesRejectRefId_ + length) != '\0'; ++length);
+    		return std::string(BusinesRejectRefId_, length);
+    	}
+    
+    	constexpr auto &set_BusinesRejectRefId(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -95,23 +102,22 @@ class BusinessMessageReject
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_BusinesRejectRefId(std::string_view value) noexcept
+    	auto &set_BusinesRejectRefId(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(BusinesRejectRefId_size(), value.size());
+    		// auto size = std::min(BusinesRejectRefId_size(), value.size());
     		std::memcpy(BusinesRejectRefId_, value.data(), BusinesRejectRefId_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -281,7 +287,7 @@ inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, T
 {
 	os << msg.BusinesRejectRefId_name() << ": " << msg.get_BusinesRejectRefId() << " ";
 	os << msg.BusinessRejectReason_name() << ": " << msg.get_BusinessRejectReason() << " ";
-	os << msg.Text_name() << ": " << msg.get_Text().get() << " ";
+	os << msg.Text_name() << ": " << msg.get_Text().get_str() << " ";
 	return os;
 };
 

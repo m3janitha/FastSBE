@@ -65,23 +65,7 @@ BENCHMARK_F(SbeToolFixture, BM_encode_NewOrderSingle_from_struct)(benchmark::Sta
    }
 }
 
-// BENCHMARK_F(FastSBEFixture, BM_Encode_CancelReplace_from_struct)(benchmark::State& st) 
-// {
-//    for (auto _ : st) 
-//    {
-//         fastsbe::create_msg_from_c_struct(msg_, data, false);
-//    }
-// }
-
-// BENCHMARK_F(SbeToolFixture, BM_Encode_CancelReplace_from_struct)(benchmark::State& st)
-// {
-//    for (auto _ : st) 
-//    {
-//         sbetool::create_msg_from_c_struct(msg_, sizeof(msg_), data, false);
-//    }
-// }
-
-// BENCHMARK_F(SbeToolFixture, BM_Encode_get_from_cancel_replace_data)(benchmark::State& st)
+// BENCHMARK_F(SbeToolFixture, BM_encode_get_values_from_NewOrderSinglData)(benchmark::State& st)
 // {
 //    for (auto _ : st) 
 //    {

@@ -58,41 +58,48 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t OrderID_offset() noexcept
-    	{ 
-    		return 0; 
+    	{
+    		return 0;
     	}
     
     	static constexpr std::size_t OrderID_id() noexcept
-    	{ 
-    		return 37; 
-    	}
-    	
-    	static constexpr const char* OrderID_name() noexcept
-    	{ 
-    		return "OrderID"; 
+    	{
+    		return 37;
     	}
     
-    	constexpr char* get_OrderID() noexcept
-    	{ 
+    	static constexpr const char *OrderID_name() noexcept
+    	{
+    		return "OrderID";
+    	}
+    
+    	constexpr char *get_OrderID() noexcept
+    	{
     		return OrderID_;
     	}
     
-    	constexpr const char* get_OrderID() const noexcept
-    	{ 
+    	constexpr const char *get_OrderID() const noexcept
+    	{
     		return OrderID_;
     	}
     
-    	constexpr std::string_view get_OrderID_str() noexcept
-    	{ 
+    	constexpr std::string_view get_OrderID_view() noexcept
+    	{
     		return std::string_view(OrderID_, 8);
     	}
     
-    	constexpr const std::string_view get_OrderID_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_OrderID_view() const noexcept
+    	{
     		return std::string_view(OrderID_, 8);
     	}
     
-    	constexpr auto& set_OrderID(const char* value) noexcept
+    	const std::string get_OrderID_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(OrderID_ + length) != '\0'; ++length);
+    		return std::string(OrderID_, length);
+    	}
+    
+    	constexpr auto &set_OrderID(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -102,23 +109,22 @@ class ExecutionReport
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_OrderID(std::string_view value) noexcept
+    	auto &set_OrderID(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(OrderID_size(), value.size());
+    		// auto size = std::min(OrderID_size(), value.size());
     		std::memcpy(OrderID_, value.data(), OrderID_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -132,41 +138,48 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t ExecID_offset() noexcept
-    	{ 
-    		return OrderID_offset() + OrderID_size(); 
+    	{
+    		return OrderID_offset() + OrderID_size();
     	}
     
     	static constexpr std::size_t ExecID_id() noexcept
-    	{ 
-    		return 17; 
-    	}
-    	
-    	static constexpr const char* ExecID_name() noexcept
-    	{ 
-    		return "ExecID"; 
+    	{
+    		return 17;
     	}
     
-    	constexpr char* get_ExecID() noexcept
-    	{ 
+    	static constexpr const char *ExecID_name() noexcept
+    	{
+    		return "ExecID";
+    	}
+    
+    	constexpr char *get_ExecID() noexcept
+    	{
     		return ExecID_;
     	}
     
-    	constexpr const char* get_ExecID() const noexcept
-    	{ 
+    	constexpr const char *get_ExecID() const noexcept
+    	{
     		return ExecID_;
     	}
     
-    	constexpr std::string_view get_ExecID_str() noexcept
-    	{ 
+    	constexpr std::string_view get_ExecID_view() noexcept
+    	{
     		return std::string_view(ExecID_, 8);
     	}
     
-    	constexpr const std::string_view get_ExecID_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_ExecID_view() const noexcept
+    	{
     		return std::string_view(ExecID_, 8);
     	}
     
-    	constexpr auto& set_ExecID(const char* value) noexcept
+    	const std::string get_ExecID_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(ExecID_ + length) != '\0'; ++length);
+    		return std::string(ExecID_, length);
+    	}
+    
+    	constexpr auto &set_ExecID(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -176,23 +189,22 @@ class ExecutionReport
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_ExecID(std::string_view value) noexcept
+    	auto &set_ExecID(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(ExecID_size(), value.size());
+    		// auto size = std::min(ExecID_size(), value.size());
     		std::memcpy(ExecID_, value.data(), ExecID_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)
@@ -282,41 +294,48 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t Symbol_offset() noexcept
-    	{ 
-    		return OrdStatus_offset() + OrdStatus_size(); 
+    	{
+    		return OrdStatus_offset() + OrdStatus_size();
     	}
     
     	static constexpr std::size_t Symbol_id() noexcept
-    	{ 
-    		return 55; 
-    	}
-    	
-    	static constexpr const char* Symbol_name() noexcept
-    	{ 
-    		return "Symbol"; 
+    	{
+    		return 55;
     	}
     
-    	constexpr char* get_Symbol() noexcept
-    	{ 
+    	static constexpr const char *Symbol_name() noexcept
+    	{
+    		return "Symbol";
+    	}
+    
+    	constexpr char *get_Symbol() noexcept
+    	{
     		return Symbol_;
     	}
     
-    	constexpr const char* get_Symbol() const noexcept
-    	{ 
+    	constexpr const char *get_Symbol() const noexcept
+    	{
     		return Symbol_;
     	}
     
-    	constexpr std::string_view get_Symbol_str() noexcept
-    	{ 
+    	constexpr std::string_view get_Symbol_view() noexcept
+    	{
     		return std::string_view(Symbol_, 8);
     	}
     
-    	constexpr const std::string_view get_Symbol_str() const noexcept
-    	{ 
+    	constexpr const std::string_view get_Symbol_view() const noexcept
+    	{
     		return std::string_view(Symbol_, 8);
     	}
     
-    	constexpr auto& set_Symbol(const char* value) noexcept
+    	const std::string get_Symbol_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 8 && *(Symbol_ + length) != '\0'; ++length);
+    		return std::string(Symbol_, length);
+    	}
+    
+    	constexpr auto &set_Symbol(const char *value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
@@ -326,23 +345,22 @@ class ExecutionReport
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
     
-    	auto& set_Symbol(std::string_view value) noexcept
+    	auto &set_Symbol(std::string_view value) noexcept
     	{
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic push
     	#pragma GCC diagnostic ignored "-Wstringop-overflow"
     	#endif
-    		//auto size = std::min(Symbol_size(), value.size());
+    		// auto size = std::min(Symbol_size(), value.size());
     		std::memcpy(Symbol_, value.data(), Symbol_size());
     		return *this;
     	#if defined(__GNUG__)
     	#pragma GCC diagnostic pop
-    	#endif	
+    	#endif
     	}
-    
     
     private:
     	#pragma pack(push, 1)

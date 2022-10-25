@@ -8,7 +8,7 @@ set (py_cmd "${fast_sbe_dir}/FastSBE.py")
 set (log_file "${CMAKE_CURRENT_LIST_DIR}/log.txt")
 set (schema_file "${CMAKE_CURRENT_LIST_DIR}/example-schema.xml")
 set (out_folder "${CMAKE_CURRENT_LIST_DIR}/generated")
-set (override_namespace "test::sbe")
+set (override_namespace "sbetool")
 
 message("py_cmd is ${py_cmd} ${log_file} ${schema_file} ${out_folder} ${override_namespace}" )
 
@@ -21,13 +21,18 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/generated)
 
-add_executable(decode_sbe_v2 decode_sbe_v2.cpp 
-    ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
-)
-
-target_link_libraries(decode_sbe_v2 GTest::gtest GTest::gtest_main)
-
-add_test(NAME decode_sbe_v2 COMMAND decode_sbe_v2)
+file( GLOB TEST_SOURCES *.cpp )
+foreach( test_sourcefile ${TEST_SOURCES} )
+    get_filename_component(EXECUTABLE_NAME ${test_sourcefile} NAME_WE)
+    string( REPLACE ".cpp" "" ${EXECUTABLE_NAME} ${test_sourcefile} )    
+    #add_executable( ${test_name} ${test_sourcefile} )
+    message("add_executable ${EXECUTABLE_NAME} ${test_sourcefile}") 
+    add_executable(${EXECUTABLE_NAME} ${test_sourcefile} 
+        ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h
+    )    
+    target_link_libraries(${EXECUTABLE_NAME} GTest::gtest GTest::gtest_main)
+    add_test(NAME ${EXECUTABLE_NAME} COMMAND ${EXECUTABLE_NAME})
+endforeach( test_sourcefile ${TEST_SOURCES} )
 
 add_custom_target(
     sbe_v2_target ALL
