@@ -39,7 +39,7 @@ jobs:
       working-directory: ${{github.workspace}}/build/tests/benchmark
       run: ./validation_test
       
-    - name: Benchmark
-      working-directory: ${{github.workspace}}/build/tests/benchmark
+    #- name: Benchmark
+      #working-directory: ${{github.workspace}}/build/tests/benchmark
       #run: ./benchmark_test      
       
