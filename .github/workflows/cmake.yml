@@ -41,5 +41,5 @@ jobs:
       
     - name: Benchmark
       working-directory: ${{github.workspace}}/build/tests/benchmark
-      run: ./benchmark_test      
+      #run: ./benchmark_test      
       
