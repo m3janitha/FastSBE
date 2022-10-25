@@ -3,6 +3,7 @@
 #include<string>
 #include<string_view>
 #include<ostream>
+#include<cstring>
 #include<execTypeEnum.h>
 #include<ordStatusEnum.h>
 #include<MONTH_YEAR.h>

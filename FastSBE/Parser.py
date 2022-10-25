@@ -295,7 +295,7 @@ class Parser:
 		handler = ContentHandler()
 		self.generate_composite_class(composite, handler)
 
-		system_includes = ["cstdint", "string", "string_view", "ostream"]
+		system_includes = ["cstdint", "string", "string_view", "ostream", "cstring"]
 		indentation = Indentaion(0)
 		FileGen(indentation = indentation, out_folder = self.out_folder\
 			, file_name = composite_name, namespace = self.namespace\
@@ -605,7 +605,7 @@ class Parser:
 		handler = ContentHandler()
 		self.generate_message(message, handler)
 
-		system_includes = ["cstdint", "string", "string_view", "ostream"]
+		system_includes = ["cstdint", "string", "string_view", "ostream", "cstring"]
 		indentation = Indentaion(0)
 		FileGen(indentation = indentation, out_folder = self.out_folder\
 			, file_name = message_name, namespace = self.namespace\

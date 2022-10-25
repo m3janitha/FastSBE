@@ -3,6 +3,7 @@
 #include<string>
 #include<string_view>
 #include<ostream>
+#include<cstring>
 #include<businessRejectReasonEnum.h>
 #include<DATA.h>
 
