@@ -792,8 +792,8 @@ inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, T
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
 		auto &g = group.get(i);
-	os << g.FillPx_name() << ": " << g.get_FillPx() << " ";
-	os << g.FillQty_name() << ": " << g.get_FillQty() << " ";
+		os << g.FillPx_name() << ": " << g.get_FillPx() << " ";
+		os << g.FillQty_name() << ": " << g.get_FillQty() << " ";
 	}
 	return os;
 }

@@ -1440,9 +1440,9 @@ inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, T
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
 		auto &g = group.get(i);
-	os << g.PartyID_name() << ": " << g.get_PartyID() << " ";
-	os << g.PartyIDSource_name() << ": " << g.get_PartyIDSource() << " ";
-	os << g.PartyRole_name() << ": " << g.get_PartyRole() << " ";
+		os << g.PartyID_name() << ": " << g.get_PartyID() << " ";
+		os << g.PartyIDSource_name() << ": " << g.get_PartyIDSource() << " ";
+		os << g.PartyRole_name() << ": " << g.get_PartyRole() << " ";
 	}
 	return os;
 }
@@ -1453,8 +1453,8 @@ inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, T
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
 		auto &g = group.get(i);
-	os << g.AllocAccount_name() << ": " << g.get_AllocAccount() << " ";
-	os << g.AllocShares_name() << ": " << g.get_AllocShares() << " ";
+		os << g.AllocAccount_name() << ": " << g.get_AllocAccount() << " ";
+		os << g.AllocShares_name() << ": " << g.get_AllocShares() << " ";
 	}
 	return os;
 }
@@ -1465,7 +1465,7 @@ inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, T
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
 		auto &g = group.get(i);
-	os << g.TradingSessionID_name() << ": " << g.get_TradingSessionID() << " ";
+		os << g.TradingSessionID_name() << ": " << g.get_TradingSessionID() << " ";
 	}
 	return os;
 }
