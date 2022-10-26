@@ -375,31 +375,30 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t MaturityMonthYear_offset() noexcept
-    	{ 
-    		return Symbol_offset() + Symbol_size(); 
+    	{
+    		return Symbol_offset() + Symbol_size();
     	}
     
     	static constexpr std::size_t MaturityMonthYear_id() noexcept
-    	{ 
-    		return 200; 
+    	{
+    		return 200;
     	}
-    	
-    	static constexpr const char* MaturityMonthYear_name() noexcept
-    	{ 
-    		return "MaturityMonthYear"; 
+    
+    	static constexpr const char *MaturityMonthYear_name() noexcept
+    	{
+    		return "MaturityMonthYear";
     	}
-    	
-    	constexpr const MONTH_YEAR& get_MaturityMonthYear() const noexcept
-    	{ 
-    		return MaturityMonthYear_;
-    	}
-    	
-    	constexpr MONTH_YEAR& get_MaturityMonthYear() noexcept
+    
+    	constexpr const MONTH_YEAR &get_MaturityMonthYear() const noexcept
     	{
     		return MaturityMonthYear_;
-    
     	}
-    	constexpr auto& set_MaturityMonthYear(MONTH_YEAR& value) noexcept
+    
+    	constexpr MONTH_YEAR &get_MaturityMonthYear() noexcept
+    	{
+    		return MaturityMonthYear_;
+    	}
+    	constexpr auto &set_MaturityMonthYear(MONTH_YEAR &value) noexcept
     	{
     		MaturityMonthYear_ = value;
     		return *this;
@@ -456,31 +455,30 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t LeavesQty_offset() noexcept
-    	{ 
-    		return Side_offset() + Side_size(); 
+    	{
+    		return Side_offset() + Side_size();
     	}
     
     	static constexpr std::size_t LeavesQty_id() noexcept
-    	{ 
-    		return 151; 
+    	{
+    		return 151;
     	}
-    	
-    	static constexpr const char* LeavesQty_name() noexcept
-    	{ 
-    		return "LeavesQty"; 
+    
+    	static constexpr const char *LeavesQty_name() noexcept
+    	{
+    		return "LeavesQty";
     	}
-    	
-    	constexpr const qtyEncoding& get_LeavesQty() const noexcept
-    	{ 
-    		return LeavesQty_;
-    	}
-    	
-    	constexpr qtyEncoding& get_LeavesQty() noexcept
+    
+    	constexpr const qtyEncoding &get_LeavesQty() const noexcept
     	{
     		return LeavesQty_;
-    
     	}
-    	constexpr auto& set_LeavesQty(qtyEncoding& value) noexcept
+    
+    	constexpr qtyEncoding &get_LeavesQty() noexcept
+    	{
+    		return LeavesQty_;
+    	}
+    	constexpr auto &set_LeavesQty(qtyEncoding &value) noexcept
     	{
     		LeavesQty_ = value;
     		return *this;
@@ -499,31 +497,30 @@ class ExecutionReport
     	}
     
     	static constexpr std::size_t CumQty_offset() noexcept
-    	{ 
-    		return LeavesQty_offset() + LeavesQty_size(); 
+    	{
+    		return LeavesQty_offset() + LeavesQty_size();
     	}
     
     	static constexpr std::size_t CumQty_id() noexcept
-    	{ 
-    		return 14; 
+    	{
+    		return 14;
     	}
-    	
-    	static constexpr const char* CumQty_name() noexcept
-    	{ 
-    		return "CumQty"; 
+    
+    	static constexpr const char *CumQty_name() noexcept
+    	{
+    		return "CumQty";
     	}
-    	
-    	constexpr const qtyEncoding& get_CumQty() const noexcept
-    	{ 
-    		return CumQty_;
-    	}
-    	
-    	constexpr qtyEncoding& get_CumQty() noexcept
+    
+    	constexpr const qtyEncoding &get_CumQty() const noexcept
     	{
     		return CumQty_;
-    
     	}
-    	constexpr auto& set_CumQty(qtyEncoding& value) noexcept
+    
+    	constexpr qtyEncoding &get_CumQty() noexcept
+    	{
+    		return CumQty_;
+    	}
+    	constexpr auto &set_CumQty(qtyEncoding &value) noexcept
     	{
     		CumQty_ = value;
     		return *this;
@@ -595,12 +592,12 @@ class ExecutionReport
     	char buffer_[1024]{};
     	#pragma pack(pop)
     
-    	const char* buffer() const
+    	const char *buffer() const
     	{
     		return buffer_;
     	}
     
-    	char* buffer()
+    	char *buffer()
     	{
     		return buffer_;
     	}
@@ -626,31 +623,30 @@ class ExecutionReport
             	}
             
             	static constexpr std::size_t FillPx_offset() noexcept
-            	{ 
-            		return 0; 
+            	{
+            		return 0;
             	}
             
             	static constexpr std::size_t FillPx_id() noexcept
-            	{ 
-            		return 1364; 
+            	{
+            		return 1364;
             	}
-            	
-            	static constexpr const char* FillPx_name() noexcept
-            	{ 
-            		return "FillPx"; 
+            
+            	static constexpr const char *FillPx_name() noexcept
+            	{
+            		return "FillPx";
             	}
-            	
-            	constexpr const optionalDecimalEncoding& get_FillPx() const noexcept
-            	{ 
-            		return FillPx_;
-            	}
-            	
-            	constexpr optionalDecimalEncoding& get_FillPx() noexcept
+            
+            	constexpr const optionalDecimalEncoding &get_FillPx() const noexcept
             	{
             		return FillPx_;
-            
             	}
-            	constexpr auto& set_FillPx(optionalDecimalEncoding& value) noexcept
+            
+            	constexpr optionalDecimalEncoding &get_FillPx() noexcept
+            	{
+            		return FillPx_;
+            	}
+            	constexpr auto &set_FillPx(optionalDecimalEncoding &value) noexcept
             	{
             		FillPx_ = value;
             		return *this;
@@ -669,31 +665,30 @@ class ExecutionReport
             	}
             
             	static constexpr std::size_t FillQty_offset() noexcept
-            	{ 
-            		return FillPx_offset() + FillPx_size(); 
+            	{
+            		return FillPx_offset() + FillPx_size();
             	}
             
             	static constexpr std::size_t FillQty_id() noexcept
-            	{ 
-            		return 1365; 
+            	{
+            		return 1365;
             	}
-            	
-            	static constexpr const char* FillQty_name() noexcept
-            	{ 
-            		return "FillQty"; 
+            
+            	static constexpr const char *FillQty_name() noexcept
+            	{
+            		return "FillQty";
             	}
-            	
-            	constexpr const qtyEncoding& get_FillQty() const noexcept
-            	{ 
-            		return FillQty_;
-            	}
-            	
-            	constexpr qtyEncoding& get_FillQty() noexcept
+            
+            	constexpr const qtyEncoding &get_FillQty() const noexcept
             	{
             		return FillQty_;
-            
             	}
-            	constexpr auto& set_FillQty(qtyEncoding& value) noexcept
+            
+            	constexpr qtyEncoding &get_FillQty() noexcept
+            	{
+            		return FillQty_;
+            	}
+            	constexpr auto &set_FillQty(qtyEncoding &value) noexcept
             	{
             		FillQty_ = value;
             		return *this;
@@ -790,25 +785,21 @@ class ExecutionReport
     		return group;	
     	}
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::ExecutionReport::FillsGrp& group)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::ExecutionReport::FillsGrp &group)
 {
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
-		auto& g = group.get(i);
-
-		os << g.FillPx_name() << ": " << g.get_FillPx() << " ";
-		os << g.FillQty_name() << ": " << g.get_FillQty() << " ";
+		auto &g = group.get(i);
+	os << g.FillPx_name() << ": " << g.get_FillPx() << " ";
+	os << g.FillQty_name() << ": " << g.get_FillQty() << " ";
 	}
 	return os;
-};
+}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::ExecutionReport& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::ExecutionReport &msg)
 {
 	os << msg.OrderID_name() << ": " << msg.get_OrderID() << " ";
 	os << msg.ExecID_name() << ": " << msg.get_ExecID() << " ";
@@ -822,5 +813,5 @@ inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, T
 	os << msg.TradeDate_name() << ": " << msg.get_TradeDate() << " ";
 	os << msg.FillsGrp_name() << ": " << msg.get_FillsGrp() << " ";
 	return os;
-};
-
+}
+}

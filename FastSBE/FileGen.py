@@ -136,8 +136,8 @@ class FileGen:
 
 
 	def gen_file_end(self):
-		self.gen_namespace_end()
 		self.gen_ostream()
+		self.gen_namespace_end()		
 
 
 	def __init__(self, indentation, out_folder, file_name, namespace\

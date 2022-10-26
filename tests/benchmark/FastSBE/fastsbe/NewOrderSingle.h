@@ -401,31 +401,30 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t OrderQty_offset() noexcept
-    	{ 
-    		return TransactTime_offset() + TransactTime_size(); 
+    	{
+    		return TransactTime_offset() + TransactTime_size();
     	}
     
     	static constexpr std::size_t OrderQty_id() noexcept
-    	{ 
-    		return 38; 
+    	{
+    		return 38;
     	}
-    	
-    	static constexpr const char* OrderQty_name() noexcept
-    	{ 
-    		return "OrderQty"; 
+    
+    	static constexpr const char *OrderQty_name() noexcept
+    	{
+    		return "OrderQty";
     	}
-    	
-    	constexpr const qtyEncoding& get_OrderQty() const noexcept
-    	{ 
-    		return OrderQty_;
-    	}
-    	
-    	constexpr qtyEncoding& get_OrderQty() noexcept
+    
+    	constexpr const qtyEncoding &get_OrderQty() const noexcept
     	{
     		return OrderQty_;
-    
     	}
-    	constexpr auto& set_OrderQty(qtyEncoding& value) noexcept
+    
+    	constexpr qtyEncoding &get_OrderQty() noexcept
+    	{
+    		return OrderQty_;
+    	}
+    	constexpr auto &set_OrderQty(qtyEncoding &value) noexcept
     	{
     		OrderQty_ = value;
     		return *this;
@@ -482,31 +481,30 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t Price_offset() noexcept
-    	{ 
-    		return OrdType_offset() + OrdType_size(); 
+    	{
+    		return OrdType_offset() + OrdType_size();
     	}
     
     	static constexpr std::size_t Price_id() noexcept
-    	{ 
-    		return 44; 
+    	{
+    		return 44;
     	}
-    	
-    	static constexpr const char* Price_name() noexcept
-    	{ 
-    		return "Price"; 
+    
+    	static constexpr const char *Price_name() noexcept
+    	{
+    		return "Price";
     	}
-    	
-    	constexpr const optionalDecimalEncoding& get_Price() const noexcept
-    	{ 
-    		return Price_;
-    	}
-    	
-    	constexpr optionalDecimalEncoding& get_Price() noexcept
+    
+    	constexpr const optionalDecimalEncoding &get_Price() const noexcept
     	{
     		return Price_;
-    
     	}
-    	constexpr auto& set_Price(optionalDecimalEncoding& value) noexcept
+    
+    	constexpr optionalDecimalEncoding &get_Price() noexcept
+    	{
+    		return Price_;
+    	}
+    	constexpr auto &set_Price(optionalDecimalEncoding &value) noexcept
     	{
     		Price_ = value;
     		return *this;
@@ -525,31 +523,30 @@ class NewOrderSingle
     	}
     
     	static constexpr std::size_t StopPx_offset() noexcept
-    	{ 
-    		return Price_offset() + Price_size(); 
+    	{
+    		return Price_offset() + Price_size();
     	}
     
     	static constexpr std::size_t StopPx_id() noexcept
-    	{ 
-    		return 99; 
+    	{
+    		return 99;
     	}
-    	
-    	static constexpr const char* StopPx_name() noexcept
-    	{ 
-    		return "StopPx"; 
+    
+    	static constexpr const char *StopPx_name() noexcept
+    	{
+    		return "StopPx";
     	}
-    	
-    	constexpr const optionalDecimalEncoding& get_StopPx() const noexcept
-    	{ 
-    		return StopPx_;
-    	}
-    	
-    	constexpr optionalDecimalEncoding& get_StopPx() noexcept
+    
+    	constexpr const optionalDecimalEncoding &get_StopPx() const noexcept
     	{
     		return StopPx_;
-    
     	}
-    	constexpr auto& set_StopPx(optionalDecimalEncoding& value) noexcept
+    
+    	constexpr optionalDecimalEncoding &get_StopPx() noexcept
+    	{
+    		return StopPx_;
+    	}
+    	constexpr auto &set_StopPx(optionalDecimalEncoding &value) noexcept
     	{
     		StopPx_ = value;
     		return *this;
@@ -561,12 +558,12 @@ class NewOrderSingle
     	char buffer_[1024]{};
     	#pragma pack(pop)
     
-    	const char* buffer() const
+    	const char *buffer() const
     	{
     		return buffer_;
     	}
     
-    	char* buffer()
+    	char *buffer()
     	{
     		return buffer_;
     	}
@@ -926,31 +923,30 @@ class NewOrderSingle
             	}
             
             	static constexpr std::size_t AllocShares_offset() noexcept
-            	{ 
-            		return AllocAccount_offset() + AllocAccount_size(); 
+            	{
+            		return AllocAccount_offset() + AllocAccount_size();
             	}
             
             	static constexpr std::size_t AllocShares_id() noexcept
-            	{ 
-            		return 80; 
+            	{
+            		return 80;
             	}
-            	
-            	static constexpr const char* AllocShares_name() noexcept
-            	{ 
-            		return "AllocShares"; 
+            
+            	static constexpr const char *AllocShares_name() noexcept
+            	{
+            		return "AllocShares";
             	}
-            	
-            	constexpr const qtyEncoding& get_AllocShares() const noexcept
-            	{ 
-            		return AllocShares_;
-            	}
-            	
-            	constexpr qtyEncoding& get_AllocShares() noexcept
+            
+            	constexpr const qtyEncoding &get_AllocShares() const noexcept
             	{
             		return AllocShares_;
-            
             	}
-            	constexpr auto& set_AllocShares(qtyEncoding& value) noexcept
+            
+            	constexpr qtyEncoding &get_AllocShares() noexcept
+            	{
+            		return AllocShares_;
+            	}
+            	constexpr auto &set_AllocShares(qtyEncoding &value) noexcept
             	{
             		AllocShares_ = value;
             		return *this;
@@ -1437,53 +1433,45 @@ class NewOrderSingle
     		return data;	
     	}
 };
+
+template <class CharT, class Traits = std::char_traits<CharT>>
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::NewOrderSingle::PartiesGrp &group)
+{
+	for (auto i = 0; i < group.get_numInGroup(); i++)
+	{
+		auto &g = group.get(i);
+	os << g.PartyID_name() << ": " << g.get_PartyID() << " ";
+	os << g.PartyIDSource_name() << ": " << g.get_PartyIDSource() << " ";
+	os << g.PartyRole_name() << ": " << g.get_PartyRole() << " ";
+	}
+	return os;
 }
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::NewOrderSingle::PartiesGrp& group)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::NewOrderSingle::AllocsGrp &group)
 {
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
-		auto& g = group.get(i);
-
-		os << g.PartyID_name() << ": " << g.get_PartyID() << " ";
-		os << g.PartyIDSource_name() << ": " << g.get_PartyIDSource() << " ";
-		os << g.PartyRole_name() << ": " << g.get_PartyRole() << " ";
+		auto &g = group.get(i);
+	os << g.AllocAccount_name() << ": " << g.get_AllocAccount() << " ";
+	os << g.AllocShares_name() << ": " << g.get_AllocShares() << " ";
 	}
 	return os;
-};
+}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::NewOrderSingle::AllocsGrp& group)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::NewOrderSingle::TradingSessionsGrp &group)
 {
 	for (auto i = 0; i < group.get_numInGroup(); i++)
 	{
-		auto& g = group.get(i);
-
-		os << g.AllocAccount_name() << ": " << g.get_AllocAccount() << " ";
-		os << g.AllocShares_name() << ": " << g.get_AllocShares() << " ";
+		auto &g = group.get(i);
+	os << g.TradingSessionID_name() << ": " << g.get_TradingSessionID() << " ";
 	}
 	return os;
-};
+}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::NewOrderSingle::TradingSessionsGrp& group)
-{
-	for (auto i = 0; i < group.get_numInGroup(); i++)
-	{
-		auto& g = group.get(i);
-
-		os << g.TradingSessionID_name() << ": " << g.get_TradingSessionID() << " ";
-	}
-	return os;
-};
-
-template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::NewOrderSingle& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::NewOrderSingle &msg)
 {
 	os << msg.ClOrdId_name() << ": " << msg.get_ClOrdId() << " ";
 	os << msg.Account_name() << ": " << msg.get_Account() << " ";
@@ -1500,5 +1488,5 @@ inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, T
 	os << msg.Text_name() << ": " << msg.get_Text().get_str() << " ";
 	os << msg.ClearingFirm_name() << ": " << msg.get_ClearingFirm().get_str() << " ";
 	return os;
-};
-
+}
+}

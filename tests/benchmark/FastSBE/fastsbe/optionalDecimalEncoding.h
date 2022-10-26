@@ -131,14 +131,12 @@ class optionalDecimalEncoding
     	}
     
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::optionalDecimalEncoding& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::optionalDecimalEncoding &msg)
 {
 	os << msg.mantissa_name() << ": " << msg.get_mantissa() << " ";
 	os << msg.exponent_name() << ": " << msg.get_exponent() << " ";
 	return os;
-};
-
+}
+}

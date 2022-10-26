@@ -43,12 +43,12 @@ class businessRejectReasonEnum
         }
     }
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::businessRejectReasonEnum::Value val)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::businessRejectReasonEnum::Value val)
 {
     os << fastsbe::businessRejectReasonEnum::to_string(val);
     return os;
+}
+
 }

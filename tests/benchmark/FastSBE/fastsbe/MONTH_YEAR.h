@@ -269,16 +269,14 @@ class MONTH_YEAR
     	}
     
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::MONTH_YEAR& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::MONTH_YEAR &msg)
 {
 	os << msg.year_name() << ": " << msg.get_year() << " ";
 	os << msg.month_name() << ": " << msg.get_month() << " ";
 	os << msg.day_name() << ": " << msg.get_day() << " ";
 	os << msg.week_name() << ": " << msg.get_week() << " ";
 	return os;
-};
-
+}
+}

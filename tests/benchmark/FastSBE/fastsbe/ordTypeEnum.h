@@ -40,12 +40,12 @@ class ordTypeEnum
         }
     }
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::ordTypeEnum::Value val)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::ordTypeEnum::Value val)
 {
     os << fastsbe::ordTypeEnum::to_string(val);
     return os;
+}
+
 }

@@ -175,14 +175,12 @@ class DATA
     	}
     
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::DATA& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::DATA &msg)
 {
 	os << msg.length_name() << ": " << msg.get_length() << " ";
 	os << msg.varData_name() << ": " << msg.get_varData() << " ";
 	return os;
-};
-
+}
+}

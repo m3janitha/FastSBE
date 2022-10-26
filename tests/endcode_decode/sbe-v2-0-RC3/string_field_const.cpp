@@ -7,7 +7,7 @@
 
 namespace sbetool
 {
-    TEST(string, field_info)
+    TEST(string_const, field_info)
     {
         TestMessage msg{};
         EXPECT_EQ(msg.SessionID_size(), 0);
@@ -16,7 +16,7 @@ namespace sbetool
         EXPECT_EQ(msg.SessionID_name(), "SessionID");
     }
 
-    TEST(string, get_field)
+    TEST(string_const, get_field)
     {
         TestMessage msg{};
         const char* SessionID = "ABCDEFGH";
@@ -26,7 +26,7 @@ namespace sbetool
         EXPECT_EQ(msg.get_SessionID_string(), std::string(SessionID));
     }
 
-    TEST(string, get_field_const)
+    TEST(string_const, get_field_const)
     {
         const TestMessage msg{};
         const char* SessionID = "ABCDEFGH";

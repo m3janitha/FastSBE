@@ -37,12 +37,12 @@ class PartyRoleEnum
         }
     }
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::PartyRoleEnum::Value val)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::PartyRoleEnum::Value val)
 {
     os << fastsbe::PartyRoleEnum::to_string(val);
     return os;
+}
+
 }

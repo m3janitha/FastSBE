@@ -163,12 +163,12 @@ class BusinessMessageReject
     	char buffer_[1024]{};
     	#pragma pack(pop)
     
-    	const char* buffer() const
+    	const char *buffer() const
     	{
     		return buffer_;
     	}
     
-    	char* buffer()
+    	char *buffer()
     	{
     		return buffer_;
     	}
@@ -280,15 +280,13 @@ class BusinessMessageReject
     		return data;	
     	}
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::BusinessMessageReject& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::BusinessMessageReject &msg)
 {
 	os << msg.BusinesRejectRefId_name() << ": " << msg.get_BusinesRejectRefId() << " ";
 	os << msg.BusinessRejectReason_name() << ": " << msg.get_BusinessRejectReason() << " ";
 	os << msg.Text_name() << ": " << msg.get_Text().get_str() << " ";
 	return os;
-};
-
+}
+}

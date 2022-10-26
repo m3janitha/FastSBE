@@ -159,14 +159,12 @@ class groupSizeEncoding
     	}
     
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::groupSizeEncoding& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::groupSizeEncoding &msg)
 {
 	os << msg.blockLength_name() << ": " << msg.get_blockLength() << " ";
 	os << msg.numInGroup_name() << ": " << msg.get_numInGroup() << " ";
 	return os;
-};
-
+}
+}

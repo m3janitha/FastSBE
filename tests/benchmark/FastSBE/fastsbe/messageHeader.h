@@ -269,16 +269,14 @@ class messageHeader
     	}
     
 };
-}
 
 template <class CharT, class Traits = std::char_traits<CharT>>
-inline std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os
-    , const fastsbe::messageHeader& msg)
+inline std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os, const fastsbe::messageHeader &msg)
 {
 	os << msg.blockLength_name() << ": " << msg.get_blockLength() << " ";
 	os << msg.templateId_name() << ": " << msg.get_templateId() << " ";
 	os << msg.schemaId_name() << ": " << msg.get_schemaId() << " ";
 	os << msg.version_name() << ": " << msg.get_version() << " ";
 	return os;
-};
-
+}
+}
