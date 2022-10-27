@@ -11,7 +11,7 @@ namespace sbetool
     {
         TestMessage msg{};
         EXPECT_EQ(msg.SessionID_size(), 0);
-        EXPECT_EQ(msg.SessionID_offset(), 8);
+        EXPECT_EQ(msg.SessionID_offset(), 10);
         EXPECT_EQ(msg.SessionID_id(), 1);
         EXPECT_EQ(msg.SessionID_name(), "SessionID");
     }
