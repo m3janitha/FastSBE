@@ -306,7 +306,12 @@ class NewOrderSingle
     	{ 
     		return Symbol_offset() + Symbol_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t Side_id() noexcept
+    	{ 
+    		return 54; 
+    	}
+    
     	static constexpr const char* Side_name() noexcept
     	{ 
     		return "Side"; 
@@ -314,7 +319,7 @@ class NewOrderSingle
     
     	static constexpr sideEnum::Value Side_null_value() noexcept
     	{
-    		return sideEnum::Value::Null;
+    		return sideEnum::Value::nullValue;
     	}
     
     	constexpr sideEnum::Value get_Side() const noexcept
@@ -446,7 +451,12 @@ class NewOrderSingle
     	{ 
     		return OrderQty_offset() + OrderQty_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t OrdType_id() noexcept
+    	{ 
+    		return 40; 
+    	}
+    
     	static constexpr const char* OrdType_name() noexcept
     	{ 
     		return "OrdType"; 
@@ -454,7 +464,7 @@ class NewOrderSingle
     
     	static constexpr ordTypeEnum::Value OrdType_null_value() noexcept
     	{
-    		return ordTypeEnum::Value::Null;
+    		return ordTypeEnum::Value::nullValue;
     	}
     
     	constexpr ordTypeEnum::Value get_OrdType() const noexcept
@@ -672,7 +682,12 @@ class NewOrderSingle
             	{ 
             		return PartyID_offset() + PartyID_size(); 
             	}
-            	
+            
+            	static constexpr std::size_t PartyIDSource_id() noexcept
+            	{ 
+            		return 447; 
+            	}
+            
             	static constexpr const char* PartyIDSource_name() noexcept
             	{ 
             		return "PartyIDSource"; 
@@ -680,7 +695,7 @@ class NewOrderSingle
             
             	static constexpr PartyIDSourceEnum::Value PartyIDSource_null_value() noexcept
             	{
-            		return PartyIDSourceEnum::Value::Null;
+            		return PartyIDSourceEnum::Value::nullValue;
             	}
             
             	constexpr PartyIDSourceEnum::Value get_PartyIDSource() const noexcept
@@ -710,7 +725,12 @@ class NewOrderSingle
             	{ 
             		return PartyIDSource_offset() + PartyIDSource_size(); 
             	}
-            	
+            
+            	static constexpr std::size_t PartyRole_id() noexcept
+            	{ 
+            		return 452; 
+            	}
+            
             	static constexpr const char* PartyRole_name() noexcept
             	{ 
             		return "PartyRole"; 
@@ -718,7 +738,7 @@ class NewOrderSingle
             
             	static constexpr PartyRoleEnum::Value PartyRole_null_value() noexcept
             	{
-            		return PartyRoleEnum::Value::Null;
+            		return PartyRoleEnum::Value::nullValue;
             	}
             
             	constexpr PartyRoleEnum::Value get_PartyRole() const noexcept
@@ -822,6 +842,7 @@ class NewOrderSingle
     		group.header_.set_numInGroup(count);
     		return group;	
     	}
+    
     public:
     
     class AllocsGrp
@@ -1042,6 +1063,7 @@ class NewOrderSingle
     		group.header_.set_numInGroup(count);
     		return group;	
     	}
+    
     public:
     
     class TradingSessionsGrp
@@ -1220,6 +1242,7 @@ class NewOrderSingle
     		group.header_.set_numInGroup(count);
     		return group;	
     	}
+    
     public:
     
     class Text
@@ -1326,6 +1349,7 @@ class NewOrderSingle
     		std::memcpy(data.get(), value.data(), value.size());
     		return data;	
     	}
+    	
     public:
     
     class ClearingFirm
@@ -1432,6 +1456,7 @@ class NewOrderSingle
     		std::memcpy(data.get(), value.data(), value.size());
     		return data;	
     	}
+    	
 };
 
 template <class CharT, class Traits = std::char_traits<CharT>>

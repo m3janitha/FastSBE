@@ -53,3 +53,4 @@ public:
 		group.header_.set_S_NUM_VAR_DATA_FIELDS_NAME(0);	// TODO
 		return group;	
 	}
+

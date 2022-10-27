@@ -150,6 +150,18 @@ class Parser:
 			logging.error('type or primitiveType is not defined in %s', field_attrib['name']) 
 			exit()
 
+	def get_enum_null_value(self, enum_attrib):
+		#defined anywhere in the fields
+		enum_name = enum_attrib['name']
+		xpath = ".//*[@name='" + enum_name + "']"
+		field = self.root.find(xpath)
+
+		primitive_encoding_type = self.get_primitive_encoding_type(enum_attrib)
+		(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_encoding_type)
+		if 'nullValue' in field:
+			null_value = field['nullValue']
+
+		return 'nullValue', null_value
 
 	def generate_enum(self, type):
 		enum_values = []
@@ -161,8 +173,7 @@ class Parser:
 		#if type is user defined
 		enum_attrib = self.update_enum_attrib(type = type)
 		primitive_encoding_type = self.get_primitive_encoding_type(enum_attrib)
-		(min_value, max_value, null_value) = self.get_numeric_attrib_of_primitive(primitive_encoding_type)
-		enum_values.append(('Null', null_value))
+		enum_values.append(self.get_enum_null_value(enum_attrib))
 		handler = ContentHandler()
 		enum_file = EnumClassGen(handler, enum_name, Metadata.c_field_types[primitive_encoding_type]\
 			, enum_values, self.namespace)

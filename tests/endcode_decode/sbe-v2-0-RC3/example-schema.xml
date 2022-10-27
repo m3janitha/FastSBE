@@ -11,6 +11,7 @@
         <type name="idString16" length="16" primitiveType="char" characterEncoding="ISO_8859_1" />
         <type name="intEnumEncoding" primitiveType="uint8" />
         <type name="currency" length="3" primitiveType="char" description="ISO 4217" />
+        <type name="Quantity" primitiveType="uint64" description="Test field. Quantity" />
         <composite name="DATA">
             <type name="length" primitiveType="uint16" />
             <type name="varData" length="0" primitiveType="char" />
@@ -47,6 +48,11 @@
             <type name="time" primitiveType="uint64" />
             <type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond" />
         </composite>
+        <composite name="TestComposite" description="UTC timestamp with nanosecond precision">
+            <type name="PartyIDSource" id="447" type="PartyIDSourceEnum" semanticType="char" />
+            <type name="OptionalPartyIDSource" id="448" type="PartyIDSourceEnum" semanticType="char" presence="optional" nullValue="250"/>
+            <type name="ConstPartyIDSource" id="449" type="PartyIDSourceEnum" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
+        </composite>        
         <enum name="TimeUnit" encodingType="uint8">
             <validValue name="second">0</validValue>
             <validValue name="millisecond">3</validValue>
@@ -149,8 +155,14 @@
             <data name="ClearingFirm" id="439" type="DATA" semanticType="data" />
         </sbe:message>
         <sbe:message name="TestMessage" id="100" blockLength="54" semanticType="D">
+            <field name="TestComposite" id="38" type="TestComposite" offset="0" semanticType="Qty" />
             <field name="ClOrdId" id="11" type="idString" offset="0" semanticType="String" />
             <field name="SessionID" id="1" type="idString" offset="8" semanticType="String" presence="constant">ABCDEFGH</field>
+            <field name="PartyIDSource" id="447" type="PartyIDSourceEnum" offset="8" semanticType="char" />
+            <field name="OptionalPartyIDSource" id="448" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="optional" nullValue="250"/>
+            <field name="ConstPartyIDSource" id="449" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
+            <field name="PartyRole" id="452" type="PartyRoleEnum" offset="9" semanticType="uint8" />
+            <field name="OrderQty" id="38" type="Quantity" offset="33" semanticType="Qty" />
         </sbe:message>
     </messages>
 </sbe:messageSchema>

@@ -22,7 +22,7 @@ public:
 
 	static constexpr S_FIELD_TYPE::Value S_FIELD_NAME_null_value() noexcept
 	{
-		return S_FIELD_TYPE::Value::Null;
+		return S_FIELD_TYPE::Value::nullValue;
 	}
 
 	constexpr S_FIELD_TYPE::Value get_S_FIELD_NAME() const noexcept

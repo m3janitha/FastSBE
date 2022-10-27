@@ -22,7 +22,7 @@ class ordStatusEnum
         Rejected = '8',
         PendingNew = 'A',
         PendingReplace = 'E',
-        Null = 0,
+        nullValue = 0,
     };
     
     public:
@@ -48,8 +48,8 @@ class ordStatusEnum
             return "PendingNew";
         case Value::PendingReplace:
             return "PendingReplace";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

@@ -18,7 +18,7 @@ class businessRejectReasonEnum
         UnknownSecurity = 2,
         ApplicationNotAvailable = 4,
         NotAuthorized = 6,
-        Null = 255,
+        nullValue = 255,
     };
     
     public:
@@ -36,8 +36,8 @@ class businessRejectReasonEnum
             return "ApplicationNotAvailable";
         case Value::NotAuthorized:
             return "NotAuthorized";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

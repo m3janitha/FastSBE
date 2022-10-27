@@ -15,7 +15,7 @@ class sideEnum
     {
         Buy = '1',
         Sell = '2',
-        Null = 0,
+        nullValue = 0,
     };
     
     public:
@@ -27,8 +27,8 @@ class sideEnum
             return "Buy";
         case Value::Sell:
             return "Sell";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

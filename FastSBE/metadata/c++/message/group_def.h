@@ -51,3 +51,4 @@ public:
 		group.header_.set_S_NUM_IN_GROUP_NAME(count);
 		return group;	
 	}
+

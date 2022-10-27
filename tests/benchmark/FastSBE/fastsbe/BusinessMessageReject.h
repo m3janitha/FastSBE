@@ -135,7 +135,12 @@ class BusinessMessageReject
     	{ 
     		return BusinesRejectRefId_offset() + BusinesRejectRefId_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t BusinessRejectReason_id() noexcept
+    	{ 
+    		return 380; 
+    	}
+    
     	static constexpr const char* BusinessRejectReason_name() noexcept
     	{ 
     		return "BusinessRejectReason"; 
@@ -143,7 +148,7 @@ class BusinessMessageReject
     
     	static constexpr businessRejectReasonEnum::Value BusinessRejectReason_null_value() noexcept
     	{
-    		return businessRejectReasonEnum::Value::Null;
+    		return businessRejectReasonEnum::Value::nullValue;
     	}
     
     	constexpr businessRejectReasonEnum::Value get_BusinessRejectReason() const noexcept
@@ -279,6 +284,7 @@ class BusinessMessageReject
     		std::memcpy(data.get(), value.data(), value.size());
     		return data;	
     	}
+    	
 };
 
 template <class CharT, class Traits = std::char_traits<CharT>>

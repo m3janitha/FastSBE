@@ -17,7 +17,7 @@ class ordTypeEnum
         Limit = '2',
         Stop = '3',
         StopLimit = '4',
-        Null = 0,
+        nullValue = 0,
     };
     
     public:
@@ -33,8 +33,8 @@ class ordTypeEnum
             return "Stop";
         case Value::StopLimit:
             return "StopLimit";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

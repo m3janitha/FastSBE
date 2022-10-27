@@ -21,7 +21,7 @@ class execTypeEnum
         Rejected = '8',
         PendingNew = 'A',
         Trade = 'F',
-        Null = 0,
+        nullValue = 0,
     };
     
     public:
@@ -45,8 +45,8 @@ class execTypeEnum
             return "PendingNew";
         case Value::Trade:
             return "Trade";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

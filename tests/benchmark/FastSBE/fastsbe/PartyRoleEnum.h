@@ -16,7 +16,7 @@ class PartyRoleEnum
         ExecutingFirm = 1,
         BrokerOfCredit = 2,
         ClientID = 3,
-        Null = 255,
+        nullValue = 255,
     };
     
     public:
@@ -30,8 +30,8 @@ class PartyRoleEnum
             return "BrokerOfCredit";
         case Value::ClientID:
             return "ClientID";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }

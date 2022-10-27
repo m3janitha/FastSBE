@@ -222,7 +222,12 @@ class ExecutionReport
     	{ 
     		return ExecID_offset() + ExecID_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t ExecType_id() noexcept
+    	{ 
+    		return 150; 
+    	}
+    
     	static constexpr const char* ExecType_name() noexcept
     	{ 
     		return "ExecType"; 
@@ -230,7 +235,7 @@ class ExecutionReport
     
     	static constexpr execTypeEnum::Value ExecType_null_value() noexcept
     	{
-    		return execTypeEnum::Value::Null;
+    		return execTypeEnum::Value::nullValue;
     	}
     
     	constexpr execTypeEnum::Value get_ExecType() const noexcept
@@ -260,7 +265,12 @@ class ExecutionReport
     	{ 
     		return ExecType_offset() + ExecType_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t OrdStatus_id() noexcept
+    	{ 
+    		return 39; 
+    	}
+    
     	static constexpr const char* OrdStatus_name() noexcept
     	{ 
     		return "OrdStatus"; 
@@ -268,7 +278,7 @@ class ExecutionReport
     
     	static constexpr ordStatusEnum::Value OrdStatus_null_value() noexcept
     	{
-    		return ordStatusEnum::Value::Null;
+    		return ordStatusEnum::Value::nullValue;
     	}
     
     	constexpr ordStatusEnum::Value get_OrdStatus() const noexcept
@@ -420,7 +430,12 @@ class ExecutionReport
     	{ 
     		return MaturityMonthYear_offset() + MaturityMonthYear_size(); 
     	}
-    	
+    
+    	static constexpr std::size_t Side_id() noexcept
+    	{ 
+    		return 54; 
+    	}
+    
     	static constexpr const char* Side_name() noexcept
     	{ 
     		return "Side"; 
@@ -428,7 +443,7 @@ class ExecutionReport
     
     	static constexpr sideEnum::Value Side_null_value() noexcept
     	{
-    		return sideEnum::Value::Null;
+    		return sideEnum::Value::nullValue;
     	}
     
     	constexpr sideEnum::Value get_Side() const noexcept
@@ -784,6 +799,7 @@ class ExecutionReport
     		group.header_.set_numInGroup(count);
     		return group;	
     	}
+    
 };
 
 template <class CharT, class Traits = std::char_traits<CharT>>

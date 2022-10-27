@@ -60,3 +60,4 @@ public:
 		std::memcpy(data.get(), value.data(), value.size());
 		return data;	
 	}
+	

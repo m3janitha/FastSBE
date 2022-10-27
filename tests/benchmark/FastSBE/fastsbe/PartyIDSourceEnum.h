@@ -15,7 +15,7 @@ class PartyIDSourceEnum
     {
         BIC = 'B',
         Proprietary = 'C',
-        Null = 0,
+        nullValue = 0,
     };
     
     public:
@@ -27,8 +27,8 @@ class PartyIDSourceEnum
             return "BIC";
         case Value::Proprietary:
             return "Proprietary";
-        case Value::Null:
-            return "Null";
+        case Value::nullValue:
+            return "nullValue";
         default:
             return "Invalid";
         }
