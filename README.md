@@ -7,7 +7,7 @@ Command line Python code generator that generates C++ codec for [SBE](https://gi
 Benchmark tests are included in the repository
 
 ## Why it is Faster
-* Zero copy and zero allocation
+* Zero copy and Zero allocation in Decoding 
 * Constant time access to variable length fields and repeating groups 
 
 ## Author
