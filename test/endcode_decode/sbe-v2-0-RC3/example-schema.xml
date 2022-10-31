@@ -56,6 +56,8 @@
             <type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond" />
         </composite>
         <composite name="TestComposite" description="UTC timestamp with nanosecond precision">
+            <type name="ClOrdId" length="8" primitiveType="char" semanticType="String" />
+            <type name="ConstClOrdId" length="8" primitiveType="char" semanticType="String" presence="constant">ABCDEFGH</type>
             <type name="PartyIDSource" type="PartyIDSourceEnum" semanticType="char" />
             <type name="OptionalPartyIDSource" type="PartyIDSourceEnum" semanticType="char" presence="optional" nullValue="250"/>
             <type name="ConstPartyIDSource" type="PartyIDSourceEnum" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
@@ -174,7 +176,7 @@
         <sbe:message name="TestMessage" id="100" blockLength="54" semanticType="D">
             <field name="TestComposite" id="38" type="TestComposite" offset="0" semanticType="Qty" />
             <field name="ClOrdId" id="11" type="idString" offset="0" semanticType="String" />
-            <field name="SessionID" id="1" type="idString" offset="8" semanticType="String" presence="constant">ABCDEFGH</field>
+            <field name="ConstClOrdId" id="1" type="idString" offset="8" semanticType="String" presence="constant">ABCDEFGH</field>
             <field name="PartyIDSource" id="447" type="PartyIDSourceEnum" offset="8" semanticType="char" />
             <field name="OptionalPartyIDSource" id="448" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="optional" nullValue="250"/>
             <field name="ConstPartyIDSource" id="449" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>

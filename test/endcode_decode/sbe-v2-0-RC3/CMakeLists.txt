@@ -18,8 +18,8 @@ if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/generated/__header.h)
 endif()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
-include_directories(${PROJECT_SOURCE_DIR}/tests/endcode_decode/common)
+include_directories(${PROJECT_SOURCE_DIR}/test/utility)
+include_directories(${PROJECT_SOURCE_DIR}/test/endcode_decode/common)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/generated)
 
 file( GLOB TEST_SOURCES *.cpp composite/*.cpp message/*.cpp)

@@ -3,7 +3,7 @@ message("CMAKE_CURRENT_SRC_DIR is ${CMAKE_CURRENT_SRC_DIR}")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${CMAKE_CURRENT_LIST_DIR}/FastSbe/fastsbe)
-include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
+include_directories(${PROJECT_SOURCE_DIR}/test/utility)
 
 set (fast_sbe_dir "${PROJECT_SOURCE_DIR}/FastSBE")
 set (py_cmd "${fast_sbe_dir}/FastSBE.py")

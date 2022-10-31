@@ -134,6 +134,13 @@ class DATA
     		return std::string_view(varData_, 0);
     	}
     
+    	const std::string get_varData_string() const noexcept
+    	{
+    		auto length = 0ULL;
+    		for (; length < 0 && *(varData_ + length) != '\0'; ++length);
+    		return std::string(varData_, length);
+    	}	
+    
     	auto& set_varData(const char* value) noexcept
     	{
     	#if defined(__GNUG__)

@@ -44,7 +44,7 @@ include(FindPythonInterp)
 
 enable_testing()
 
-add_subdirectory(tests)
+add_subdirectory(test)
 #add_subdirectory(example)
 
 

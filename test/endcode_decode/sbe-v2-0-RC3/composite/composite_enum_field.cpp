@@ -10,7 +10,7 @@ namespace sbetool
     template <typename... T>
     std::size_t get_offset()
     {
-        static constexpr const std::size_t field_offset{0};
+        static constexpr const std::size_t field_offset{8};
         return (field_offset + ... + sizeof(T));
     }
 
@@ -73,7 +73,7 @@ namespace sbetool
         auto &composite = msg.get_TestComposite();
 
         EXPECT_EQ(composite.ConstPartyIDSource_size(), 0);
-        EXPECT_EQ(composite.ConstPartyIDSource_offset(), 2);
+        EXPECT_EQ(composite.ConstPartyIDSource_offset(), (get_offset<PartyIDSourceEnum, PartyIDSourceEnum>()));
         EXPECT_EQ(composite.ConstPartyIDSource_name(), "ConstPartyIDSource");
     }
 

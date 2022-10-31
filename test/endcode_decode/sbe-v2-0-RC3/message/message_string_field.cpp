@@ -3,17 +3,18 @@
 #include <gtest/gtest.h>
 #include <random_gen.h>
 
-#include <NewOrderSingle.h>
 #include <TestMessage.h>
 
 namespace sbetool
 {
+    static constexpr const std::size_t field_offset{56};
+
     // guaranteed to be null terminated
     TEST(string, field_info)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         EXPECT_EQ(msg.ClOrdId_size(), 8);
-        EXPECT_EQ(msg.ClOrdId_offset(), 0);
+        EXPECT_EQ(msg.ClOrdId_offset(), field_offset);
         EXPECT_EQ(msg.ClOrdId_id(), 11);
         EXPECT_EQ(msg.ClOrdId_name(), "ClOrdId");
     }
@@ -21,7 +22,7 @@ namespace sbetool
     // guaranteed to be null terminated
     TEST(string, empty_string)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         msg.set_ClOrdId("");
         EXPECT_EQ(std::string(msg.get_ClOrdId()), std::string(""));
         // string_view of field length
@@ -32,8 +33,8 @@ namespace sbetool
 
     TEST(string, const_empty_string)
     {
-        const NewOrderSingle msg{};
-        const_cast<NewOrderSingle &>(msg).set_ClOrdId("");
+        const TestMessage msg{};
+        const_cast<TestMessage &>(msg).set_ClOrdId("");
 
         EXPECT_EQ(std::string(msg.get_ClOrdId()), std::string(""));
         // string_view of field length
@@ -46,7 +47,7 @@ namespace sbetool
     // guaranteed to be null terminated
     TEST(string, max_length_minus_one)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         auto ClOrdId = random_string(7);
         msg.set_ClOrdId(ClOrdId);
 
@@ -59,9 +60,9 @@ namespace sbetool
 
     TEST(string, const_max_length_minus_one)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         auto ClOrdId = random_string(7);
-        const_cast<NewOrderSingle &>(msg).set_ClOrdId(ClOrdId);
+        const_cast<TestMessage &>(msg).set_ClOrdId(ClOrdId);
 
         EXPECT_EQ(std::string(msg.get_ClOrdId()), ClOrdId);
         auto ClOrdId_view = ClOrdId;
@@ -72,7 +73,7 @@ namespace sbetool
 
     TEST(string, max_length)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         auto ClOrdId = random_string(8);
         msg.set_ClOrdId(ClOrdId);
 
@@ -84,9 +85,9 @@ namespace sbetool
 
     TEST(string, const_max_length)
     {
-        NewOrderSingle msg{};
+        TestMessage msg{};
         auto ClOrdId = random_string(8);
-        const_cast<NewOrderSingle &>(msg).set_ClOrdId(ClOrdId);
+        const_cast<TestMessage &>(msg).set_ClOrdId(ClOrdId);
 
         EXPECT_EQ(msg.get_ClOrdId_view(), std::string_view(ClOrdId));
         EXPECT_EQ(msg.get_ClOrdId_string(), ClOrdId);
@@ -95,7 +96,7 @@ namespace sbetool
     TEST(string, set_from_string_view)
     {
         {
-            NewOrderSingle msg{};
+            TestMessage msg{};
             std::string_view ClOrdId("");
             msg.set_ClOrdId(ClOrdId);
 
@@ -106,7 +107,7 @@ namespace sbetool
             EXPECT_EQ(msg.get_ClOrdId_string(), std::string(""));
         }
         {
-            NewOrderSingle msg{};
+            TestMessage msg{};
             std::string_view ClOrdId(random_string(7).c_str());
             msg.set_ClOrdId(ClOrdId);
 
@@ -117,9 +118,8 @@ namespace sbetool
             EXPECT_EQ(msg.get_ClOrdId_view(), std::string_view(ClOrdId_view));
             EXPECT_EQ(msg.get_ClOrdId_string(), ClOrdId);
         }
-
         {
-            NewOrderSingle msg{};
+            TestMessage msg{};
             std::string_view ClOrdId(random_string(8).c_str());
             msg.set_ClOrdId(ClOrdId);
 
@@ -131,30 +131,30 @@ namespace sbetool
     TEST(string_const, field_info)
     {
         TestMessage msg{};
-        EXPECT_EQ(msg.SessionID_size(), 0);
-        EXPECT_EQ(msg.SessionID_offset(), 56);
-        EXPECT_EQ(msg.SessionID_id(), 1);
-        EXPECT_EQ(msg.SessionID_name(), "SessionID");
+        EXPECT_EQ(msg.ConstClOrdId_size(), 0);
+        EXPECT_EQ(msg.ConstClOrdId_offset(), field_offset + 8);
+        EXPECT_EQ(msg.ConstClOrdId_id(), 1);
+        EXPECT_EQ(msg.ConstClOrdId_name(), "ConstClOrdId");
     }
 
     TEST(string_const, get_field)
     {
         TestMessage msg{};
-        const char* SessionID = "ABCDEFGH";
+        const char* ConstClOrdId = "ABCDEFGH";
 
-        EXPECT_EQ(msg.get_SessionID(), SessionID);
-        EXPECT_EQ(msg.get_SessionID_view(), std::string_view(SessionID));
-        EXPECT_EQ(msg.get_SessionID_string(), std::string(SessionID));
+        EXPECT_EQ(msg.get_ConstClOrdId(), ConstClOrdId);
+        EXPECT_EQ(msg.get_ConstClOrdId_view(), std::string_view(ConstClOrdId));
+        EXPECT_EQ(msg.get_ConstClOrdId_string(), std::string(ConstClOrdId));
     }
 
     TEST(string_const, get_field_const)
     {
         const TestMessage msg{};
-        const char* SessionID = "ABCDEFGH";
+        const char* ConstClOrdId = "ABCDEFGH";
 
-        EXPECT_EQ(msg.get_SessionID(), SessionID);
-        EXPECT_EQ(msg.get_SessionID_view(), std::string_view(SessionID));
-        EXPECT_EQ(msg.get_SessionID_string(), std::string(SessionID));
+        EXPECT_EQ(msg.get_ConstClOrdId(), ConstClOrdId);
+        EXPECT_EQ(msg.get_ConstClOrdId_view(), std::string_view(ConstClOrdId));
+        EXPECT_EQ(msg.get_ConstClOrdId_string(), std::string(ConstClOrdId));
     }    
 }
 

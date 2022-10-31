@@ -11,7 +11,7 @@ namespace sbetool
     template<typename... T>
     std::size_t get_offset()
     {
-        static constexpr const std::size_t field_offset{59};
+        static constexpr const std::size_t field_offset{67};
         return (field_offset + ... + sizeof(T));
     }
 
