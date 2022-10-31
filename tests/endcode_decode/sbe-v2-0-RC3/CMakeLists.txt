@@ -22,10 +22,10 @@ include_directories(${PROJECT_SOURCE_DIR}/tests/utility)
 include_directories(${PROJECT_SOURCE_DIR}/tests/endcode_decode/common)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/generated)
 
-file( GLOB TEST_SOURCES *.cpp )
+file( GLOB TEST_SOURCES *.cpp composite/*.cpp message/*.cpp)
 foreach( test_sourcefile ${TEST_SOURCES} )
     get_filename_component(EXECUTABLE_NAME ${test_sourcefile} NAME_WE)
-    string( REPLACE ".cpp" "" ${EXECUTABLE_NAME} ${test_sourcefile} )    
+    string( REPLACE ".cpp" "" ${EXECUTABLE_NAME} ${test_sourcefile} )
     #add_executable( ${test_name} ${test_sourcefile} )
     message("add_executable ${EXECUTABLE_NAME} ${test_sourcefile}") 
     add_executable(${EXECUTABLE_NAME} ${test_sourcefile} 
@@ -47,7 +47,3 @@ add_custom_command(
     COMMAND ${PYTHON_EXECUTABLE} ${py_cmd} ${log_file} ${schema_file} ${out_folder} ${override_namespace}
     WORKING_DIRECTORY ${fast_sbe_dir}
 )
-
-
-
-

@@ -127,7 +127,7 @@ class Parser:
 				logging.error('%s is not defined in types', field_type)
 				exit()
 
-		logging.debub('field_attrib %s', field_attrib)
+		logging.debug('field_attrib %s', field_attrib)
 		return field_attrib
 
 

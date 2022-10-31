@@ -16,8 +16,8 @@ if (MSVC)
 else()
     # lots of warnings and all warnings as errors
     message("setting CMAKE_CXX_FLAGS")
-    set(CMAKE_BUILD_TYPE Release)
-    set(CMAKE_CXX_FLAGS "-O3")
+    #set(CMAKE_BUILD_TYPE Release)
+    #set(CMAKE_CXX_FLAGS "-O3")
 endif()
 
 include(FetchContent)

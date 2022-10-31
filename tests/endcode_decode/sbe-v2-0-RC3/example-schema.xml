@@ -11,7 +11,14 @@
         <type name="idString16" length="16" primitiveType="char" characterEncoding="ISO_8859_1" />
         <type name="intEnumEncoding" primitiveType="uint8" />
         <type name="currency" length="3" primitiveType="char" description="ISO 4217" />
-        <type name="Quantity" primitiveType="uint64" description="Test field. Quantity" />
+        <type name="QuantityU64" primitiveType="uint64" description="Test field. Quantity" />
+        <type name="Quantity64" primitiveType="int64" description="Test field. Quantity" />
+        <type name="QuantityU32" primitiveType="uint32" description="Test field. Quantity" />
+        <type name="Quantity32" primitiveType="int32" description="Test field. Quantity" />
+        <type name="QuantityU16" primitiveType="uint16" description="Test field. Quantity" />
+        <type name="Quantity16" primitiveType="int16" description="Test field. Quantity" />
+        <type name="QuantityU8" primitiveType="uint8" description="Test field. Quantity" />
+        <type name="Quantity8" primitiveType="int8" description="Test field. Quantity" />
         <composite name="DATA">
             <type name="length" primitiveType="uint16" />
             <type name="varData" length="0" primitiveType="char" />
@@ -49,9 +56,19 @@
             <type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond" />
         </composite>
         <composite name="TestComposite" description="UTC timestamp with nanosecond precision">
-            <type name="PartyIDSource" id="447" type="PartyIDSourceEnum" semanticType="char" />
-            <type name="OptionalPartyIDSource" id="448" type="PartyIDSourceEnum" semanticType="char" presence="optional" nullValue="250"/>
-            <type name="ConstPartyIDSource" id="449" type="PartyIDSourceEnum" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
+            <type name="PartyIDSource" type="PartyIDSourceEnum" semanticType="char" />
+            <type name="OptionalPartyIDSource" type="PartyIDSourceEnum" semanticType="char" presence="optional" nullValue="250"/>
+            <type name="ConstPartyIDSource" type="PartyIDSourceEnum" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
+            <type name="OrderQtyU64" primitiveType="uint64" semanticType="Qty" />
+            <type name="OrderQty64" primitiveType="int64" semanticType="Qty" />
+            <type name="OrderQtyU32" primitiveType="uint32" semanticType="Qty" />
+            <type name="OrderQty32" primitiveType="int32" semanticType="Qty" />
+            <type name="OrderQtyU16" primitiveType="uint16" semanticType="Qty" />
+            <type name="OrderQty16" primitiveType="int16" semanticType="Qty" />
+            <type name="OrderQtyU8" primitiveType="uint8" semanticType="Qty" />
+            <type name="OrderQty8" primitiveType="int8" semanticType="Qty" />
+            <type name="OptionalOrderQtyU64" primitiveType="uint64" semanticType="Qty" presence="optional"/>
+            <type name="ConstOrderQty64" primitiveType="int64" semanticType="Qty" presence="constant">42545</type>
         </composite>        
         <enum name="TimeUnit" encodingType="uint8">
             <validValue name="second">0</validValue>
@@ -162,7 +179,16 @@
             <field name="OptionalPartyIDSource" id="448" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="optional" nullValue="250"/>
             <field name="ConstPartyIDSource" id="449" type="PartyIDSourceEnum" offset="8" semanticType="char" presence="constant" valueRef="PartyIDSourceEnum.Proprietary"/>
             <field name="PartyRole" id="452" type="PartyRoleEnum" offset="9" semanticType="uint8" />
-            <field name="OrderQty" id="38" type="Quantity" offset="33" semanticType="Qty" />
+            <field name="OrderQtyU64" id="38" type="QuantityU64" offset="33" semanticType="Qty" />
+            <field name="OrderQty64" id="381" type="Quantity64" offset="34" semanticType="Qty" />
+            <field name="OrderQtyU32" id="382" type="QuantityU32" offset="35" semanticType="Qty" />
+            <field name="OrderQty32" id="383" type="Quantity32" offset="36" semanticType="Qty" />
+            <field name="OrderQtyU16" id="384" type="QuantityU16" offset="37" semanticType="Qty" />
+            <field name="OrderQty16" id="385" type="Quantity16" offset="38" semanticType="Qty" />
+            <field name="OrderQtyU8" id="386" type="QuantityU8" offset="39" semanticType="Qty" />
+            <field name="OrderQty8" id="387" type="Quantity8" offset="40" semanticType="Qty" />
+            <field name="OptionalOrderQtyU64" id="388" type="QuantityU64" offset="33" semanticType="Qty" presence="optional"/>
+            <field name="ConstOrderQty64" id="389" type="Quantity64" offset="34" semanticType="Qty" presence="constant">42545</field>
         </sbe:message>
     </messages>
 </sbe:messageSchema>

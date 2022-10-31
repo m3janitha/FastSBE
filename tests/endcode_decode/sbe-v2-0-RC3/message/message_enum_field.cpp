@@ -7,11 +7,18 @@
 
 namespace sbetool
 {
+    template <typename... T>
+    std::size_t get_offset()
+    {
+        static constexpr const std::size_t field_offset{56};
+        return (field_offset + ... + sizeof(T));
+    }
+
     TEST(enums, field_info)
     {
         TestMessage msg{};
         EXPECT_EQ(msg.PartyIDSource_size(), 1);
-        EXPECT_EQ(msg.PartyIDSource_offset(), 10);
+        EXPECT_EQ(msg.PartyIDSource_offset(), get_offset());
         EXPECT_EQ(msg.PartyIDSource_id(), 447);
         EXPECT_EQ(msg.PartyIDSource_name(), "PartyIDSource");
         EXPECT_EQ(msg.PartyIDSource_null_value(), PartyIDSourceEnum::Value::nullValue);
@@ -40,7 +47,7 @@ namespace sbetool
     {
         TestMessage msg{};
         EXPECT_EQ(msg.OptionalPartyIDSource_size(), 1);
-        EXPECT_EQ(msg.OptionalPartyIDSource_offset(),11);
+        EXPECT_EQ(msg.OptionalPartyIDSource_offset(),(get_offset<PartyIDSourceEnum>()));
         EXPECT_EQ(msg.OptionalPartyIDSource_id(), 448);
         EXPECT_EQ(msg.OptionalPartyIDSource_name(), "OptionalPartyIDSource");
         EXPECT_EQ(msg.OptionalPartyIDSource_null_value(), PartyIDSourceEnum::Value::nullValue);
@@ -63,7 +70,7 @@ namespace sbetool
     {
         TestMessage msg{};
         EXPECT_EQ(msg.ConstPartyIDSource_size(), 0);
-        EXPECT_EQ(msg.ConstPartyIDSource_offset(), 12);
+        EXPECT_EQ(msg.ConstPartyIDSource_offset(), (get_offset<PartyIDSourceEnum, PartyIDSourceEnum>()));
         EXPECT_EQ(msg.ConstPartyIDSource_id(), 449);
         EXPECT_EQ(msg.ConstPartyIDSource_name(), "ConstPartyIDSource");
     }
@@ -78,7 +85,7 @@ namespace sbetool
     {
         TestMessage msg{};
         EXPECT_EQ(msg.PartyRole_size(), 1);
-        EXPECT_EQ(msg.PartyRole_offset(), 12);
+        EXPECT_EQ(msg.PartyRole_offset(), (get_offset<PartyIDSourceEnum, PartyIDSourceEnum>()));
         EXPECT_EQ(msg.PartyRole_id(), 452);
         EXPECT_EQ(msg.PartyRole_name(), "PartyRole");
         EXPECT_EQ(msg.PartyRole_null_value(), PartyRoleEnum::Value::nullValue);

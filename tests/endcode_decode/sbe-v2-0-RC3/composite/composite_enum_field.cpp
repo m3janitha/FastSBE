@@ -7,20 +7,27 @@
 
 namespace sbetool
 {
-    TEST(enums, field_info)
+    template <typename... T>
+    std::size_t get_offset()
+    {
+        static constexpr const std::size_t field_offset{0};
+        return (field_offset + ... + sizeof(T));
+    }
+
+    TEST(composite_enums, field_info)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
+        auto &composite = msg.get_TestComposite();
         EXPECT_EQ(composite.PartyIDSource_size(), 1);
-        EXPECT_EQ(composite.PartyIDSource_offset(),0);
+        EXPECT_EQ(composite.PartyIDSource_offset(), get_offset());
         EXPECT_EQ(composite.PartyIDSource_name(), "PartyIDSource");
         EXPECT_EQ(composite.PartyIDSource_null_value(), PartyIDSourceEnum::Value::nullValue);
     }
 
-    TEST(enums, field_values)
+    TEST(composite_enums, field_values)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
+        auto &composite = msg.get_TestComposite();
 
         composite.set_PartyIDSource(PartyIDSourceEnum::Value::BIC);
         EXPECT_EQ(composite.get_PartyIDSource(), PartyIDSourceEnum::Value::BIC);
@@ -30,23 +37,23 @@ namespace sbetool
 
         composite.set_PartyIDSource(PartyIDSourceEnum::Value::nullValue);
         EXPECT_EQ(composite.get_PartyIDSource(), PartyIDSourceEnum::Value::nullValue);
-    } 
+    }
 
-    TEST(enums, optional_field_info)
+    TEST(composite_enums, optional_field_info)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
+        auto &composite = msg.get_TestComposite();
 
         EXPECT_EQ(composite.OptionalPartyIDSource_size(), 1);
-        EXPECT_EQ(composite.OptionalPartyIDSource_offset(), 1);
+        EXPECT_EQ(composite.OptionalPartyIDSource_offset(), (get_offset<PartyIDSourceEnum>()));
         EXPECT_EQ(composite.OptionalPartyIDSource_name(), "OptionalPartyIDSource");
         EXPECT_EQ(composite.OptionalPartyIDSource_null_value(), PartyIDSourceEnum::Value::nullValue);
     }
 
-    TEST(enums, optional_field_values)
+    TEST(composite_enums, optional_field_values)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
+        auto &composite = msg.get_TestComposite();
 
         EXPECT_EQ(composite.get_OptionalPartyIDSource(), PartyIDSourceEnum::Value::nullValue);
 
@@ -60,23 +67,23 @@ namespace sbetool
         EXPECT_EQ(composite.get_OptionalPartyIDSource(), PartyIDSourceEnum::Value::nullValue);
     }
 
-    TEST(enums, const_field_info)
+    TEST(composite_enums, const_field_info)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
+        auto &composite = msg.get_TestComposite();
 
         EXPECT_EQ(composite.ConstPartyIDSource_size(), 0);
         EXPECT_EQ(composite.ConstPartyIDSource_offset(), 2);
         EXPECT_EQ(composite.ConstPartyIDSource_name(), "ConstPartyIDSource");
     }
 
-    TEST(enums, const_field_values)
+    TEST(composite_enums, const_field_values)
     {
         TestMessage msg{};
-        auto& composite = msg.get_TestComposite();
-        
+        auto &composite = msg.get_TestComposite();
+
         EXPECT_EQ(composite.get_ConstPartyIDSource(), PartyIDSourceEnum::Value::Proprietary);
-    }    
+    }
 }
 
 int main(int argc, char **argv)
