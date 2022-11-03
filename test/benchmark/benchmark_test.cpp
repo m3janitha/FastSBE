@@ -49,7 +49,7 @@ BENCHMARK_F(SbeToolFixture, BM_Decode_NewOrderSingle)(benchmark::State& st)
    }
 }
 
-BENCHMARK_F(FastSBEFixture, BM_encode_NewOrderSingle_from_struct)(benchmark::State& st) 
+BENCHMARK_F(FastSBEFixture, BM_Encode_NewOrderSingle_from_struct)(benchmark::State& st) 
 {
    for (auto _ : st) 
    {
@@ -57,7 +57,7 @@ BENCHMARK_F(FastSBEFixture, BM_encode_NewOrderSingle_from_struct)(benchmark::Sta
    }
 }
 
-BENCHMARK_F(SbeToolFixture, BM_encode_NewOrderSingle_from_struct)(benchmark::State& st)
+BENCHMARK_F(SbeToolFixture, BM_Encode_NewOrderSingle_from_struct)(benchmark::State& st)
 {
    for (auto _ : st) 
    {

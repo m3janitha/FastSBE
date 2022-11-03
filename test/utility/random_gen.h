@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include<ostream>
+#include <ostream>
 #include <random>
 #include <limits>
 #include <type_traits>
