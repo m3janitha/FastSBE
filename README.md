@@ -2,11 +2,11 @@
 
 Command line Python code generator that generates C++ codec for [SBE](https://github.com/FIXTradingCommunity/fix-simple-binary-encoding) messages from XML declaration schemas.
 
-## Features
-5X faster encoding 2X faster decoding compared to widely used sbe-tool. 
-Benchmark tests are included in the repository
+## Why FastSBE
+* 5X faster encoding 2X faster decoding compared to widely used sbe-tool
+* Benchmark figures available in GitHub Actions. Check CMake workflow logs.
 
-## Why it is Faster
+## Why it is Fast
 * Zero copy and Zero allocation in Decoding 
 * Constant time access to variable length fields and repeating groups 
 
@@ -14,5 +14,5 @@ Benchmark tests are included in the repository
 [Janitha Meedeniya](https://www.linkedin.com/in/janitha-meedeniya) 
 
 ## Limitations
-Variable length fields are not supported within repeating groups (due to performance) 
+* variable length fields are not supported within repeating groups
 
