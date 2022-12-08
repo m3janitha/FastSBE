@@ -10,9 +10,6 @@ Command line Python code generator that generates C++ codec for [SBE](https://gi
 * Zero copy and Zero allocation in Decoding 
 * Constant time access to variable length fields and repeating groups 
 
-## Author
-[Janitha Meedeniya](https://www.linkedin.com/in/janitha-meedeniya)
-
 ## Performance
 ```console
 2022-11-03T00:51:53+00:00
